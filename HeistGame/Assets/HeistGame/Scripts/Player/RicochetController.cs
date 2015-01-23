@@ -88,7 +88,7 @@ public class RicochetController : MonoBehaviour
         rigidbody.useGravity = false;
         playerHeight = renderer.bounds.extents.y * 2;
         Debug.Log("Player is " + playerHeight + " units tall");
-        hull = (BoxCollider)collider;
+        //hull = (BoxCollider)collider;
     }
 
     void Update()
