@@ -73,7 +73,7 @@ public class RicochetController : MonoBehaviour
         Vector3 camPos = cameraTrans.position;
         camPos.y = headJoint.position.y;
 
-        Debug.Log("Head Joint's Y at: " + camPos.y);
+        //Debug.Log("Head Joint's Y at: " + camPos.y);
 
         cameraTrans.position = camPos;
     }

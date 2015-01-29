@@ -8,6 +8,10 @@ public class C_Shoot : MonoBehaviour
     public float ShotSpread = 0.03f;
     public GameObject defaultHolePrefab;
 
+    //Shooting
+    float fireRate = 1.0f;
+    private float lastShot = 0.0f;
+
     // Use this for initialization
     void Start()
     {
@@ -23,22 +27,30 @@ public class C_Shoot : MonoBehaviour
 
     void Shoot()
     {
-
         RaycastHit Hit;	// Store raycast info
 
         Vector3 DirectionRay = BulletSpread();	// Set bullet spread
 
         Debug.DrawRay(this.transform.position, DirectionRay * range, Color.green);	// Ray so we can see
 
-        if (Physics.Raycast(transform.position, DirectionRay, out Hit, range))
-        {	// Check for ray hit
-            Quaternion hitRotation = Quaternion.FromToRotation(Vector3.up, Hit.normal);
-            if (Hit.transform.tag == "Untagged")
-            {
-                GameObject defaultHole = Instantiate(defaultHolePrefab, Hit.point, hitRotation) as GameObject;
-                defaultHole.transform.parent = Hit.transform;
-                defaultHole.transform.position = new Vector3(defaultHole.transform.position.x, defaultHole.transform.position.y + 0.01f, defaultHole.transform.position.z + 0.01f);
-                Destroy(defaultHole, 3);
+        if (Time.time > fireRate + lastShot)
+        {
+            if (Physics.Raycast(transform.position, DirectionRay, out Hit, range))
+            {	// Check for ray hit
+                Quaternion hitRotation = Quaternion.FromToRotation(Vector3.up, Hit.normal);
+                if (Hit.transform.tag == "Untagged")
+                {
+                    GameObject defaultHole = Instantiate(defaultHolePrefab, Hit.point, hitRotation) as GameObject;
+                    defaultHole.transform.parent = Hit.transform;
+                    defaultHole.transform.position = new Vector3(defaultHole.transform.position.x, defaultHole.transform.position.y + 0.01f, defaultHole.transform.position.z + 0.01f);
+                    Destroy(defaultHole, 3);
+                }
+
+                if (Hit.transform.gameObject.layer == 8)
+                {
+                    Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
+                    Debug.Log("yay");
+                }
             }
         }
     }
