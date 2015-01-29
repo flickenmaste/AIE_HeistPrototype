@@ -42,14 +42,14 @@ public class C_Shoot : MonoBehaviour
                 {
                     GameObject defaultHole = Instantiate(defaultHolePrefab, Hit.point, hitRotation) as GameObject;
                     defaultHole.transform.parent = Hit.transform;
-                    defaultHole.transform.position = new Vector3(defaultHole.transform.position.x, defaultHole.transform.position.y + 0.01f, defaultHole.transform.position.z + 0.01f);
+                    defaultHole.transform.position = new Vector3(defaultHole.transform.position.x, defaultHole.transform.position.y + 0.01f, defaultHole.transform.position.z);
                     Destroy(defaultHole, 3);
                 }
 
                 if (Hit.transform.gameObject.layer == 8)
                 {
                     Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
-                    Debug.Log("yay");
+                    //Debug.Log("yay");
                 }
             }
         }
@@ -62,7 +62,7 @@ public class C_Shoot : MonoBehaviour
         if ((Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0) &&		// aim
             (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0))	// movement
         {
-            Debug.Log("AIM AND WALK");
+            //Debug.Log("AIM AND WALK");
             ShotSpread = 0.4f;
         }
 
@@ -71,14 +71,14 @@ public class C_Shoot : MonoBehaviour
         else if ((Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) ||	// aim
                  (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0))	// movement
         {
-            Debug.Log("AIM or WALK");
+            //Debug.Log("AIM or WALK");
             ShotSpread = 0.2f;
         }
 
         // NOTHING NOTHING - leave shit
         else // jack shit
         {
-            Debug.Log("STILL");
+            //Debug.Log("STILL");
             ShotSpread = 0.03f;
         }
 

@@ -169,7 +169,7 @@ public class RicochetController : MonoBehaviour
         {
             foreach (ContactPoint contact in other.contacts)
             {
-                print(contact.thisCollider.name + " hit " + contact.otherCollider.name);
+                //print(contact.thisCollider.name + " hit " + contact.otherCollider.name);
 
                 if (contact.point.y < transform.position.y)
                 {
@@ -188,7 +188,7 @@ public class RicochetController : MonoBehaviour
         {
             foreach (ContactPoint contact in other.contacts)
             {
-                print(contact.thisCollider.name + " left " + contact.otherCollider.name);
+                //print(contact.thisCollider.name + " left " + contact.otherCollider.name);
 
                 if (contact.point.y < transform.position.y)
                 {
