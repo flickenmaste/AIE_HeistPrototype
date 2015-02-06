@@ -12,10 +12,12 @@ public class C_Shoot : MonoBehaviour
     float fireRate = 1.0f;
     private float lastShot = 0.0f;
 
+    public GameObject EscaMan;
+
     // Use this for initialization
     void Start()
     {
-
+        EscaMan = GameObject.FindGameObjectWithTag("EscalationManager");
     }
 
     // Update is called once per frame
@@ -50,6 +52,8 @@ public class C_Shoot : MonoBehaviour
                 {
                     Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
                     //Debug.Log("yay");
+                    if (EscaMan.GetComponent<EscalationManager>().PhaseQueue.Count >= 1)
+                        EscaMan.GetComponent<EscalationManager>().PhaseQueue.Dequeue(); // This is how you can escalate the phase
                 }
             }
         }
