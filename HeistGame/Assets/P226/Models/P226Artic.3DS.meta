@@ -1,0 +1,116 @@
+fileFormatVersion: 2
+guid: e48c09a0f06479e41983517548f52915
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: P69mm
+    100002: P6Body
+    100004: P6Hammer
+    100006: //RootNode
+    100008: P6Slide
+    100010: P6Trigger
+    100012: P6Safty
+    100014: P6Mag
+    100016: P6SlideLoc
+    100018: P69mmSpent
+    400000: P69mm
+    400002: P6Body
+    400004: P6Hammer
+    400006: //RootNode
+    400008: P6Slide
+    400010: P6Trigger
+    400012: P6Safty
+    400014: P6Mag
+    400016: P6SlideLoc
+    400018: P69mmSpent
+    2300000: P69mm
+    2300002: P6Body
+    2300004: P6Hammer
+    2300006: P6Slide
+    2300008: P6Trigger
+    2300010: P6Safty
+    2300012: P6Mag
+    2300014: P6SlideLoc
+    2300016: P69mmSpent
+    3300000: P69mm
+    3300002: P6Body
+    3300004: P6Hammer
+    3300006: P6Slide
+    3300008: P6Trigger
+    3300010: P6Safty
+    3300012: P6Mag
+    3300014: P6SlideLoc
+    3300016: P69mmSpent
+    4300000: P226Body
+    4300002: P226Mag
+    4300004: P2269mm
+    4300006: P226Trigge
+    4300008: Hammer
+    4300010: P226Slide
+    4300012: P2269mmSpe
+    4300014: P226Safty
+    4300016: P226SlideR
+    4300018: P6Body
+    4300020: P6Mag
+    4300022: P69mm
+    4300024: P6Trigger
+    4300026: P6Hammer
+    4300028: P6Slide
+    4300030: P69mmSpent
+    4300032: P6Safty
+    4300034: P6SlideLoc
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .100000001
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
