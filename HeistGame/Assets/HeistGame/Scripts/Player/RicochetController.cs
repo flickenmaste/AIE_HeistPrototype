@@ -6,7 +6,7 @@ using System.Collections;
 
 public class RicochetController : MonoBehaviour
 {
-    #region Properties and Variables
+    #region Properties and Variable
 
     public Transform headJoint;
 
