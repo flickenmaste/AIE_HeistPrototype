@@ -6,7 +6,9 @@ public class Player : MonoBehaviour {
     // Bool to show player is carrying gold
     public bool CarryingGold;
 
+    // Managers
     public GameObject LootMan;
+    public GameObject PhaseMan;
 
     public GameObject Loot;
     
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour {
     {
         CarryingGold = false;
         LootMan = GameObject.FindGameObjectWithTag("LootManager");
+        PhaseMan = GameObject.FindGameObjectWithTag("PhaseManager");
 	}
 	
 	// Update is called once per frame
