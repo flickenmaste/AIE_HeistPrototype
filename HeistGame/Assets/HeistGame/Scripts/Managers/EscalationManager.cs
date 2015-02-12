@@ -75,19 +75,19 @@ public class EscalationManager : MonoBehaviour
             switch (PhaseQueue.Peek().ToString())
             {
                 case "NoPhase":
-                    Debug.Log("No Phase");
+                    //Debug.Log("No Phase");
                     break;
                 case "PhaseOne":
-                    Debug.Log("Phase One");
+                    //Debug.Log("Phase One");
                     break;
                 case "PhaseTwo":
-                    Debug.Log("Phase Two");
+                    //Debug.Log("Phase Two");
                     break;
                 case "PhaseThree":
-                    Debug.Log("Phase Three");
+                    //Debug.Log("Phase Three");
                     break;
                 default:
-                    Debug.Log("Out of phases");
+                    //Debug.Log("Out of phases");
                     break;
             }
         }
