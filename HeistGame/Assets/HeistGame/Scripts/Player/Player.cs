@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
             Loot.GetComponent<GoldLoot>().Taken = false;
             Loot.GetComponent<GoldLoot>().HideLoot();
             CarryingGold = false;
-            Loot.transform.position = transform.position;
+            Loot.transform.position = transform.position + transform.forward;
         }
     }
 }
