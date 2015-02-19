@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="NPC classes&#xD;&#xA;">
+    <Position X="0.5" Y="0.5" Height="0.75" Width="1.523" />
+  </Comment>
+  <Comment CommentText="Player relevant classes">
+    <Position X="2.458" Y="0.5" Height="0.75" Width="1.544" />
+  </Comment>
+  <Comment CommentText="GUI classes">
+    <Position X="4.521" Y="0.5" Height="0.75" Width="1.544" />
+  </Comment>
+  <Comment CommentText="Managers">
+    <Position X="6.5" Y="0.5" Height="0.75" Width="1.544" />
+  </Comment>
+  <Comment CommentText="Utility and items">
+    <Position X="8.458" Y="0.5" Height="0.75" Width="1.544" />
+  </Comment>
+  <Comment CommentText="RAIN AI actions">
+    <Position X="10.458" Y="0.5" Height="0.75" Width="1.544" />
+  </Comment>
+  <Class Name="GetCopList" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAQAAAAAAIAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AI\Actions\GetCopList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerDetected" Collapsed="true">
+    <Position X="10.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAQAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AI\Actions\PlayerDetected.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SearchForPlayer" Collapsed="true">
+    <Position X="10.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAACAgAAQAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AI\Actions\SearchForPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShootPlayer" Collapsed="true">
+    <Position X="10.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAAAAAAACIAAAQAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\AI\Actions\ShootPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoldLoot" Collapsed="true">
+    <Position X="8.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Loot\GoldLoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EscalationManager" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAgACAAADAAAAAQAAAAAAAAAgAAAAIAAAAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Managers\EscalationManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LootManager" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAACAACAAAAABAAAAAABAAAAAAAAAAAAAEQAAACA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Managers\LootManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhaseManager" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAACAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Managers\PhaseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleSpawner" Collapsed="true">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAEAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Managers\Spawners\SimpleSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BasicCop" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgCAAAAAAAAEAAAAAAAAEAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\NPC\Cops\BasicCop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NPC" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\NPC\NPC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="C_Crosshair" Collapsed="true">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Player\C_Crosshair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="C_Shoot" Collapsed="true">
+    <Position X="2.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoQAAAAIQCIABAAEAAAAAAAAAAAAAIAAIACAAAAAAAg=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Player\C_Shoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACACAACAIAAAAAAgAAAAEAIAAAAAAAAAAgAAgAAg=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RicochetController" Collapsed="true">
+    <Position X="2.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQEAWcAAjAgAAgAgCBAIgCQCAAAVQAMQICADCCAEAI=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Player\RicochetController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimpleMouseRotator" Collapsed="true">
+    <Position X="2.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAQAIACAAAAAQAAAAAAAACAAAAAAAgABgABAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\Player\SimpleMouseRotator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeatGUI" Collapsed="true">
+    <Position X="4.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAQCAAAAAAAAAAAAAAgAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\UI\HeatGUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LootGUI" Collapsed="true">
+    <Position X="4.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\UI\LootGUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PhaseGUI" Collapsed="true">
+    <Position X="4.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAg=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\UI\PhaseGUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerGUI" Collapsed="true">
+    <Position X="4.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACCAAAAAAAAAAAAAAACAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Assets\HeistGame\Scripts\UI\PlayerGUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

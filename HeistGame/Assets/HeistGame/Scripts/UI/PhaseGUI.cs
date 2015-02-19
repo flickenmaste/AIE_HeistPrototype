@@ -28,6 +28,6 @@ public class PhaseGUI : MonoBehaviour {
         if (PhaseMan.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Planning")
             PhaseText.text = "Pre-planning Stage: Press F to continue";
         if (PhaseMan.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
-            PhaseText.text = "";
+            PhaseText.text = "Execution Phase: Get the gold!";
     }
 }
