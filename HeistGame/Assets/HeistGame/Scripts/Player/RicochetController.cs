@@ -254,9 +254,11 @@ public class RicochetController : MonoBehaviour
             //Debug.Log("bbbump it up");
 
 
-            slopeCurveEval = SlopeCurveModifier.Evaluate(Vector3.Angle(groundNormal, Vector3.up));
-            bumpForce = Vector3.up * (slopeCurveEval);
-            rigidbody.AddForce(bumpForce, ForceMode.Impulse);
+            //slopeCurveEval = SlopeCurveModifier.Evaluate(Vector3.Angle(groundNormal, Vector3.up));
+            //bumpForce = Vector3.up * (slopeCurveEval);
+            //rigidbody.AddForce(bumpForce, ForceMode.Impulse);
+
+            // ^ terrys shitty stair code
         }
 
 

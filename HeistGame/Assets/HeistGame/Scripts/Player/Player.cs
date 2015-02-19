@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
+    public float Health;
+    
     // Bool to show player is carrying gold
     public bool CarryingGold;
 
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour {
     // Use this for initialization
 	void Start () 
     {
+        Health = 100.0f;
         CarryingGold = false;
         LootMan = GameObject.FindGameObjectWithTag("LootManager");
         PhaseMan = GameObject.FindGameObjectWithTag("PhaseManager");
@@ -25,6 +28,15 @@ public class Player : MonoBehaviour {
     {
         CheckInput();
 	}
+
+    public void TakeDamage(float dmg)
+    {
+        if (Health > 0.0f)
+            Health += -dmg;
+
+        if (Health <= 0.0f)
+            Debug.Log("You died");  // reload level or something
+    }
 
     void CheckInput()
     {
