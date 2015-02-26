@@ -200,7 +200,7 @@ public class RicochetController : MonoBehaviour
         rigidbody.freezeRotation = true;
         rigidbody.useGravity = false;
         playerHeight = renderer.bounds.extents.y * 2;
-        Debug.Log("Player is " + playerHeight + " units tall");
+        //Debug.Log("Player is " + playerHeight + " units tall");
         //hull = (BoxCollider)collider;
 
         JumpCount = JumpLimit;
@@ -304,21 +304,21 @@ public class RicochetController : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(0, 0, 200, 20), "RBody Vel: " + rigidbody.velocity.ToString());
-        GUI.Label(new Rect(0, 20, 200, 20), "Target Vel: " + moveIntention);
+        //GUI.Label(new Rect(0, 0, 200, 20), "RBody Vel: " + rigidbody.velocity.ToString());
+        //GUI.Label(new Rect(0, 20, 200, 20), "Target Vel: " + moveIntention);
 
-        GUI.Label(new Rect(0, 40, 200, 20), "Jumping: " + (curMoveState != MovementState.GROUNDED ? "true" : "false"));
-        GUI.Label(new Rect(0, 60, 200, 20), "Crouching: " + (crouchIntention ? "true" : "false"));
+        //GUI.Label(new Rect(0, 40, 200, 20), "Jumping: " + (curMoveState != MovementState.GROUNDED ? "true" : "false"));
+        //GUI.Label(new Rect(0, 60, 200, 20), "Crouching: " + (crouchIntention ? "true" : "false"));
 
-        GUI.Label(new Rect(0, 100, 200, 20), "Ground Normal: " + groundNormal.ToString());
-        GUI.Label(new Rect(0, 120, 200, 20), "Ground Angle: " + Vector3.Angle(groundNormal, Vector3.up));
+        //GUI.Label(new Rect(0, 100, 200, 20), "Ground Normal: " + groundNormal.ToString());
+        //GUI.Label(new Rect(0, 120, 200, 20), "Ground Angle: " + Vector3.Angle(groundNormal, Vector3.up));
 
 
-        GUI.Label(new Rect(0, 140, 200, 20), "SqMag: " + sqrMag.ToString());
-        GUI.Label(new Rect(0, 160, 200, 20), "SqTargetMag: " + sqrTarMag.ToString());
-        GUI.Label(new Rect(0, 180, 200, 20), "Bump Force: " + bumpForce.ToString());
-        GUI.Label(new Rect(0, 200, 200, 20), "Slope Eval: " + slopeCurveEval.ToString());
-        GUI.Label(new Rect(0, 240, 200, 20), "Jump Count: " + JumpCount.ToString());
+        //GUI.Label(new Rect(0, 140, 200, 20), "SqMag: " + sqrMag.ToString());
+        //GUI.Label(new Rect(0, 160, 200, 20), "SqTargetMag: " + sqrTarMag.ToString());
+        //GUI.Label(new Rect(0, 180, 200, 20), "Bump Force: " + bumpForce.ToString());
+        //GUI.Label(new Rect(0, 200, 200, 20), "Slope Eval: " + slopeCurveEval.ToString());
+        //GUI.Label(new Rect(0, 240, 200, 20), "Jump Count: " + JumpCount.ToString());
     }
 
     void OnCollisionEnter(Collision other)
