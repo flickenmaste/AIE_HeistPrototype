@@ -74,7 +74,10 @@ public class C_Shoot : MonoBehaviour
 
                 if (Hit.transform.gameObject.layer == 8)
                 {
-                    Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
+                    if (Hit.transform.gameObject.tag == "Cop")
+                        Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
+                    if (Hit.transform.gameObject.tag == "Civilian")
+                        Hit.transform.gameObject.GetComponent<BasicCivilian>().TakeDamage(50);
                     //Debug.Log("yay");
                     if (EscaMan.GetComponent<EscalationManager>().PhaseQueue.Count >= 1)
                         EscaMan.GetComponent<EscalationManager>().PhaseQueue.Dequeue(); // This is how you can escalate the phase
