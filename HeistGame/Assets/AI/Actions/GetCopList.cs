@@ -13,10 +13,11 @@ public class GetCopList : RAINAction
     public override void Start(RAIN.Core.AI ai)
     {
 		Cops = GameObject.FindGameObjectsWithTag("Cop");
-		
+
 		foreach (var cop in Cops)
 		{
-			cop.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varPath", "PatrolPath");
+			//if(cop != null)
+			//cop.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varPath", "PatrolPath");
 		}
 
         base.Start(ai);
