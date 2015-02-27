@@ -8,6 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     #region Properties and Variable
 
+    //
+    public bool IsWallRunning;
+    //
+
     public Transform headJoint;
 
     public Transform cameraTrans;
@@ -279,7 +283,7 @@ public class PlayerController : MonoBehaviour
             sqrTarMag = 0.0f;
         }
 
-
+        CheckWallRunning();
 
         rigidbody.AddForce(Physics.gravity * gravityMultipler);    // Apply gravity
 
@@ -367,5 +371,18 @@ public class PlayerController : MonoBehaviour
     {
 
     }
+    #endregion
+
+    #region Wills stuff
+
+    void CheckWallRunning()
+    {
+        if (IsWallRunning)
+        {
+            Debug.Log("Wall Running");
+            this.gameObject.rigidbody.AddForce(Vector3.up * 8, ForceMode.Force);
+        }
+    }
+
     #endregion
 }

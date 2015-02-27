@@ -3,7 +3,8 @@ using System.Collections;
 
 public class WallRunTrigger : MonoBehaviour {
 
-	// Use this for initialization
+    
+    // Use this for initialization
 	void Start () 
     {
 
@@ -14,4 +15,14 @@ public class WallRunTrigger : MonoBehaviour {
     {
 
 	}
+
+    void OnTriggerStay(Collider c)
+    {
+        c.gameObject.GetComponent<PlayerController>().IsWallRunning = true;
+    }
+
+    void OnTriggerExit(Collider c)
+    {
+        c.gameObject.GetComponent<PlayerController>().IsWallRunning = false;
+    }
 }
