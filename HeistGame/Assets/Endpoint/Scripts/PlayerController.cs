@@ -310,7 +310,7 @@ public class PlayerController : MonoBehaviour
     {
         //GUI.Label(new Rect(0, 0, 200, 20), "RBody Vel: " + rigidbody.velocity.ToString());
         //GUI.Label(new Rect(0, 20, 200, 20), "Target Vel: " + moveIntention);
-
+        GUI.Label(new Rect(0, 0, 200, 20), "Wall Running?: " + IsWallRunning.ToString());
         //GUI.Label(new Rect(0, 40, 200, 20), "Jumping: " + (curMoveState != MovementState.GROUNDED ? "true" : "false"));
         //GUI.Label(new Rect(0, 60, 200, 20), "Crouching: " + (crouchIntention ? "true" : "false"));
 
@@ -322,7 +322,7 @@ public class PlayerController : MonoBehaviour
         //GUI.Label(new Rect(0, 160, 200, 20), "SqTargetMag: " + sqrTarMag.ToString());
         //GUI.Label(new Rect(0, 180, 200, 20), "Bump Force: " + bumpForce.ToString());
         //GUI.Label(new Rect(0, 200, 200, 20), "Slope Eval: " + slopeCurveEval.ToString());
-        //GUI.Label(new Rect(0, 240, 200, 20), "Jump Count: " + JumpCount.ToString());
+        GUI.Label(new Rect(0, 240, 200, 20), "Jump Count: " + JumpCount.ToString());
     }
 
     void OnCollisionEnter(Collision other)
@@ -379,9 +379,15 @@ public class PlayerController : MonoBehaviour
     {
         if (IsWallRunning)
         {
-            Debug.Log("Wall Running");
             this.gameObject.rigidbody.AddForce(Vector3.up * 8, ForceMode.Force);
+            StartCoroutine(StopWallRun());
         }
+    }
+
+    IEnumerator StopWallRun()
+    {
+        yield return new WaitForSeconds(1);
+        IsWallRunning = false;
     }
 
     #endregion
