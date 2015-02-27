@@ -20,7 +20,7 @@ public class SetOrders : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
-		for (int i = 0; i < Cops.GetLength; i++)
+		for (int i = 0; i < Cops.Length; i++)
 		{
 			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varPlayer") == "1")
 			{
