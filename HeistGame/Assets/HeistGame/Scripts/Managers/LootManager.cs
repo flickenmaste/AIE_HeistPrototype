@@ -43,7 +43,7 @@ public class LootManager : MonoBehaviour {
         float distance = Vector3.Distance(Player.transform.position, DropOffPoint.transform.position);
         if (distance <= range)
         {
-            Debug.Log("Dropped off");
+            Application.LoadLevel("WinScreen");
         }
     }
 }

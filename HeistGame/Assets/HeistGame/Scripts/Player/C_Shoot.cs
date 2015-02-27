@@ -12,6 +12,8 @@ public class C_Shoot : MonoBehaviour
     float fireRate = 1.0f;
     private float lastShot = 0.0f;
 
+    public int MaxShots = 15;
+
     // Managers
     public GameObject EscaMan;
     public GameObject PhaseMan;
@@ -21,6 +23,10 @@ public class C_Shoot : MonoBehaviour
     public Texture2D cross2;
     public Texture2D cross3;
     public Texture2D cross4;
+
+    // Audio
+    public AudioClip GunShot;
+    public AudioClip Reload;
 
     // Use this for initialization
     void Start()
@@ -33,8 +39,16 @@ public class C_Shoot : MonoBehaviour
     void Update()
     {
         if (PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
-            if (Input.GetMouseButtonDown(0))
+        {
+            if (Input.GetMouseButtonDown(0) && MaxShots >= 1)
                 Shoot();
+
+            if (Input.GetKeyUp(KeyCode.R) && MaxShots < 15)
+            {
+                AudioSource.PlayClipAtPoint(Reload, this.gameObject.transform.position);
+                MaxShots = 15;
+            }
+        }
     }
 
     void Shoot()
@@ -60,13 +74,19 @@ public class C_Shoot : MonoBehaviour
 
                 if (Hit.transform.gameObject.layer == 8)
                 {
-                    Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
+                    if (Hit.transform.gameObject.tag == "Cop")
+                        Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
+                    if (Hit.transform.gameObject.tag == "Civilian")
+                        Hit.transform.gameObject.GetComponent<BasicCivilian>().TakeDamage(50);
                     //Debug.Log("yay");
                     if (EscaMan.GetComponent<EscalationManager>().PhaseQueue.Count >= 1)
                         EscaMan.GetComponent<EscalationManager>().PhaseQueue.Dequeue(); // This is how you can escalate the phase
                 }
             }
         }
+
+        AudioSource.PlayClipAtPoint(GunShot, this.gameObject.transform.position);
+        MaxShots += -1;
     }
 
     Vector3 BulletSpread()

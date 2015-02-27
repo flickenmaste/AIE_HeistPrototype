@@ -8,6 +8,7 @@ public class PlayerGUI : MonoBehaviour {
 
     // Managers
     public GameObject Player;
+    public GameObject Shooting;
     
     // Use this for initialization
 	void Start () 
@@ -23,6 +24,6 @@ public class PlayerGUI : MonoBehaviour {
 
     void UpdatePlayerText()
     {
-        PlayerText.text = "Health: " + Player.GetComponent<Player>().Health;
+        PlayerText.text = "Health: " + Player.GetComponent<Player>().Health + " Bullets: " + Shooting.GetComponent<C_Shoot>().MaxShots;
     }
 }
