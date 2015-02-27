@@ -5,6 +5,11 @@ public class WallKill : MonoBehaviour {
 
 	public Transform Player;
 
+	public float SpeedX;
+
+	public float SpeedY;
+
+	public float SpeedZ;
 
 	void OnTriggerEnter(Collider coll)
 	{
@@ -14,7 +19,7 @@ public class WallKill : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.transform.rigidbody.AddForce(-500, 0, 0);
+		this.transform.rigidbody.AddForce(SpeedX, SpeedY, SpeedZ);
 	}
 	
 	// Update is called once per frame
