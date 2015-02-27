@@ -14,7 +14,7 @@ public class WallKill : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		this.transform.rigidbody.AddForce(-500, 0, 0);
 	}
 	
 	// Update is called once per frame
