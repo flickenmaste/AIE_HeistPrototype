@@ -4,6 +4,9 @@ using System.Collections;
 public class C_Shoot : MonoBehaviour
 {
 
+	//int to create a shotgun effect
+	public int ShotCount = 8;
+
     public float range = 1000.0f;
     public float ShotSpread = 0.03f;
     public GameObject defaultHolePrefab;
@@ -38,8 +41,8 @@ public class C_Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
-        {
+//        if (PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
+//        {
             if (Input.GetMouseButtonDown(0) && MaxShots >= 1)
                 Shoot();
 
@@ -48,7 +51,7 @@ public class C_Shoot : MonoBehaviour
                 AudioSource.PlayClipAtPoint(Reload, this.gameObject.transform.position);
                 MaxShots = 15;
             }
-        }
+//        }
     }
 
     void Shoot()
@@ -84,7 +87,6 @@ public class C_Shoot : MonoBehaviour
                 }
             }
         }
-
         AudioSource.PlayClipAtPoint(GunShot, this.gameObject.transform.position);
         MaxShots += -1;
     }
@@ -127,8 +129,8 @@ public class C_Shoot : MonoBehaviour
     // Crosshair
     void OnGUI()
     {
-        if (PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
-        {
+        //if (PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
+        //{
             if ((Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0) || // aim
                 (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)) // movement
             {
@@ -153,7 +155,7 @@ public class C_Shoot : MonoBehaviour
                 // Down
                 GUI.DrawTexture(new Rect(0 + (Screen.width / 2) - 16, 0 + (Screen.height / 2) + 45, 32, 64), cross4, ScaleMode.StretchToFill, true, 10.0F);
             }
-        }
+        //}
     }
 }
 
