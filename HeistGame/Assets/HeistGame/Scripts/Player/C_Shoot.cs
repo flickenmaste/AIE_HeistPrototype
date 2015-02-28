@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class C_Shoot : MonoBehaviour
 {
     public float range = 1000.0f;
     public float ShotSpread = 0.03f;
     public GameObject defaultHolePrefab;
+
+	//string to allow for different weapons
+	public string Weapon;
+
+	//int to allow for different number of shots
+	//with different weapons
+	public int ShotCount;
 
     // Shooting
     float fireRate = 1.0f;
@@ -30,6 +38,9 @@ public class C_Shoot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		Weapon = "Pistol";
+		ShotCount = 1;
+
         EscaMan = GameObject.FindGameObjectWithTag("EscalationManager");
         PhaseMan = GameObject.FindGameObjectWithTag("PhaseManager");
     }
@@ -37,6 +48,8 @@ public class C_Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		WeaponSelect();
+
         if (PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
         {
             if (Input.GetMouseButtonDown(0) && MaxShots >= 1)
@@ -58,31 +71,67 @@ public class C_Shoot : MonoBehaviour
 
         Debug.DrawRay(this.transform.position, DirectionRay * range, Color.green);	// Ray so we can see
 
-        if (Time.time > fireRate + lastShot)
-        {
-            if (Physics.Raycast(transform.position, DirectionRay, out Hit, range))
-            {	// Check for ray hit
-                Quaternion hitRotation = Quaternion.FromToRotation(Vector3.up, Hit.normal);
-                if (Hit.transform.tag == "Untagged")
-                {
-                    GameObject defaultHole = Instantiate(defaultHolePrefab, Hit.point, hitRotation) as GameObject;
-                    defaultHole.transform.parent = Hit.transform;
-                    defaultHole.transform.position = new Vector3(defaultHole.transform.position.x, defaultHole.transform.position.y + 0.01f, defaultHole.transform.position.z);
-                    Destroy(defaultHole, 3);
-                }
+		switch (Weapon)
+		{
+		case "Pistol":
+	        if (Time.time > fireRate + lastShot)
+	        {
+	            if (Physics.Raycast(transform.position, DirectionRay, out Hit, range))
+	            {	// Check for ray hit
+	                Quaternion hitRotation = Quaternion.FromToRotation(Vector3.up, Hit.normal);
+	                if (Hit.transform.tag == "Untagged")
+	                {
+	                    GameObject defaultHole = Instantiate(defaultHolePrefab, Hit.point, hitRotation) as GameObject;
+	                    defaultHole.transform.parent = Hit.transform;
+	                    defaultHole.transform.position = new Vector3(defaultHole.transform.position.x, defaultHole.transform.position.y + 0.01f, defaultHole.transform.position.z);
+	                    Destroy(defaultHole, 3);
+	                }
 
-                if (Hit.transform.gameObject.layer == 8)
-                {
-                    if (Hit.transform.gameObject.tag == "Cop")
-                        Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
-                    if (Hit.transform.gameObject.tag == "Civilian")
-                        Hit.transform.gameObject.GetComponent<BasicCivilian>().TakeDamage(50);
-                    //Debug.Log("yay");
-                    if (EscaMan.GetComponent<EscalationManager>().PhaseQueue.Count >= 1)
-                        EscaMan.GetComponent<EscalationManager>().PhaseQueue.Dequeue(); // This is how you can escalate the phase
-                }
-            }
-        }
+	                if (Hit.transform.gameObject.layer == 8)
+	                {
+	                    if (Hit.transform.gameObject.tag == "Cop")
+	                        Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
+	                    if (Hit.transform.gameObject.tag == "Civilian")
+	                        Hit.transform.gameObject.GetComponent<BasicCivilian>().TakeDamage(50);
+	                    //Debug.Log("yay");
+	                    if (EscaMan.GetComponent<EscalationManager>().PhaseQueue.Count >= 1)
+	                        EscaMan.GetComponent<EscalationManager>().PhaseQueue.Dequeue(); // This is how you can escalate the phase
+	                }
+	            }
+	        }
+			break;
+
+		case "ShotGun":
+			for (int i = 0; i < ShotCount; i++)
+			{
+				if (Time.time > fireRate + lastShot)
+				{
+					if (Physics.Raycast(transform.position, DirectionRay, out Hit, range))
+					{	// Check for ray hit
+						Quaternion hitRotation = Quaternion.FromToRotation(Vector3.up, Hit.normal);
+						if (Hit.transform.tag == "Untagged")
+						{
+							GameObject defaultHole = Instantiate(defaultHolePrefab, Hit.point, hitRotation) as GameObject;
+							defaultHole.transform.parent = Hit.transform;
+							defaultHole.transform.position = new Vector3(defaultHole.transform.position.x, defaultHole.transform.position.y + 0.01f, defaultHole.transform.position.z);
+							Destroy(defaultHole, 3);
+						}
+						
+						if (Hit.transform.gameObject.layer == 8)
+						{
+							if (Hit.transform.gameObject.tag == "Cop")
+								Hit.transform.gameObject.GetComponent<BasicCop>().TakeDamage(50);
+							if (Hit.transform.gameObject.tag == "Civilian")
+								Hit.transform.gameObject.GetComponent<BasicCivilian>().TakeDamage(50);
+							//Debug.Log("yay");
+							if (EscaMan.GetComponent<EscalationManager>().PhaseQueue.Count >= 1)
+								EscaMan.GetComponent<EscalationManager>().PhaseQueue.Dequeue(); // This is how you can escalate the phase
+						}
+					}
+				}
+			}
+			break;
+		}
         AudioSource.PlayClipAtPoint(GunShot, this.gameObject.transform.position);
         MaxShots += -1;
     }
@@ -153,5 +202,21 @@ public class C_Shoot : MonoBehaviour
             }
         }
     }
+
+	void WeaponSelect()
+	{
+		if (Input.GetKeyDown(KeyCode.Keypad1))
+		{
+			Debug.Log("Pistol");
+			Weapon = "Pistol";
+			ShotCount = 1;
+		}
+		if (Input.GetKeyDown(KeyCode.M))
+		{
+			Debug.Log("shotgun");
+			Weapon = ("Shotgun");
+			ShotCount = 8;
+		}
+	}
 }
 
