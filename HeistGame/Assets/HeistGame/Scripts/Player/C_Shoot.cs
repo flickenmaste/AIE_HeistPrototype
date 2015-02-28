@@ -3,7 +3,6 @@ using System.Collections;
 
 public class C_Shoot : MonoBehaviour
 {
-
     public float range = 1000.0f;
     public float ShotSpread = 0.03f;
     public GameObject defaultHolePrefab;
@@ -84,7 +83,6 @@ public class C_Shoot : MonoBehaviour
                 }
             }
         }
-
         AudioSource.PlayClipAtPoint(GunShot, this.gameObject.transform.position);
         MaxShots += -1;
     }

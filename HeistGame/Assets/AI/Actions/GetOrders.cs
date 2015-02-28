@@ -5,26 +5,28 @@ using RAIN.Action;
 using RAIN.Core;
 
 [RAINAction]
-public class GetCopList : RAINAction
+public class GetOrders : RAINAction
 {
-	//private List<GameObject> Cops = new List<GameObject>();
-	public GameObject[] Cops;	
+	public GameObject Commander;
 
     public override void Start(RAIN.Core.AI ai)
     {
-		Cops = GameObject.FindGameObjectsWithTag("Cop");
-
-		foreach (var cop in Cops)
-		{
-			//if(cop != null)
-			//cop.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varPath", "PatrolPath");
-		}
+		Commander = GameObject.FindGameObjectWithTag("Commisioner");
 
         base.Start(ai);
     }
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
+		if (Commander.GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.GetItem ("varOrder") == "Attack")
+		{
+
+		}
+		else
+		{
+
+		}
+
         return ActionResult.SUCCESS;
     }
 

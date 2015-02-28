@@ -34,8 +34,8 @@ public class Player : MonoBehaviour {
         if (Health > 0.0f)
             Health += -dmg;
 
-        if (Health <= 0.0f)
-            Application.LoadLevel("GameOver");  // reload level or something
+        //if (Health <= 0.0f)
+            //Application.LoadLevel("GameOver");  // reload level or something
     }
 
     void CheckInput()
