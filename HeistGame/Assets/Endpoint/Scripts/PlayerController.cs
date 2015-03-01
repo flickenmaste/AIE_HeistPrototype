@@ -14,7 +14,15 @@ public class PlayerController : MonoBehaviour
 
 
 
+	// LEDGE DETECTION //
+	[HideInInspector]
 	public bool ledgeGrab;
+	[HideInInspector]
+	public bool facingLedge;
+	[HideInInspector]
+	public bool snapToWall;
+	/////////////////////
+
 
     public Transform headJoint;
 
@@ -288,7 +296,7 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckWallRunning();
-		CheckLedge();
+		//CheckLedge();
 
         rigidbody.AddForce(Physics.gravity * gravityMultipler);    // Apply gravity
 
@@ -389,12 +397,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	void CheckLedge() {
-		if(ledgeGrab) {
+	/*void CheckLedge() {
+		if(facingLedge) {
+
 			Debug.Log("LEDGE GRABBED");
-			this.gameObject.rigidbody.AddForce(Vector3.up * 30, ForceMode.Force);
+
+
+
+
+			//this.gameObject.rigidbody.AddForce(Vector3.up * 60, ForceMode.Force);
+			//this.GetComponent<Rigidbody>().
+			//this.gameObject.transform.position += Vector3.up * 10 * Time.deltaTime;
 		}
-	}
+	}*/
 
     #endregion
 }
