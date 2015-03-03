@@ -4,7 +4,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 {
     #region Properties and Variable
 
@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
     public bool IsWallRunning;
     //
 
-
+    // Camera
+    public GameObject myCam;
 
 	public bool ledgeGrab;
 
@@ -214,8 +215,14 @@ public class PlayerController : MonoBehaviour
         JumpCount = JumpLimit;
     }
 
-    void Update()
+    public override void Attached()
     {
+        state.PlayerTransform.SetTransforms(transform);
+    }
+
+    public override void SimulateOwner()
+    {
+        myCam.SetActive(true);
         syncCameraToJoint();
 
         // Poll user's state
