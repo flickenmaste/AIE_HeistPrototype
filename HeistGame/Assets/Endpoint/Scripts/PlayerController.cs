@@ -8,6 +8,15 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 {
     #region Properties and Variable
 
+    // LEDGE DETECTION //
+    [HideInInspector]
+    public bool ledgeGrab;
+    [HideInInspector]
+    public bool facingLedge;
+    [HideInInspector]
+    public bool snapToWall;
+    /////////////////////
+
     //
     public bool IsWallRunning;
     //
@@ -15,7 +24,7 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
     // Camera
     public GameObject myCam;
 
-	public bool ledgeGrab;
+	//public bool ledgeGrab;
 
     public Transform headJoint;
 

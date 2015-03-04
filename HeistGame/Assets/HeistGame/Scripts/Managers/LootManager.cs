@@ -28,8 +28,8 @@ public class LootManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (Player.GetComponent<Player>().CarryingGold)
-            LootIsTaken();
+        //if (Player.GetComponent<Player>().CarryingGold)
+            //LootIsTaken();
     }
 
     void SpawnLoot()

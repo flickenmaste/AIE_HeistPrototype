@@ -8,6 +8,7 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
     {
         // randomize a position
         var pos = new Vector3(0, 2, -191);
+        //var pos = new Vector3(5, 2, -19);
 
         // instantiate cube
         BoltNetwork.Instantiate(BoltPrefabs.PlayerEndpoint, pos, Quaternion.identity);
