@@ -384,26 +384,29 @@ public class PlayerController : MonoBehaviour
     {
         if (IsWallRunning)
         {
+<<<<<<< HEAD
+=======
             //Debug.Log("Wall Running");
+>>>>>>> origin/Caleb
             this.gameObject.rigidbody.AddForce(Vector3.up * 8, ForceMode.Force);
             StartCoroutine(StopWallRun());
         }
     }
 
+<<<<<<< HEAD
     IEnumerator StopWallRun()
     {
         yield return new WaitForSeconds(1);
         IsWallRunning = false;
     }
-
-	void CheckLedge() 
-	{
-		if(ledgeGrab) 
-		{
+=======
+	void CheckLedge() {
+		if(ledgeGrab) {
 			Debug.Log("LEDGE GRABBED");
 			this.gameObject.rigidbody.AddForce(Vector3.up * 30, ForceMode.Force);
 		}
 	}
+>>>>>>> origin/Caleb
 
     #endregion
 }
