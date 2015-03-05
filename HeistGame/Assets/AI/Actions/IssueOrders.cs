@@ -10,10 +10,21 @@ public class SetOrders : RAINAction
 	public GameObject[] Cops;
 	public GameObject Commander;
 
+	public void SetPath(int number)
+	{
+		Cops[number].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varPath", "Path");
+	}
+
+	//function to see if the cops have reached the previous player location after they have lost sight
+	void SearchAround()
+	{
+
+	}
+
     public override void Start(RAIN.Core.AI ai)
     {
 		Cops = GameObject.FindGameObjectsWithTag("Cop");
-		Commander = GameObject.FindGameObjectWithTag("Commiosioner");
+		Commander = GameObject.FindGameObjectWithTag("Commisioner");
 
         base.Start(ai);
     }
@@ -22,13 +33,14 @@ public class SetOrders : RAINAction
     {
 		for (int i = 0; i < Cops.Length; i++)
 		{
-			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varPlayer") == "1")
+			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varObjective").Equals("Attack"))
 			{
-				Commander.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varOder", "AttackOrder");
+
 			}
-			else
+
+			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varObjective").Equals("Patrol"))
 			{
-				Commander.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varOder", "PatrolOrder");
+				SetPath(i);
 			}
 		}
 
