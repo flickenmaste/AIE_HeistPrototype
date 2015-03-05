@@ -252,6 +252,9 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 
         }
 
+        if (Input.GetKeyUp(KeyCode.E))
+            this.gameObject.transform.position = new Vector3(0, 2, -191);
+
         crouchIntention = crouchPressed;
     }
 

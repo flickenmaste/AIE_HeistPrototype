@@ -29,15 +29,12 @@ public class WallKill : Bolt.EntityBehaviour<IWallState>
 	void Start () 
     {
         started = false;
+        this.transform.rigidbody.AddForce(SpeedX, SpeedY, SpeedZ);
 	}
 	
 	// Update is called once per frame
     public override void SimulateOwner()
     {
-        if (!started)
-        {
-            this.transform.rigidbody.AddForce(SpeedX, SpeedY, SpeedZ);
-            started = true;
-        }   
+ 
 	}
 }
