@@ -10,15 +10,11 @@ public class SetOrders : RAINAction
 	public GameObject[] Cops;
 	public GameObject Commander;
 
+	public Vector3 PlayerPosition;
+
 	public void SetPath(int number)
 	{
 		Cops[number].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varPath", "Path");
-	}
-
-	//function to see if the cops have reached the previous player location after they have lost sight
-	void SearchAround()
-	{
-
 	}
 
     public override void Start(RAIN.Core.AI ai)
@@ -33,14 +29,25 @@ public class SetOrders : RAINAction
     {
 		for (int i = 0; i < Cops.Length; i++)
 		{
-			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varObjective").Equals("Attack"))
+			//player found, attack the player
+			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varPlayer") != null
+			    && Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varBreak").Equals(1))
 			{
-
+				Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varObjective", "Attack");
 			}
-
-			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varObjective").Equals("Patrol"))
+			
+			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varPlayer") == null
+			    && Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varBreak").Equals(1))
+			{
+				Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varObjective", "Search");
+			}
+			
+			//no player found, follow patrol route
+			if (Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varPlayer") == null
+			    && Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varBreak").Equals(0))
 			{
 				SetPath(i);
+				Cops[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varObjective", "Patrol");
 			}
 		}
 
