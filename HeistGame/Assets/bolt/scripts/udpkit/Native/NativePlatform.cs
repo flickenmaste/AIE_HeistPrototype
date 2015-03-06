@@ -1,4 +1,5 @@
 ﻿﻿#if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
+using UdpKit;
 using UnityEngine;
 using System.Collections;
 
@@ -11,7 +12,8 @@ public class NativePlatform : UdpKit.UdpPlatform {
 
   public override UdpKit.UdpIPv4Address GetBroadcastAddress() {
 #if UNITY_IPHONE
-    return NativePInvoke.GetBroadcastAddress();
+    var addr = NativePInvoke.GetBroadcastAddress();
+    return new UdpKit.UdpIPv4Address((byte) (addr >> 0), (byte) (addr >> 8), (byte) (addr >> 16), (byte) (addr >> 24));
 #elif UNITY_ANDROID
     return Android.GetBroadcastAddress();
 #else
@@ -19,17 +21,25 @@ public class NativePlatform : UdpKit.UdpPlatform {
 #endif
   }
 
+  public override UdpIPv4Address[] ResolveHostAddresses(string host) {
+    return new UdpIPv4Address[0];
+  }
+
   public override System.Collections.Generic.List<UdpKit.UdpPlatformInterface> GetNetworkInterfaces() {
-    throw new System.NotImplementedException();
+    return new System.Collections.Generic.List<UdpKit.UdpPlatformInterface>();
   }
 
   public override uint GetPrecisionTime() {
     lock (timeLock) {
-      return NativePInvoke.GetHighPrecisionTime();
+      return NativePInvoke.GetPrecisionTime();
     }
   }
 
   public override bool SupportsBroadcast {
+    get { return true; }
+  }
+
+  public override bool SupportsMasterServer {
     get { return true; }
   }
 

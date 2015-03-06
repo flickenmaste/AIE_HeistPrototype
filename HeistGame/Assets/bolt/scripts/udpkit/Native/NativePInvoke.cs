@@ -26,7 +26,7 @@ public static class NativePInvoke {
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
-  public static extern Int32 Bind(IntPtr socket, UdpEndPoint addr);
+  public static extern Int32 Bind(IntPtr socket, UdpEndPoint.Native addr);
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
@@ -38,11 +38,11 @@ public static class NativePInvoke {
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
-  public static extern Int32 SendTo(IntPtr socket, [Out] byte[] buffer, int size, UdpEndPoint addr);
+  public static extern Int32 SendTo(IntPtr socket, [Out] byte[] buffer, int size, UdpEndPoint.Native addr);
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
-  public static extern Int32 RecvFrom(IntPtr socket, [Out] byte[] buffer, int size, [Out] out UdpEndPoint addr);
+  public static extern Int32 RecvFrom(IntPtr socket, [Out] byte[] buffer, int size, [Out] out UdpEndPoint.Native addr);
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
@@ -50,25 +50,25 @@ public static class NativePInvoke {
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
-  public static extern Int32 GetEndPoint(IntPtr socket, [Out] out UdpEndPoint addr);
+  public static extern Int32 GetEndPoint(IntPtr socket, [Out] out UdpEndPoint.Native addr);
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
   public static extern Int32 Close(IntPtr socket);
 
-  [DllImport(DLL_NAME, EntryPoint = "PlatformName")]
+  [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
-  static extern IntPtr PlatformName_Extern();
-  public static string PlatformName() { return Marshal.PtrToStringAnsi(PlatformName_Extern()); }
-
-  [DllImport(DLL_NAME, EntryPoint = "Error")]
-  [SuppressUnmanagedCodeSecurity]
-  static extern IntPtr Error_Extern();
-  public static string Error() { return Marshal.PtrToStringAnsi(Error_Extern()); }
+  static extern IntPtr PlatformName();
+  public static string PlatformName_Wrapper() { return Marshal.PtrToStringAnsi(PlatformName()); }
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]
-  public static extern UInt32 GetHighPrecisionTime();
+  static extern IntPtr Error();
+  public static string Error_Wrapper() { return Marshal.PtrToStringAnsi(Error()); }
+
+  [DllImport(DLL_NAME)]
+  [SuppressUnmanagedCodeSecurity]
+  public static extern UInt32 GetPrecisionTime();
 
   [DllImport(DLL_NAME)]
   [SuppressUnmanagedCodeSecurity]

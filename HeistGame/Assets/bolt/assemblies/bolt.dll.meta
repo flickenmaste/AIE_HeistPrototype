@@ -5,7 +5,6 @@ MonoAssemblyImporter:
   iconMap: {}
   executionOrder:
     BoltEntity: -2500
-    BoltFrameInterpolator: 7500
     BoltPoll: -10000
     BoltSend: 10000
   userData: 

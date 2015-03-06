@@ -1,11 +1,24 @@
-﻿using UnityEngine;
-using UdpKit;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Reflection;
+using UdpKit;
+using UnityEngine;
 
 public static class BoltLauncher {
+  static UdpPlatform UserAssignedPlatform;
+
+  public static void StartSinglePlayer() {
+    StartSinglePlayer(BoltRuntimeSettings.instance.GetConfigCopy());
+  }
+
+  public static void StartSinglePlayer(BoltConfig config) {
+    // set null platform
+    SetUdpPlatform(new NullPlatform());
+
+    // init server
+    Initialize(BoltNetworkModes.Server, UdpEndPoint.Any, config);
+  }
+
   public static void StartServer() {
     StartServer(UdpEndPoint.Any);
   }
@@ -38,8 +51,24 @@ public static class BoltLauncher {
     Initialize(BoltNetworkModes.Client, endpoint, config);
   }
 
-  public static void Shutdown() {
-    BoltNetworkInternal.__Shutdown();
+  public static System.Threading.ManualResetEvent Shutdown() {
+    return BoltNetworkInternal.__Shutdown();
+  }
+
+  public static void Shutdown(bool waitForShutdown) {
+    BoltNetworkInternal.__Shutdown(waitForShutdown);
+  }
+
+  public static void Shutdown(Action callback) {
+    if (callback == null) {
+      Shutdown();
+    }
+    else {
+      GameObject go = new GameObject("BoltShutdownCallback");
+      BoltShutdownPoll poll = go.AddComponent<BoltShutdownPoll>();
+      poll.ShutdownEvent = Shutdown();
+      poll.Callback = callback;
+    }
   }
 
   static void Initialize(BoltNetworkModes modes, UdpEndPoint endpoint, BoltConfig config) {
@@ -92,14 +121,23 @@ public static class BoltLauncher {
     return result;
   }
 
+  public static void SetUdpPlatform(UdpPlatform platform) {
+    UserAssignedPlatform = platform;
+  }
+
   public static UdpPlatform CreateUdpPlatform() {
-#if (UNITY_ANDROID || UNITY_IPHONE || UNITY_WP8) && !UNITY_EDITOR
+    if (UserAssignedPlatform != null) {
+      return UserAssignedPlatform;
+    }
+
+#if (UNITY_ANDROID || UNITY_IPHONE) && !UNITY_EDITOR
     return new NativePlatform();
 #elif (UNITY_PS4 || UNITY_PSM) && !UNITY_EDITOR
     return new DotNetPlatform();
+#elif (UNITY_WP8) && !UNITY_EDITOR
+    return new Wp8Platform();
 #else
     return new DotNetPlatform();
 #endif
   }
-
 }

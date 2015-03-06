@@ -5,7 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
+
+#if !UNITY_WEBPLAYER
 using System.Net.NetworkInformation;
+#endif
+
 using System.Diagnostics;
 
 public class DotNetPlatform : UdpPlatform {
@@ -25,6 +29,10 @@ public class DotNetPlatform : UdpPlatform {
   }
 
   public override bool SupportsBroadcast {
+    get { return true; }
+  }
+
+  public override bool SupportsMasterServer {
     get { return true; }
   }
 
@@ -50,69 +58,136 @@ public class DotNetPlatform : UdpPlatform {
     return FindInterfaces();
   }
 
+#if UNITY_WEBPLAYER
+  public override UdpIPv4Address[] ResolveHostAddresses(string host) {
+    throw new System.NotSupportedException("ResolveHostAddress is not supported in WebPlayer");
+  }
+#else
+  public override UdpIPv4Address[] ResolveHostAddresses(string host) {
+    if (host == null) {
+      throw new System.ArgumentNullException("host", "argument was null");
+    }
+
+    if (host.Length == 0) {
+      throw new System.ArgumentException("host name was empty", "host");
+    }
+
+    return Dns.GetHostAddresses(host).Select(x => ConvertAddress(x)).ToArray();
+  }
+#endif
+
   List<UdpPlatformInterface> FindInterfaces() {
+#if UNITY_WEBPLAYER
+    return new List<UdpPlatformInterface>();
+#else
     List<UdpPlatformInterface> result = new List<UdpPlatformInterface>();
 
-    foreach (var n in NetworkInterface.GetAllNetworkInterfaces()) {
-      if (n.OperationalStatus != OperationalStatus.Up && n.OperationalStatus != OperationalStatus.Unknown) {
-        continue;
-      }
+    try {
+      if (NetworkInterface.GetIsNetworkAvailable()) {
+        foreach (var n in NetworkInterface.GetAllNetworkInterfaces()) {
+          try {
+            if (n.OperationalStatus != OperationalStatus.Up && n.OperationalStatus != OperationalStatus.Unknown) {
+              continue;
+            }
 
-      if (n.NetworkInterfaceType == NetworkInterfaceType.Loopback) {
-        continue;
-      }
+            if (n.NetworkInterfaceType == NetworkInterfaceType.Loopback) {
+              continue;
+            }
 
-      var iface = ParseInterface(n);
-      if (iface != null) {
-        result.Add(iface);
+            var iface = ParseInterface(n);
+            if (iface != null) {
+              result.Add(iface);
+            }
+          }
+          catch (System.Exception exn) {
+            UdpLog.Error(exn.Message);
+          }
+        }
       }
+    }
+    catch (System.Exception exn) {
+      UdpLog.Error(exn.Message);
     }
 
     return result;
+#endif
   }
 
 
+#if !UNITY_WEBPLAYER
   DotNetInterface ParseInterface(NetworkInterface n) {
     HashSet<UdpIPv4Address> gateway = new HashSet<UdpIPv4Address>(UdpIPv4Address.Comparer.Instance);
     HashSet<UdpIPv4Address> unicast = new HashSet<UdpIPv4Address>(UdpIPv4Address.Comparer.Instance);
     HashSet<UdpIPv4Address> multicast = new HashSet<UdpIPv4Address>(UdpIPv4Address.Comparer.Instance);
 
-    IPInterfaceProperties p = n.GetIPProperties();
+    IPInterfaceProperties p = null;
 
-    foreach (var gw in p.GatewayAddresses) {
-      if (gw.Address.AddressFamily == AddressFamily.InterNetwork) {
-        gateway.Add(ConvertAddress(gw.Address));
-      }
+    try {
+      p = n.GetIPProperties();
     }
+    catch { return null; }
 
-    foreach (var addr in p.DnsAddresses) {
-      if (addr.AddressFamily == AddressFamily.InterNetwork) {
-        gateway.Add(ConvertAddress(addr));
+    if (p != null) {
+
+      try {
+        foreach (var gw in p.GatewayAddresses) {
+          try {
+            if (gw.Address.AddressFamily == AddressFamily.InterNetwork) {
+              gateway.Add(ConvertAddress(gw.Address));
+            }
+          }
+          catch { }
+        }
       }
-    }
+      catch { }
 
-    foreach (var uni in p.UnicastAddresses) {
-      if (uni.Address.AddressFamily == AddressFamily.InterNetwork) {
-        UdpIPv4Address ipv4 = ConvertAddress(uni.Address);
-
-        unicast.Add(ipv4);
-        gateway.Add(new UdpIPv4Address(ipv4.Byte3, ipv4.Byte2, ipv4.Byte1, 1));
+      try {
+        foreach (var addr in p.DnsAddresses) {
+          try {
+            if (addr.AddressFamily == AddressFamily.InterNetwork) {
+              gateway.Add(ConvertAddress(addr));
+            }
+          }
+          catch { }
+        }
       }
-    }
+      catch { }
 
-    foreach (var multi in p.MulticastAddresses) {
-      if (multi.Address.AddressFamily == AddressFamily.InterNetwork) {
-        multicast.Add(ConvertAddress(multi.Address));
+      try {
+        foreach (var uni in p.UnicastAddresses) {
+          try {
+            if (uni.Address.AddressFamily == AddressFamily.InterNetwork) {
+              UdpIPv4Address ipv4 = ConvertAddress(uni.Address);
+
+              unicast.Add(ipv4);
+              gateway.Add(new UdpIPv4Address(ipv4.Byte3, ipv4.Byte2, ipv4.Byte1, 1));
+            }
+          }
+          catch { }
+        }
       }
-    }
+      catch { }
 
-    if (unicast.Count == 0 || gateway.Count == 0) {
-      return null;
+      try {
+        foreach (var multi in p.MulticastAddresses) {
+          try {
+            if (multi.Address.AddressFamily == AddressFamily.InterNetwork) {
+              multicast.Add(ConvertAddress(multi.Address));
+            }
+          }
+          catch { }
+        }
+      }
+      catch { }
+
+      if (unicast.Count == 0 || gateway.Count == 0) {
+        return null;
+      }
     }
 
     return new DotNetInterface(n, gateway.ToArray(), unicast.ToArray(), multicast.ToArray());
   }
-
+#endif
 
 #pragma warning disable 618
   public static UdpEndPoint ConvertEndPoint(EndPoint endpoint) {
@@ -195,6 +270,5 @@ public class DotNetPlatform : UdpPlatform {
     return IPAddress.Any;
   }
 #endif
-
 }
 #endif
