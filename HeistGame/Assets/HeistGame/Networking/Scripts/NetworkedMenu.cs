@@ -2,16 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Net;
 
 public class NetworkedMenu : MonoBehaviour {
 
     public Canvas MainMenu;
     public Canvas MultiLobby;
-    public InputField Username;
+    public Canvas JoinLobby;
+    public InputField HostUsername;
+    public InputField ClientUsername;
     public Button ServerButton;
 
     public List<UdpKit.UdpSession> ServerList;
-    
+
+    public string HostServerAddress;
+
     // Use this for initialization
 	void Start () 
     {
@@ -24,17 +29,33 @@ public class NetworkedMenu : MonoBehaviour {
 
     }
 
-    public void GoLobbyToMenu()
+    public void GoLobbyToMenu() // Main Menu
     {
+        StartCoroutine(ShutdownBolt());
         MainMenu.gameObject.SetActive(true);
         MultiLobby.gameObject.SetActive(false);
+        JoinLobby.gameObject.SetActive(false);
+        ServerList.Clear();
     }
 
-    public void GoToMultiplayerLobby()
+    public void GoToMultiplayerLobby()  // Pick to host or join lobby
     {
         MainMenu.gameObject.SetActive(false);
         MultiLobby.gameObject.SetActive(true);
-        BoltLauncher.StartServer(new UdpKit.UdpEndPoint(UdpKit.UdpIPv4Address.Any, 27000)); // Start server
+        HostServerAddress = Dns.GetHostName();
+        IPHostEntry ip = Dns.GetHostEntry(HostServerAddress);
+        HostServerAddress = ip.AddressList[0].ToString() + ":27000";
+        //BoltLauncher.StartServer(UdpKit.UdpEndPoint.Parse(HostServerAddress)); // Start server
+    }
+
+    public void GoToClientLobby()   // Start client lobby
+    {
+        MainMenu.gameObject.SetActive(false);
+        MultiLobby.gameObject.SetActive(false);
+        JoinLobby.gameObject.SetActive(true);
+
+        if (!BoltNetwork.isRunning)
+            BoltLauncher.StartClient();
     }
 
     public void PingMasterServer()
@@ -48,8 +69,8 @@ public class NetworkedMenu : MonoBehaviour {
 
     public void HostServer()
     {
-        if(!BoltNetwork.isServer)
-            BoltLauncher.StartServer(new UdpKit.UdpEndPoint(UdpKit.UdpIPv4Address.Any, 27000));
+        if (!BoltNetwork.isRunning)
+            BoltLauncher.StartServer(UdpKit.UdpEndPoint.Parse(HostServerAddress)); // Start server
 
         BoltNetwork.RegisterTokenClass<HostInfo>(); // packets!
         BoltNetwork.RegisterTokenClass<PlayerName>();
@@ -58,7 +79,7 @@ public class NetworkedMenu : MonoBehaviour {
         hostToken.maxConnections = 4;
 
         var serverName = new PlayerName();
-        serverName.Username = Username.text;
+        serverName.Username = HostUsername.text;
 
         if (BoltNetwork.isServer)
             BoltNetwork.SetHostInfo(serverName.Username, hostToken);    // Server name, etc
@@ -68,15 +89,58 @@ public class NetworkedMenu : MonoBehaviour {
 
     public void JoinServer(UdpKit.UdpSession s)
     {
+        //StartCoroutine(HostToClient(s));
+
         BoltNetwork.RegisterTokenClass<HostInfo>(); // packets!
         BoltNetwork.RegisterTokenClass<PlayerName>();
 
         var clientToken = new PlayerName();
-        clientToken.Username = Username.text;
+        clientToken.Username = ClientUsername.text;
+
+        BoltNetwork.Connect(s, clientToken); // Connect to server, send along players name
+    }
+
+    IEnumerator HostToClient(UdpKit.UdpSession s)  // Shut down server
+    {
+        if (BoltNetwork.isRunning)
+        {
+            BoltLauncher.Shutdown();
+
+            yield return new UnityEngine.WaitForSeconds(3);
+        }
 
         // START CLIENT
         BoltLauncher.StartClient();
+
+        BoltNetwork.RegisterTokenClass<HostInfo>(); // packets!
+        BoltNetwork.RegisterTokenClass<PlayerName>();
+
+        var clientToken = new PlayerName();
+        clientToken.Username = ClientUsername.text;
+
         BoltNetwork.Connect(s, clientToken); // Connect to server, send along players name
+    }
+
+    IEnumerator RestartServer()  // Shut down server
+    {
+        if (BoltNetwork.isRunning)
+        {
+            BoltLauncher.Shutdown();
+
+            yield return new UnityEngine.WaitForSeconds(3);
+        }
+
+        BoltLauncher.StartServer();
+    }
+
+    IEnumerator ShutdownBolt()  // Shut down server
+    {
+        if (BoltNetwork.isRunning)
+        {
+            BoltLauncher.Shutdown();
+
+            yield return new UnityEngine.WaitForSeconds(3);
+        }
     }
 
     void OnGUI()    // This sucks, do something better
