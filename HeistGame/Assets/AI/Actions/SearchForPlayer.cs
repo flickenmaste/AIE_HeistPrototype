@@ -17,6 +17,8 @@ public class SearchForPlayer : RAINAction
     {
         base.Start(ai);
 
+		ai.WorkingMemory.SetItem ("varPlayer", (GameObject)null);
+
 		//get and set time here (fixes it not reseting when the players detected and keeps it from always reseting)
 		_time = ai.WorkingMemory.GetItem<float> ("varTimeToSearch");
 
@@ -92,6 +94,8 @@ public class SearchForPlayer : RAINAction
 
     public override void Stop(RAIN.Core.AI ai)
     {
+		ai.WorkingMemory.SetItem ("varPlayer", (GameObject)null);
+
         base.Stop(ai);
     }
 }
