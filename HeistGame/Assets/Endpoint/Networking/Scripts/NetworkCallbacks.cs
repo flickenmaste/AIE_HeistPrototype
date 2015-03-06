@@ -9,7 +9,7 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
 
     }
 
-    public override void SceneLoadLocalDone(string map)
+    public override void SceneLoadLocalDone(string map) // When player loads a level
     {
         // randomize a position
         //var pos = new Vector3(0, 2, -191);
@@ -18,6 +18,7 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
         // instantiate cube
         //BoltNetwork.Instantiate(BoltPrefabs.PlayerEndpoint, pos, Quaternion.identity);
 
-        Debug.Log("Lobby Started");
+        if (map == "HostLobby") // Check map
+            Debug.Log("Lobby Started");
     }
 }
