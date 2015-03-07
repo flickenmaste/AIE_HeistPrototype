@@ -19,6 +19,7 @@ public class HostLobby : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
+        // todo make this an event listener so we can populate and remove names on connect and disconnect
         foreach (var connection in BoltNetwork.connections)
         {
             var token = (PlayerName)connection.ConnectToken;
@@ -29,5 +30,14 @@ public class HostLobby : MonoBehaviour
     public void UpdateList()
     {
 
+    }
+
+    public void PrintConnections()
+    {
+        foreach (var connection in BoltNetwork.connections)
+        {
+            var token = (PlayerName)connection.ConnectToken;
+            Debug.Log(token.Username);
+        }
     }
 }

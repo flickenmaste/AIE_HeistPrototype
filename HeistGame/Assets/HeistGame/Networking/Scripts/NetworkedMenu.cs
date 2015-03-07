@@ -17,6 +17,12 @@ public class NetworkedMenu : MonoBehaviour {
 
     public string HostServerAddress;
 
+    public ServerList ServerListing;
+
+    public GameObject ServerButtonPrefab;
+
+    public bool LegacyGUI;
+
     // Use this for initialization
 	void Start () 
     {
@@ -50,12 +56,12 @@ public class NetworkedMenu : MonoBehaviour {
 
     public void GoToClientLobby()   // Start client lobby
     {
+        if (!BoltNetwork.isRunning)
+            BoltLauncher.StartClient();
+
         MainMenu.gameObject.SetActive(false);
         MultiLobby.gameObject.SetActive(false);
         JoinLobby.gameObject.SetActive(true);
-
-        if (!BoltNetwork.isRunning)
-            BoltLauncher.StartClient();
     }
 
     public void PingMasterServer()
@@ -145,6 +151,10 @@ public class NetworkedMenu : MonoBehaviour {
 
     void OnGUI()    // This sucks, do something better
     {
+        // exit if we arne't trying to use Legacy OnGUI bs
+        if (!LegacyGUI)
+            return;
+
         foreach (var server in ServerList)
         {
             if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2, 150, 50), server.HostName.ToString()))
