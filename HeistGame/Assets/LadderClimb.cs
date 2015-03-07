@@ -8,7 +8,7 @@ public class LadderClimb : MonoBehaviour {
 	{
 		if (coll.gameObject.tag == "Player") 
 		{
-			coll.rigidbody.useGravity = false;
+			coll.GetComponent<Rigidbody>().useGravity = false;
 			coll.gameObject.GetComponent<PlayerController>().gravityMultipler = 0;
 		}
 	}
@@ -17,7 +17,7 @@ public class LadderClimb : MonoBehaviour {
 	{
 		if (coll.gameObject.tag == "Player")
 		{
-			coll.rigidbody.AddForce (Vector3.up * 10, ForceMode.Force);
+			coll.GetComponent<Rigidbody>().AddForce (Vector3.up * 10, ForceMode.Force);
 		}
 	}
 
@@ -25,7 +25,7 @@ public class LadderClimb : MonoBehaviour {
 	{
 		if (coll.gameObject.tag == "Player") 
 		{
-			coll.rigidbody.useGravity = true;
+			coll.GetComponent<Rigidbody>().useGravity = true;
 			coll.gameObject.GetComponent<PlayerController>().gravityMultipler = 1.0f;
 		}
 	}

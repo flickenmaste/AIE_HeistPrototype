@@ -11,7 +11,7 @@ public class BasicCop : NPC {
 	void Start () 
     {
         myHealth = 100;
-        renderer.material.color = Color.blue;
+        GetComponent<Renderer>().material.color = Color.blue;
 	}
 	
 	// Update is called once per frame

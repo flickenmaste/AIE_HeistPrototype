@@ -29,7 +29,7 @@ public class WallKill : Bolt.EntityBehaviour<IWallState>
 	void Start () 
     {
         started = false;
-        this.transform.rigidbody.AddForce(SpeedX, SpeedY, SpeedZ);
+        this.transform.GetComponent<Rigidbody>().AddForce(SpeedX, SpeedY, SpeedZ);
 	}
 	
 	// Update is called once per frame

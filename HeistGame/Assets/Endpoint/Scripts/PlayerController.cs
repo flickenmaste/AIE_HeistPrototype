@@ -106,7 +106,7 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
             JumpCount <= 0) return; // exit if we aren't on the ground or don't have any jumps left
 
         jumpIntention = false;
-        rigidbody.AddForce(Vector3.up * (jumpPower * (scaleJumpByGravity ? gravityMultipler : 1.0f)), ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(Vector3.up * (jumpPower * (scaleJumpByGravity ? gravityMultipler : 1.0f)), ForceMode.Impulse);
         curMoveState = MovementState.FLYING;
 
         JumpCount--;
@@ -146,7 +146,7 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
         //Debug.Log(sphereRad);
         //Debug.Log(sphereRad * 1.5f);
 
-        if (curMoveState == MovementState.GROUNDED || rigidbody.velocity.y < jumpPower * .5f)
+        if (curMoveState == MovementState.GROUNDED || GetComponent<Rigidbody>().velocity.y < jumpPower * .5f)
         {
             // Default value if nothing is detected:
             curMoveState = MovementState.FLYING;
@@ -163,12 +163,12 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 
                     // - under consideration -
                     // stick to surface - helps character stick to ground - specially when running down slopes
-                    if (rigidbody.velocity.y <= 0 &&
-                        rigidbody.velocity.x != 0 &&
+                    if (GetComponent<Rigidbody>().velocity.y <= 0 &&
+                        GetComponent<Rigidbody>().velocity.x != 0 &&
                         !jumpIntention)
                     {
                         // also revents you from falling off :(
-                        rigidbody.position = Vector3.MoveTowards(rigidbody.position, hits[i].point + Vector3.up * hull.size.y * .5f, Time.deltaTime * .5f);
+                        GetComponent<Rigidbody>().position = Vector3.MoveTowards(GetComponent<Rigidbody>().position, hits[i].point + Vector3.up * hull.size.y * .5f, Time.deltaTime * .5f);
                     }
 
                     groundNormal = hits[i].normal;
@@ -215,9 +215,9 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 
     void Start()
     {
-        rigidbody.freezeRotation = true;
-        rigidbody.useGravity = false;
-        playerHeight = renderer.bounds.extents.y * 2;
+        GetComponent<Rigidbody>().freezeRotation = true;
+        GetComponent<Rigidbody>().useGravity = false;
+        playerHeight = GetComponent<Renderer>().bounds.extents.y * 2;
         //Debug.Log("Player is " + playerHeight + " units tall");
         //hull = (BoxCollider)collider;
 
@@ -266,10 +266,10 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 
         targetVelocity = transform.TransformDirection(targetVelocity);  // Convert direction from local space to world space
         targetVelocity *= (runIntention ? sprintSpeed : speed);          // Magnify with Player Movespeed
-        targetVelocity.y = rigidbody.velocity.y;                        // preserve y (currently can't be directly influcened by player input)
+        targetVelocity.y = GetComponent<Rigidbody>().velocity.y;                        // preserve y (currently can't be directly influcened by player input)
 
-        sqrMag = rigidbody.velocity.sqrMagnitude;
-        rigidbody.velocity = targetVelocity;    // Override existing velocity
+        sqrMag = GetComponent<Rigidbody>().velocity.sqrMagnitude;
+        GetComponent<Rigidbody>().velocity = targetVelocity;    // Override existing velocity
 
         //sqrTarMag = (runIntention ? sprintSpeed : speed) * (runIntention ? sprintSpeed : speed);
 
@@ -309,7 +309,7 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
         CheckWallRunning();
 		CheckLedge();
 
-        rigidbody.AddForce(Physics.gravity * gravityMultipler);    // Apply gravity
+        GetComponent<Rigidbody>().AddForce(Physics.gravity * gravityMultipler);    // Apply gravity
 
 
 
@@ -404,7 +404,7 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
         if (IsWallRunning)
         {
             //Debug.Log("Wall Running");
-            this.gameObject.rigidbody.AddForce(Vector3.up * 8, ForceMode.Force);
+            this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 8, ForceMode.Force);
             StartCoroutine(StopWallRun());
         }
     }
@@ -420,7 +420,7 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 		if(ledgeGrab) 
 		{
 			Debug.Log("LEDGE GRABBED");
-			this.gameObject.rigidbody.AddForce(Vector3.up * 30, ForceMode.Force);
+			this.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * 30, ForceMode.Force);
 		}
 	}
 

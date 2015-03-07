@@ -7,7 +7,7 @@ public class EndingManager : MonoBehaviour {
 	void Start () 
     {
         Screen.lockCursor = false;
-        Screen.showCursor = true;
+        Cursor.visible = true;
 	}
 	
 	// Update is called once per frame
