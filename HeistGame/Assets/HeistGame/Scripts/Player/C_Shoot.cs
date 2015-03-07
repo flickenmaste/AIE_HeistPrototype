@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class C_Shoot : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class C_Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
         {
             if (Input.GetMouseButtonDown(0) && MaxShots >= 1)

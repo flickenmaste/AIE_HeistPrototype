@@ -71,9 +71,9 @@ public class SearchForPlayer : RAINAction
 		//}
 
 		//if this much time has passed, go back to patroling/last patrol location
-		if (_time > 50000)
+		if (_time > 3500)
 		{
-			ai.WorkingMemory.SetItem("varBreak", false);
+			ai.WorkingMemory.SetItem("varBreak", 0);
 			ai.WorkingMemory.SetItem("varReachedLastPlayerPos", false);
 			ai.WorkingMemory.SetItem ("varPlayer", (GameObject)null);
 			_time = 0;
