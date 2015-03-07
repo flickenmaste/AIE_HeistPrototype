@@ -55,7 +55,7 @@ public class SquadFormationHandler : RAINAction
 
 		SquadSpot.GetComponent<Transform> ().position = FormationManager;
 
-		SquadSpot.transform.localPosition = ai.Body.transform.position;
+		//SquadSpot.transform.localPosition = ai.Body.transform.position;
 
 		SquadCopList [SquadPlace].GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.SetItem ("varMainMovePoint", SquadSpot);
 
@@ -66,9 +66,9 @@ public class SquadFormationHandler : RAINAction
 	{
 		GameObject SquadSpot = GameObject.FindGameObjectWithTag (Positions [SquadPlace]);
 
-		FormationManager.Set (1, 0, 0);
+		FormationManager.Set (ai.Body.transform.position.x, ai.Body.transform.position.y, ai.Body.transform.position.z);
 
-		SquadSpot.transform.localPosition = ai.Body.transform.position;
+		//SquadSpot.transform.localPosition = ai.Body.transform.position;
 
 		SquadSpot.GetComponent<Transform> ().position = FormationManager;
 
