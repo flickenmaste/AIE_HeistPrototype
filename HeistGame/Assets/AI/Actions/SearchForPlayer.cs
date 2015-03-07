@@ -41,7 +41,7 @@ public class SearchForPlayer : RAINAction
 		var SearchPos = Vector3.zero;
 		
 		//uses the index number to get the waypoints position for the players last location
-		PlayerLastPos = NavigationManager.Instance.GetWaypointSet ("NewSearchPath").Waypoints[foundPlayer].position;
+		//PlayerLastPos = NavigationManager.Instance.GetWaypointSet ("NewSearchPath").Waypoints[foundPlayer].position;
 
 		//get a location extrapolated from the players last velocity vector
 		//lastDir.x += 50 * lastDir.x;
