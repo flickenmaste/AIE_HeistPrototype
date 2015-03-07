@@ -36,14 +36,6 @@ public class SearchForPlayer : RAINAction
 		//get the players last seen location
 		Vector3 pos = ai.WorkingMemory.GetItem<Vector3>("varLastPlayerPos");
 
-		//and their velocity at that time
-		Vector3 lastDir = ai.WorkingMemory.GetItem<Vector3> ("varLastPlayerDirection");
-
-		//we only need the normal of their last velocity
-		lastDir.Normalize ();
-
-		var Loc2 = Vector3.zero;
-
 		var PlayerLastPos = Vector3.zero;
 
 		var SearchPos = Vector3.zero;
@@ -51,41 +43,42 @@ public class SearchForPlayer : RAINAction
 		//gets the index number for the closest waypoint in the graph for the players last Position
 		int foundPlayer = NavigationManager.Instance.GetWaypointSet("NewSearchPath").GetClosestWaypointIndex(pos);
 
-		//uses the index number to get the waypoints position for the velocity vector based location
+		//uses the index number to get the waypoints position for the players last location
 		PlayerLastPos = NavigationManager.Instance.GetWaypointSet ("NewSearchPath").Waypoints[foundPlayer].position;
 
 		//get a location extrapolated from the players last velocity vector
-		lastDir.x += 50 * lastDir.x;
-		lastDir.z += 50 * lastDir.z;
+		//lastDir.x += 50 * lastDir.x;
+		//lastDir.z += 50 * lastDir.z;
 		
-		Loc2.x = PlayerLastPos.x + lastDir.x;
-		Loc2.z = PlayerLastPos.z + lastDir.z;
+		//Loc2.x = PlayerLastPos.x + lastDir.x;
+		//Loc2.z = PlayerLastPos.z + lastDir.z;
 
 		//gets the index number for the closest waypoint in the graph for the players last velocity vector
-		int foundSearch = NavigationManager.Instance.GetWaypointSet("NewSearchPath").GetClosestWaypointIndex(Loc2);
+		//int foundSearch = NavigationManager.Instance.GetWaypointSet("NewSearchPath").GetClosestWaypointIndex(Loc2);
 
 		//uses the index number to get the waypoints position for the velocity vector based location
-		SearchPos = NavigationManager.Instance.GetWaypointSet ("NewSearchPath").Waypoints[foundSearch].position;
+		//SearchPos = NavigationManager.Instance.GetWaypointSet ("NewSearchPath").Waypoints[foundSearch].position;
 
 		//tell the cop were to go
-		if (Vector3.Distance (ai.Kinematic.Position, PlayerLastPos) > 0.1f && reachedLoc1 == false) {
+		//if (Vector3.Distance (ai.Kinematic.Position, PlayerLastPos) > 0.1f && reachedLoc1 == false) {
 						ai.WorkingMemory.SetItem<Vector3> ("varSeek", pos);
-		} else {
-						ai.WorkingMemory.SetItem<Vector3> ("varSeek", SearchPos);
-				}
+		//} //else {
+				//		ai.WorkingMemory.SetItem<Vector3> ("varSeek", SearchPos);
+				//}
 
 		//once the cop has reached the players last position he needs to head to the velocity based on
-		if (Vector3.Distance (ai.Kinematic.Position, PlayerLastPos) <= 0.2f) 
-		{
-			reachedLoc1 = true;
-			ai.WorkingMemory.SetItem("varReachedLastPlayerPos", true);
-		}
+		//if (Vector3.Distance (ai.Kinematic.Position, PlayerLastPos) <= 0.2f) 
+		//{
+		//	reachedLoc1 = true;
+		//	ai.WorkingMemory.SetItem("varReachedLastPlayerPos", true);
+		//}
 
 		//if this much time has passed, go back to patroling/last patrol location
 		if (_time > 50000)
 		{
 			ai.WorkingMemory.SetItem("varBreak", false);
 			ai.WorkingMemory.SetItem("varReachedLastPlayerPos", false);
+			ai.WorkingMemory.SetItem ("varPlayer", (GameObject)null);
 			_time = 0;
 		}
 

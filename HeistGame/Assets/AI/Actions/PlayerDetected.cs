@@ -15,16 +15,13 @@ public class PlayerDetected : RAINAction
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
 		//telling the cop it should break out of it's patrol state
-		ai.WorkingMemory.SetItem ("varBreak", true);
+		ai.WorkingMemory.SetItem ("varBreak", 1);
 
 		//get the player game object
 		GameObject player = ai.WorkingMemory.GetItem<GameObject> ("varPlayer");
 
 		//store the players location from the gameobject (once the player is out of range, this will be their last location)
 		ai.WorkingMemory.SetItem("varLastPlayerPos", (Vector3)player.transform.position);
-
-		//storing the players velocity for later (same as above)
-		ai.WorkingMemory.SetItem ("varLastPlayerDirection", (Vector3)player.rigidbody.velocity);
 
 		//reset the time to search (fixes problems a local variable has with rain scripts)
 		ai.WorkingMemory.SetItem ("varTimeToSearch", 0);
@@ -37,6 +34,8 @@ public class PlayerDetected : RAINAction
 
     public override void Stop(RAIN.Core.AI ai)
     {
+		ai.WorkingMemory.SetItem ("varBreak", 0);
+
         base.Stop(ai);
     }
 }
