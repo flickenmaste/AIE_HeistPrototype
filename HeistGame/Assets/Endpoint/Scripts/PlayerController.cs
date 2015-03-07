@@ -4,17 +4,27 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 {
     #region Properties and Variable
+
+    // LEDGE DETECTION //
+    [HideInInspector]
+    public bool ledgeGrab;
+    [HideInInspector]
+    public bool facingLedge;
+    [HideInInspector]
+    public bool snapToWall;
+    /////////////////////
 
     //
     public bool IsWallRunning;
     //
 
+    // Camera
+    public GameObject myCam;
 
-
-	public bool ledgeGrab;
+	//public bool ledgeGrab;
 
     public Transform headJoint;
 
@@ -214,8 +224,14 @@ public class PlayerController : MonoBehaviour
         JumpCount = JumpLimit;
     }
 
-    void Update()
+    public override void Attached()
     {
+        state.PlayerTransform.SetTransforms(transform);
+    }
+
+    public override void SimulateOwner()
+    {
+        myCam.SetActive(true);
         syncCameraToJoint();
 
         // Poll user's state
@@ -235,6 +251,9 @@ public class PlayerController : MonoBehaviour
         {
 
         }
+
+        if (Input.GetKeyUp(KeyCode.E))
+            this.gameObject.transform.position = new Vector3(0, 2, -191);
 
         crouchIntention = crouchPressed;
     }
