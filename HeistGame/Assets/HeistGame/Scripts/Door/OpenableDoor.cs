@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class OpenableDoor : MonoBehaviour 
@@ -7,6 +7,7 @@ public class OpenableDoor : MonoBehaviour
 	float DoorOpenAngle= 90.0f;
 	private bool  open;
 	private bool  enter;
+	private bool  auto;
 	
 	private Vector3 defaultRot;
 	private Vector3 openRot;
@@ -22,34 +23,43 @@ public class OpenableDoor : MonoBehaviour
 	void  Update ()
 		{
 
-				if (enter == true && !open) 
+			if (enter) 
+			{
+					if (Input.GetAxis ("Mouse ScrollWheel") > 0) {
+							auto = false;
+							transform.Rotate (Vector3.up * 5.0f, Space.Self);
+					}
+					if (Input.GetAxis ("Mouse ScrollWheel") < 0) {
+							auto = false;
+							transform.Rotate (Vector3.down * 5.0f, Space.Self);
+					}
+			}
+
+			if (open && auto) {
+					//Open door
+					transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, openRot, Time.deltaTime * smooth);
+					
+			} 
+		else 
+			{
+				//Close door
+				if (auto) 
 				{
-						if (Input.GetAxis ("Mouse ScrollWheel") > 0) {
-								transform.Rotate (Vector3.up * 5.0f, Space.Self);
-						}
-						if (Input.GetAxis ("Mouse ScrollWheel") < 0) {
-								transform.Rotate (Vector3.down * 5.0f, Space.Self);
-						}
+					transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
 				}
+			}
 
-				if (open) 
-				{
-						//Open door
+			if (Input.GetKeyDown ("e") && enter && open ==true) 
+			{
+				auto = true;
+				open = false;
+			}
 
-						transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, openRot, Time.deltaTime * smooth);
-				} 
-
-				else 
-				{
-						//Close door
-
-						transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
-				}
-
-				if (Input.GetKeyDown ("e") && enter) 
-				{
-						open = !open;
-				}
+			if (Input.GetKeyDown ("e") && enter && open ==false) 
+			{
+				auto = true;
+				open = true;
+			}
 		}
 		
 	
