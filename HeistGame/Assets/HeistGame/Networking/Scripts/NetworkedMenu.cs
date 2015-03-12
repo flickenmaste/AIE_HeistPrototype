@@ -90,7 +90,7 @@ public class NetworkedMenu : MonoBehaviour {
         if (BoltNetwork.isServer)
             BoltNetwork.SetHostInfo(serverName.Username, hostToken);    // Server name, etc
 
-        BoltNetwork.LoadScene("HostLobby");
+        BoltNetwork.LoadScene("TestNetworkedLevel");
     }
 
     public void JoinServer(UdpKit.UdpSession s)

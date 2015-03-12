@@ -20,5 +20,11 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
 
         if (map == "HostLobby") // Check map
             Debug.Log("Lobby Started");
+
+        if (map == "TestNetworkedLevel")
+        {
+            var pos = new Vector3(0, 2, 0);
+            BoltNetwork.Instantiate(BoltPrefabs.PlayerNetworked, pos, Quaternion.identity);
+        }
     }
 }
