@@ -24,12 +24,11 @@ public enum CivState
 	CALLPOLICE
 };
 
-public enum IdleBehaviors
+public enum Task
 {
-	USEPHONE,
-	SMOKE,
-	CHECKWATCH,
-    TYPE,
+    GETMONEY,
+    GOTOBUILDING,
+    WALKACROSSMAP
 };
 
 public class CivilianManger : MonoBehaviour
@@ -48,15 +47,11 @@ public class CivilianManger : MonoBehaviour
 	public float SpawnRadius = 5.0f;
 	public Vector3 Spawnpoint;
 
-    private float WaitTime;
-
 	// Use this for initialization
 	void Start ()
 	{
 		//temp cop to test civilian alertness
 		Cop = GameObject.FindGameObjectWithTag("Cop");
-		//SpawnCivilian();
-		WaitTime = 3000;
 	}
 	
 	// Update is called once per frame
@@ -139,6 +134,31 @@ public class CivilianManger : MonoBehaviour
 		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("State", "MOVETOTARGET");
 	}
 
+    public string ChooseRandomTask()
+    {
+        string task;
+
+        int RandomNumber = Random.Range(1, 4);
+
+        switch(RandomNumber)
+        {
+            case 1:
+                task = Task.GETMONEY.ToString();
+                break;
+            case 2:
+                task = Task.GOTOBUILDING.ToString();
+                break;
+            case 3:
+                task = Task.WALKACROSSMAP.ToString();
+                break;
+            default:
+                task = Task.GETMONEY.ToString();
+                break;
+        }
+
+        return task;
+    }
+
 	//just makes getting the civilian's goal shorter
 	public string GetGoal()
 	{
@@ -150,38 +170,6 @@ public class CivilianManger : MonoBehaviour
 		else
 		{
 			return null;
-		}
-	}
-
-    void PerformIdleAction()
-    {
-        WaitTime = Clone.GetComponent<AIRig>().AI.WorkingMemory.GetItem<float>("varWait");
-        WaitTime += Time.time;
-
-        if (WaitTime > 3500)
-        {
-            Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varGoal", RandomizeGoal());
-            Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("State", "MOVETOTARGET");
-            WaitTime = 0;
-        }
-    }
-
-	void RandomizeIdle()
-	{
-		int RandomNumber = Random.Range (1, 6);
-		switch(RandomNumber)
-		{
-		case 1:
-
-		case 2:
-
-		case 3:
-
-		case 4:
-
-		case 5:
-			//Idle = IdleBehaviors.SMOKE;
-			break;
 		}
 	}
 }
