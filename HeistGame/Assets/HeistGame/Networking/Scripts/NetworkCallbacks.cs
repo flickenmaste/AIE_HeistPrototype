@@ -25,6 +25,15 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
         {
             var pos = new Vector3(0, 2, 0);
             BoltNetwork.Instantiate(BoltPrefabs.PlayerNetworked, pos, Quaternion.identity);
+            
+            if (BoltNetwork.isServer)
+            {
+                var civ1 = new Vector3(32, 1.3f, -21);
+                BoltNetwork.Instantiate(BoltPrefabs.SimpleCivNetworked, civ1, Quaternion.identity);
+
+                var civ2 = new Vector3(32, 1.3f, -25);
+                BoltNetwork.Instantiate(BoltPrefabs.SimpleCivNetworked, civ2, Quaternion.identity);
+            }
         }
     }
 }
