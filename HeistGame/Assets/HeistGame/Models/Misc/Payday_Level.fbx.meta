@@ -1,0 +1,917 @@
+fileFormatVersion: 2
+guid: 8bb0eee6e7fce2848897176dd7568e12
+timeCreated: 1426265157
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: ambientLight1
+    100002: Arch_01
+    100004: Bank
+    100006: Bank_Outer_01
+    100008: Bank_Trim_01
+    100010: BF1
+    100012: BF1_Floor
+    100014: Buildings_01
+    100016: Buildings_01 1
+    100018: Buildings_01 2
+    100020: Buildings_01 3
+    100022: Cars
+    100024: City_Block_01
+    100026: City_Block_01 1
+    100028: City_Block_01 2
+    100030: City_Block_02
+    100032: City_Block_03
+    100034: City_Block_04
+    100036: City_Block_05
+    100038: City_Block_06
+    100040: City_Edge
+    100042: Cop_01
+    100044: Cop_02
+    100046: directionalLight1
+    100048: Door
+    100050: Door 1
+    100052: Door 10
+    100054: Door 11
+    100056: Door 12
+    100058: Door 2
+    100060: Door 3
+    100062: Door 4
+    100064: Door 5
+    100066: Door 6
+    100068: Door 7
+    100070: Door 8
+    100072: Door 9
+    100074: Door_Frame_01
+    100076: Door_Frame_010
+    100078: Door_Frame_011
+    100080: Door_Frame_012
+    100082: Door_Frame_013
+    100084: Door_Frame_02
+    100086: Door_Frame_03
+    100088: Door_Frame_04
+    100090: Door_Frame_05
+    100092: Door_Frame_06
+    100094: Door_Frame_07
+    100096: Door_Frame_08
+    100098: Door_Frame_09
+    100100: Doors
+    100102: F1
+    100104: F1_Floor
+    100106: F2
+    100108: F2_Floor
+    100110: Front_Door
+    100112: Glass_Door_01
+    100114: Glass_Door_02
+    100116: Lambourgini_01
+    100118: Lambourgini_012
+    100120: Lamp_Post_01
+    100122: Lamp_Post_01 1
+    100124: Lamp_Post_01 2
+    100126: Lamp_Post_01 3
+    100128: Lamp_Post_02
+    100130: Lamp_Post_02 1
+    100132: Lamp_Post_02 2
+    100134: Lamp_Post_02 3
+    100136: Lamp_Post_03
+    100138: Lamp_Post_03 1
+    100140: Lamp_Post_03 2
+    100142: Lamp_Post_03 3
+    100144: Lamp_Post_04
+    100146: Lamp_Post_04 1
+    100148: Lamp_Post_04 2
+    100150: Lamp_Post_04 3
+    100152: Lamp_Post_05
+    100154: Lamp_Post_05 1
+    100156: Lamp_Post_05 2
+    100158: Lamp_Post_05 3
+    100160: Lamp_Post_06
+    100162: Lamp_Post_06 1
+    100164: Lamp_Post_06 2
+    100166: Lamp_Post_06 3
+    100168: Lamp_Post_07
+    100170: Lamp_Post_07 1
+    100172: Lamp_Post_07 2
+    100174: Lamp_Post_07 3
+    100176: Lamp_Post_08
+    100178: Lamp_Post_08 1
+    100180: Lamp_Post_08 2
+    100182: Lamp_Post_08 3
+    100184: Lamp_Post_09
+    100186: Lamp_Post_09 1
+    100188: Lamp_Post_09 2
+    100190: Lamp_Post_09 3
+    100192: Lamp_Post_10
+    100194: Lamp_Post_10 1
+    100196: Lamp_Post_10 2
+    100198: Lamp_Post_10 3
+    100200: Lamps_01
+    100202: Lamps_02
+    100204: Lamps_03
+    100206: Lamps_04
+    100208: Lincoln_01
+    100210: NPC_01
+    100212: NPC_02
+    100214: NPC_04
+    100216: //RootNode
+    100218: pCube1
+    100220: Player
+    100222: Player1
+    100224: Player_01
+    100226: Player_02
+    100228: Player_04
+    100230: pointLight1
+    100232: pointLight2
+    100234: pointLight3
+    100236: polySurface1
+    100238: polySurface2
+    100240: polySurface3
+    100242: Sign
+    100244: Size_Refferance
+    100246: spotLight1
+    100248: spotLight1 1
+    100250: spotLight1 2
+    100252: spotLight1 3
+    100254: spotLight10
+    100256: spotLight10 1
+    100258: spotLight10 2
+    100260: spotLight10 3
+    100262: spotLight2
+    100264: spotLight2 1
+    100266: spotLight2 2
+    100268: spotLight2 3
+    100270: spotLight3
+    100272: spotLight3 1
+    100274: spotLight3 2
+    100276: spotLight3 3
+    100278: spotLight4
+    100280: spotLight4 1
+    100282: spotLight4 2
+    100284: spotLight4 3
+    100286: spotLight5
+    100288: spotLight5 1
+    100290: spotLight5 2
+    100292: spotLight5 3
+    100294: spotLight6
+    100296: spotLight6 1
+    100298: spotLight6 2
+    100300: spotLight6 3
+    100302: spotLight7
+    100304: spotLight7 1
+    100306: spotLight7 2
+    100308: spotLight7 3
+    100310: spotLight8
+    100312: spotLight8 1
+    100314: spotLight8 2
+    100316: spotLight8 3
+    100318: spotLight9
+    100320: spotLight9 1
+    100322: spotLight9 2
+    100324: spotLight9 3
+    100326: Stair_01
+    100328: Stair_02
+    100330: Trafic_Light_01
+    100332: Trafic_Light_010
+    100334: Trafic_Light_02
+    100336: Trafic_Light_03
+    100338: Trafic_Light_04
+    100340: Trafic_Light_05
+    100342: Trafic_Light_06
+    100344: Trafic_Light_07
+    100346: Trafic_Light_08
+    100348: Trafic_Light_09
+    100350: Van_01
+    100352: Van_02
+    100354: Wall_Destructable:Wall_O_01
+    100356: Wall_Destructable:Wall_X_01
+    100358: Wall_X_01
+    100360: Windows_01
+    400000: ambientLight1
+    400002: Arch_01
+    400004: Bank
+    400006: Bank_Outer_01
+    400008: Bank_Trim_01
+    400010: BF1
+    400012: BF1_Floor
+    400014: Buildings_01
+    400016: Buildings_01 1
+    400018: Buildings_01 2
+    400020: Buildings_01 3
+    400022: Cars
+    400024: City_Block_01
+    400026: City_Block_01 1
+    400028: City_Block_01 2
+    400030: City_Block_02
+    400032: City_Block_03
+    400034: City_Block_04
+    400036: City_Block_05
+    400038: City_Block_06
+    400040: City_Edge
+    400042: Cop_01
+    400044: Cop_02
+    400046: directionalLight1
+    400048: Door
+    400050: Door 1
+    400052: Door 10
+    400054: Door 11
+    400056: Door 12
+    400058: Door 2
+    400060: Door 3
+    400062: Door 4
+    400064: Door 5
+    400066: Door 6
+    400068: Door 7
+    400070: Door 8
+    400072: Door 9
+    400074: Door_Frame_01
+    400076: Door_Frame_010
+    400078: Door_Frame_011
+    400080: Door_Frame_012
+    400082: Door_Frame_013
+    400084: Door_Frame_02
+    400086: Door_Frame_03
+    400088: Door_Frame_04
+    400090: Door_Frame_05
+    400092: Door_Frame_06
+    400094: Door_Frame_07
+    400096: Door_Frame_08
+    400098: Door_Frame_09
+    400100: Doors
+    400102: F1
+    400104: F1_Floor
+    400106: F2
+    400108: F2_Floor
+    400110: Front_Door
+    400112: Glass_Door_01
+    400114: Glass_Door_02
+    400116: Lambourgini_01
+    400118: Lambourgini_012
+    400120: Lamp_Post_01
+    400122: Lamp_Post_01 1
+    400124: Lamp_Post_01 2
+    400126: Lamp_Post_01 3
+    400128: Lamp_Post_02
+    400130: Lamp_Post_02 1
+    400132: Lamp_Post_02 2
+    400134: Lamp_Post_02 3
+    400136: Lamp_Post_03
+    400138: Lamp_Post_03 1
+    400140: Lamp_Post_03 2
+    400142: Lamp_Post_03 3
+    400144: Lamp_Post_04
+    400146: Lamp_Post_04 1
+    400148: Lamp_Post_04 2
+    400150: Lamp_Post_04 3
+    400152: Lamp_Post_05
+    400154: Lamp_Post_05 1
+    400156: Lamp_Post_05 2
+    400158: Lamp_Post_05 3
+    400160: Lamp_Post_06
+    400162: Lamp_Post_06 1
+    400164: Lamp_Post_06 2
+    400166: Lamp_Post_06 3
+    400168: Lamp_Post_07
+    400170: Lamp_Post_07 1
+    400172: Lamp_Post_07 2
+    400174: Lamp_Post_07 3
+    400176: Lamp_Post_08
+    400178: Lamp_Post_08 1
+    400180: Lamp_Post_08 2
+    400182: Lamp_Post_08 3
+    400184: Lamp_Post_09
+    400186: Lamp_Post_09 1
+    400188: Lamp_Post_09 2
+    400190: Lamp_Post_09 3
+    400192: Lamp_Post_10
+    400194: Lamp_Post_10 1
+    400196: Lamp_Post_10 2
+    400198: Lamp_Post_10 3
+    400200: Lamps_01
+    400202: Lamps_02
+    400204: Lamps_03
+    400206: Lamps_04
+    400208: Lincoln_01
+    400210: NPC_01
+    400212: NPC_02
+    400214: NPC_04
+    400216: //RootNode
+    400218: pCube1
+    400220: Player
+    400222: Player1
+    400224: Player_01
+    400226: Player_02
+    400228: Player_04
+    400230: pointLight1
+    400232: pointLight2
+    400234: pointLight3
+    400236: polySurface1
+    400238: polySurface2
+    400240: polySurface3
+    400242: Sign
+    400244: Size_Refferance
+    400246: spotLight1
+    400248: spotLight1 1
+    400250: spotLight1 2
+    400252: spotLight1 3
+    400254: spotLight10
+    400256: spotLight10 1
+    400258: spotLight10 2
+    400260: spotLight10 3
+    400262: spotLight2
+    400264: spotLight2 1
+    400266: spotLight2 2
+    400268: spotLight2 3
+    400270: spotLight3
+    400272: spotLight3 1
+    400274: spotLight3 2
+    400276: spotLight3 3
+    400278: spotLight4
+    400280: spotLight4 1
+    400282: spotLight4 2
+    400284: spotLight4 3
+    400286: spotLight5
+    400288: spotLight5 1
+    400290: spotLight5 2
+    400292: spotLight5 3
+    400294: spotLight6
+    400296: spotLight6 1
+    400298: spotLight6 2
+    400300: spotLight6 3
+    400302: spotLight7
+    400304: spotLight7 1
+    400306: spotLight7 2
+    400308: spotLight7 3
+    400310: spotLight8
+    400312: spotLight8 1
+    400314: spotLight8 2
+    400316: spotLight8 3
+    400318: spotLight9
+    400320: spotLight9 1
+    400322: spotLight9 2
+    400324: spotLight9 3
+    400326: Stair_01
+    400328: Stair_02
+    400330: Trafic_Light_01
+    400332: Trafic_Light_010
+    400334: Trafic_Light_02
+    400336: Trafic_Light_03
+    400338: Trafic_Light_04
+    400340: Trafic_Light_05
+    400342: Trafic_Light_06
+    400344: Trafic_Light_07
+    400346: Trafic_Light_08
+    400348: Trafic_Light_09
+    400350: Van_01
+    400352: Van_02
+    400354: Wall_Destructable:Wall_O_01
+    400356: Wall_Destructable:Wall_X_01
+    400358: Wall_X_01
+    400360: Windows_01
+    2300000: Arch_01
+    2300002: Bank_Outer_01
+    2300004: Bank_Trim_01
+    2300006: BF1
+    2300008: BF1_Floor
+    2300010: Buildings_01
+    2300012: Buildings_01 1
+    2300014: Buildings_01 2
+    2300016: Buildings_01 3
+    2300018: City_Block_01 1
+    2300020: City_Block_01 2
+    2300022: City_Block_05
+    2300024: City_Block_06
+    2300026: City_Edge
+    2300028: Cop_01
+    2300030: Cop_02
+    2300032: Door
+    2300034: Door 1
+    2300036: Door 10
+    2300038: Door 11
+    2300040: Door 12
+    2300042: Door 2
+    2300044: Door 3
+    2300046: Door 4
+    2300048: Door 5
+    2300050: Door 6
+    2300052: Door 7
+    2300054: Door 8
+    2300056: Door 9
+    2300058: Door_Frame_01
+    2300060: Door_Frame_010
+    2300062: Door_Frame_011
+    2300064: Door_Frame_012
+    2300066: Door_Frame_013
+    2300068: Door_Frame_02
+    2300070: Door_Frame_03
+    2300072: Door_Frame_04
+    2300074: Door_Frame_05
+    2300076: Door_Frame_06
+    2300078: Door_Frame_07
+    2300080: Door_Frame_08
+    2300082: Door_Frame_09
+    2300084: F1
+    2300086: F1_Floor
+    2300088: F2
+    2300090: F2_Floor
+    2300092: Front_Door
+    2300094: Glass_Door_01
+    2300096: Glass_Door_02
+    2300098: Lambourgini_01
+    2300100: Lambourgini_012
+    2300102: Lamp_Post_01
+    2300104: Lamp_Post_01 1
+    2300106: Lamp_Post_01 2
+    2300108: Lamp_Post_01 3
+    2300110: Lamp_Post_02
+    2300112: Lamp_Post_02 1
+    2300114: Lamp_Post_02 2
+    2300116: Lamp_Post_02 3
+    2300118: Lamp_Post_03
+    2300120: Lamp_Post_03 1
+    2300122: Lamp_Post_03 2
+    2300124: Lamp_Post_03 3
+    2300126: Lamp_Post_04
+    2300128: Lamp_Post_04 1
+    2300130: Lamp_Post_04 2
+    2300132: Lamp_Post_04 3
+    2300134: Lamp_Post_05
+    2300136: Lamp_Post_05 1
+    2300138: Lamp_Post_05 2
+    2300140: Lamp_Post_05 3
+    2300142: Lamp_Post_06
+    2300144: Lamp_Post_06 1
+    2300146: Lamp_Post_06 2
+    2300148: Lamp_Post_06 3
+    2300150: Lamp_Post_07
+    2300152: Lamp_Post_07 1
+    2300154: Lamp_Post_07 2
+    2300156: Lamp_Post_07 3
+    2300158: Lamp_Post_08
+    2300160: Lamp_Post_08 1
+    2300162: Lamp_Post_08 2
+    2300164: Lamp_Post_08 3
+    2300166: Lamp_Post_09
+    2300168: Lamp_Post_09 1
+    2300170: Lamp_Post_09 2
+    2300172: Lamp_Post_09 3
+    2300174: Lamp_Post_10
+    2300176: Lamp_Post_10 1
+    2300178: Lamp_Post_10 2
+    2300180: Lamp_Post_10 3
+    2300182: Lincoln_01
+    2300184: NPC_01
+    2300186: NPC_02
+    2300188: NPC_04
+    2300190: pCube1
+    2300192: Player1
+    2300194: Player_01
+    2300196: Player_02
+    2300198: Player_04
+    2300200: polySurface1
+    2300202: polySurface2
+    2300204: polySurface3
+    2300206: Sign
+    2300208: Stair_01
+    2300210: Stair_02
+    2300212: Trafic_Light_01
+    2300214: Trafic_Light_010
+    2300216: Trafic_Light_02
+    2300218: Trafic_Light_03
+    2300220: Trafic_Light_04
+    2300222: Trafic_Light_05
+    2300224: Trafic_Light_06
+    2300226: Trafic_Light_07
+    2300228: Trafic_Light_08
+    2300230: Trafic_Light_09
+    2300232: Van_01
+    2300234: Van_02
+    2300236: Wall_Destructable:Wall_O_01
+    2300238: Wall_Destructable:Wall_X_01
+    2300240: Wall_X_01
+    2300242: Windows_01
+    3300000: Arch_01
+    3300002: Bank_Outer_01
+    3300004: Bank_Trim_01
+    3300006: BF1
+    3300008: BF1_Floor
+    3300010: Buildings_01
+    3300012: Buildings_01 1
+    3300014: Buildings_01 2
+    3300016: Buildings_01 3
+    3300018: City_Block_01 1
+    3300020: City_Block_01 2
+    3300022: City_Block_05
+    3300024: City_Block_06
+    3300026: City_Edge
+    3300028: Cop_01
+    3300030: Cop_02
+    3300032: Door
+    3300034: Door 1
+    3300036: Door 10
+    3300038: Door 11
+    3300040: Door 12
+    3300042: Door 2
+    3300044: Door 3
+    3300046: Door 4
+    3300048: Door 5
+    3300050: Door 6
+    3300052: Door 7
+    3300054: Door 8
+    3300056: Door 9
+    3300058: Door_Frame_01
+    3300060: Door_Frame_010
+    3300062: Door_Frame_011
+    3300064: Door_Frame_012
+    3300066: Door_Frame_013
+    3300068: Door_Frame_02
+    3300070: Door_Frame_03
+    3300072: Door_Frame_04
+    3300074: Door_Frame_05
+    3300076: Door_Frame_06
+    3300078: Door_Frame_07
+    3300080: Door_Frame_08
+    3300082: Door_Frame_09
+    3300084: F1
+    3300086: F1_Floor
+    3300088: F2
+    3300090: F2_Floor
+    3300092: Front_Door
+    3300094: Glass_Door_01
+    3300096: Glass_Door_02
+    3300098: Lambourgini_01
+    3300100: Lambourgini_012
+    3300102: Lamp_Post_01
+    3300104: Lamp_Post_01 1
+    3300106: Lamp_Post_01 2
+    3300108: Lamp_Post_01 3
+    3300110: Lamp_Post_02
+    3300112: Lamp_Post_02 1
+    3300114: Lamp_Post_02 2
+    3300116: Lamp_Post_02 3
+    3300118: Lamp_Post_03
+    3300120: Lamp_Post_03 1
+    3300122: Lamp_Post_03 2
+    3300124: Lamp_Post_03 3
+    3300126: Lamp_Post_04
+    3300128: Lamp_Post_04 1
+    3300130: Lamp_Post_04 2
+    3300132: Lamp_Post_04 3
+    3300134: Lamp_Post_05
+    3300136: Lamp_Post_05 1
+    3300138: Lamp_Post_05 2
+    3300140: Lamp_Post_05 3
+    3300142: Lamp_Post_06
+    3300144: Lamp_Post_06 1
+    3300146: Lamp_Post_06 2
+    3300148: Lamp_Post_06 3
+    3300150: Lamp_Post_07
+    3300152: Lamp_Post_07 1
+    3300154: Lamp_Post_07 2
+    3300156: Lamp_Post_07 3
+    3300158: Lamp_Post_08
+    3300160: Lamp_Post_08 1
+    3300162: Lamp_Post_08 2
+    3300164: Lamp_Post_08 3
+    3300166: Lamp_Post_09
+    3300168: Lamp_Post_09 1
+    3300170: Lamp_Post_09 2
+    3300172: Lamp_Post_09 3
+    3300174: Lamp_Post_10
+    3300176: Lamp_Post_10 1
+    3300178: Lamp_Post_10 2
+    3300180: Lamp_Post_10 3
+    3300182: Lincoln_01
+    3300184: NPC_01
+    3300186: NPC_02
+    3300188: NPC_04
+    3300190: pCube1
+    3300192: Player1
+    3300194: Player_01
+    3300196: Player_02
+    3300198: Player_04
+    3300200: polySurface1
+    3300202: polySurface2
+    3300204: polySurface3
+    3300206: Sign
+    3300208: Stair_01
+    3300210: Stair_02
+    3300212: Trafic_Light_01
+    3300214: Trafic_Light_010
+    3300216: Trafic_Light_02
+    3300218: Trafic_Light_03
+    3300220: Trafic_Light_04
+    3300222: Trafic_Light_05
+    3300224: Trafic_Light_06
+    3300226: Trafic_Light_07
+    3300228: Trafic_Light_08
+    3300230: Trafic_Light_09
+    3300232: Van_01
+    3300234: Van_02
+    3300236: Wall_Destructable:Wall_O_01
+    3300238: Wall_Destructable:Wall_X_01
+    3300240: Wall_X_01
+    3300242: Windows_01
+    4300000: City_Edge
+    4300002: Cop_01
+    4300004: Cop_02
+    4300006: NPC_01
+    4300008: NPC_02
+    4300010: NPC_04
+    4300012: Player_01
+    4300014: Player_02
+    4300016: Player_04
+    4300018: Player1
+    4300020: City_Block_01
+    4300022: Buildings_01
+    4300024: City_Block_01
+    4300026: Buildings_01
+    4300028: City_Block_05
+    4300030: Buildings_01
+    4300032: City_Block_06
+    4300034: Buildings_01
+    4300036: F2
+    4300038: F2_Floor
+    4300040: F1
+    4300042: F1_Floor
+    4300044: BF1
+    4300046: BF1_Floor
+    4300048: Stair_01
+    4300050: Stair_02
+    4300052: Bank_Outer_01
+    4300054: Bank_Trim_01
+    4300056: Windows_01
+    4300058: Arch_01
+    4300060: Sign
+    4300062: Front_Door
+    4300064: Glass_Door_01
+    4300066: Glass_Door_02
+    4300068: Door_Frame_01
+    4300070: Door
+    4300072: Door_Frame_02
+    4300074: Door
+    4300076: Door_Frame_03
+    4300078: Door
+    4300080: Door_Frame_04
+    4300082: Door
+    4300084: Door_Frame_05
+    4300086: Door
+    4300088: Door_Frame_06
+    4300090: Door
+    4300092: Door_Frame_07
+    4300094: Door
+    4300096: Door_Frame_08
+    4300098: Door
+    4300100: Door_Frame_09
+    4300102: Door
+    4300104: Door_Frame_010
+    4300106: Door
+    4300108: Door_Frame_011
+    4300110: Door
+    4300112: Door_Frame_012
+    4300114: Door
+    4300116: Lincoln_01
+    4300118: Lambourgini_01
+    4300120: Van_01
+    4300122: Van_02
+    4300124: Lambourgini_012
+    4300126: Door_Frame_013
+    4300128: Door
+    4300130: pCube1
+    4300132: polySurface2
+    4300134: polySurface1
+    4300136: Trafic_Light_01
+    4300138: Trafic_Light_02
+    4300140: Trafic_Light_03
+    4300142: Trafic_Light_04
+    4300144: Trafic_Light_05
+    4300146: Trafic_Light_06
+    4300148: Trafic_Light_07
+    4300150: Trafic_Light_08
+    4300152: Trafic_Light_09
+    4300154: Trafic_Light_010
+    4300156: polySurface3
+    4300158: Lamp_Post_01
+    4300160: Lamp_Post_02
+    4300162: Lamp_Post_03
+    4300164: Lamp_Post_04
+    4300166: Lamp_Post_05
+    4300168: Lamp_Post_06
+    4300170: Lamp_Post_07
+    4300172: Lamp_Post_08
+    4300174: Lamp_Post_09
+    4300176: Lamp_Post_10
+    4300178: Lamp_Post_01
+    4300180: Lamp_Post_02
+    4300182: Lamp_Post_03
+    4300184: Lamp_Post_04
+    4300186: Lamp_Post_05
+    4300188: Lamp_Post_06
+    4300190: Lamp_Post_07
+    4300192: Lamp_Post_08
+    4300194: Lamp_Post_09
+    4300196: Lamp_Post_10
+    4300198: Lamp_Post_01
+    4300200: Lamp_Post_02
+    4300202: Lamp_Post_03
+    4300204: Lamp_Post_04
+    4300206: Lamp_Post_05
+    4300208: Lamp_Post_06
+    4300210: Lamp_Post_07
+    4300212: Lamp_Post_08
+    4300214: Lamp_Post_09
+    4300216: Lamp_Post_10
+    4300218: Lamp_Post_01
+    4300220: Lamp_Post_02
+    4300222: Lamp_Post_03
+    4300224: Lamp_Post_04
+    4300226: Lamp_Post_05
+    4300228: Lamp_Post_06
+    4300230: Lamp_Post_07
+    4300232: Lamp_Post_08
+    4300234: Lamp_Post_09
+    4300236: Lamp_Post_10
+    4300238: Wall_Destructable:Wall_X_01
+    4300240: Wall_Destructable:Wall_O_01
+    4300242: Wall_X_01
+    6400000: Arch_01
+    6400002: Bank_Outer_01
+    6400004: Bank_Trim_01
+    6400006: BF1
+    6400008: BF1_Floor
+    6400010: Buildings_01
+    6400012: Buildings_01 1
+    6400014: Buildings_01 2
+    6400016: Buildings_01 3
+    6400018: City_Block_01 1
+    6400020: City_Block_01 2
+    6400022: City_Block_05
+    6400024: City_Block_06
+    6400026: City_Edge
+    6400028: Cop_01
+    6400030: Cop_02
+    6400032: Door
+    6400034: Door 1
+    6400036: Door 10
+    6400038: Door 11
+    6400040: Door 12
+    6400042: Door 2
+    6400044: Door 3
+    6400046: Door 4
+    6400048: Door 5
+    6400050: Door 6
+    6400052: Door 7
+    6400054: Door 8
+    6400056: Door 9
+    6400058: Door_Frame_01
+    6400060: Door_Frame_010
+    6400062: Door_Frame_011
+    6400064: Door_Frame_012
+    6400066: Door_Frame_013
+    6400068: Door_Frame_02
+    6400070: Door_Frame_03
+    6400072: Door_Frame_04
+    6400074: Door_Frame_05
+    6400076: Door_Frame_06
+    6400078: Door_Frame_07
+    6400080: Door_Frame_08
+    6400082: Door_Frame_09
+    6400084: F1
+    6400086: F1_Floor
+    6400088: F2
+    6400090: F2_Floor
+    6400092: Front_Door
+    6400094: Glass_Door_01
+    6400096: Glass_Door_02
+    6400098: Lambourgini_01
+    6400100: Lambourgini_012
+    6400102: Lamp_Post_01
+    6400104: Lamp_Post_01 1
+    6400106: Lamp_Post_01 2
+    6400108: Lamp_Post_01 3
+    6400110: Lamp_Post_02
+    6400112: Lamp_Post_02 1
+    6400114: Lamp_Post_02 2
+    6400116: Lamp_Post_02 3
+    6400118: Lamp_Post_03
+    6400120: Lamp_Post_03 1
+    6400122: Lamp_Post_03 2
+    6400124: Lamp_Post_03 3
+    6400126: Lamp_Post_04
+    6400128: Lamp_Post_04 1
+    6400130: Lamp_Post_04 2
+    6400132: Lamp_Post_04 3
+    6400134: Lamp_Post_05
+    6400136: Lamp_Post_05 1
+    6400138: Lamp_Post_05 2
+    6400140: Lamp_Post_05 3
+    6400142: Lamp_Post_06
+    6400144: Lamp_Post_06 1
+    6400146: Lamp_Post_06 2
+    6400148: Lamp_Post_06 3
+    6400150: Lamp_Post_07
+    6400152: Lamp_Post_07 1
+    6400154: Lamp_Post_07 2
+    6400156: Lamp_Post_07 3
+    6400158: Lamp_Post_08
+    6400160: Lamp_Post_08 1
+    6400162: Lamp_Post_08 2
+    6400164: Lamp_Post_08 3
+    6400166: Lamp_Post_09
+    6400168: Lamp_Post_09 1
+    6400170: Lamp_Post_09 2
+    6400172: Lamp_Post_09 3
+    6400174: Lamp_Post_10
+    6400176: Lamp_Post_10 1
+    6400178: Lamp_Post_10 2
+    6400180: Lamp_Post_10 3
+    6400182: Lincoln_01
+    6400184: NPC_01
+    6400186: NPC_02
+    6400188: NPC_04
+    6400190: pCube1
+    6400192: Player1
+    6400194: Player_01
+    6400196: Player_02
+    6400198: Player_04
+    6400200: polySurface1
+    6400202: polySurface2
+    6400204: polySurface3
+    6400206: Sign
+    6400208: Stair_01
+    6400210: Stair_02
+    6400212: Trafic_Light_01
+    6400214: Trafic_Light_010
+    6400216: Trafic_Light_02
+    6400218: Trafic_Light_03
+    6400220: Trafic_Light_04
+    6400222: Trafic_Light_05
+    6400224: Trafic_Light_06
+    6400226: Trafic_Light_07
+    6400228: Trafic_Light_08
+    6400230: Trafic_Light_09
+    6400232: Van_01
+    6400234: Van_02
+    6400236: Wall_Destructable:Wall_O_01
+    6400238: Wall_Destructable:Wall_X_01
+    6400240: Wall_X_01
+    6400242: Windows_01
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

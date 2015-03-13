@@ -33,7 +33,7 @@ public class SquadPlayerDetection : RAINAction
 		
 		foreach (var cop in CopList)
 		{
-			GameObject IsPlayer = cop.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem<GameObject>("varPlayer");
+			GameObject IsPlayer = cop.GetComponent<AIRig>().AI.WorkingMemory.GetItem<GameObject>("varPlayer");
 
 			if(IsPlayer != (GameObject)null)
 			{
@@ -43,7 +43,7 @@ public class SquadPlayerDetection : RAINAction
 				ai.WorkingMemory.SetItem("varBreak", 1);
 				ai.WorkingMemory.SetItem ("varFormation", "Wedge");
 				ai.Motor.Speed = 0.0f;
-				ai.WorkingMemory.SetItem ("varFormationSet", 0);
+				ai.WorkingMemory.SetItem ("varFormationSet", 1);
 				break;
 			}
 
@@ -54,8 +54,16 @@ public class SquadPlayerDetection : RAINAction
 		{
 			foreach (var cop in CopList)
 			{
-				cop.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varPlayer", ai.WorkingMemory.GetItem<GameObject>("varPlayer"));
+				cop.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varSquadPlayer", ai.WorkingMemory.GetItem<GameObject>("varPlayer"));
 			}
+		}
+		else{
+			foreach (var cop in CopList)
+			{
+				cop.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varSquadPlayer", (GameObject)null);
+			}
+
+			ai.WorkingMemory.SetItem("varPlayer", (GameObject)null);
 		}
 
         return ActionResult.SUCCESS;

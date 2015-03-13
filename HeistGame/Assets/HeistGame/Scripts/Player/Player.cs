@@ -32,6 +32,7 @@ public class Player : MonoBehaviour {
     {
         CheckInput();
 		Shout();
+		if (Input.GetKey(KeyCode.Escape)) { Application.Quit(); } 
 	}
 
     public void TakeDamage(float dmg)
