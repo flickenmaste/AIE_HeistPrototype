@@ -5,49 +5,58 @@ public class OpenableDoor : MonoBehaviour
 {
 	float smooth= 5.0f;
 	float DoorOpenAngle= 90.0f;
-	private bool  open;
-	private bool  enter;
-	private bool  auto;
+	public bool  open;
+	public bool  enter;
+	public bool  auto;
 	
-	private Vector3 defaultRot;
-	private Vector3 openRot;
+	private Quaternion defaultRot;
+	private Quaternion openRot;
+	private Quaternion currentRot;
+	public Vector3 defaultRotEular;
+	public Vector3 openRotEular;
 	
 	void  Start ()
 	{
-		defaultRot = transform.eulerAngles;
-		openRot = new Vector3 (defaultRot.x, defaultRot.y + DoorOpenAngle, defaultRot.z);
+		defaultRot = transform.localRotation;
+		openRot = Quaternion.Euler(defaultRot.x, defaultRot.y + DoorOpenAngle, defaultRot.z);
 	}
 	
 	//Main function
 
 	void  Update ()
 		{
+		defaultRotEular = defaultRot.eulerAngles;
+		openRotEular = openRot.eulerAngles;
 
-			if (enter) 
-			{
-					if (Input.GetAxis ("Mouse ScrollWheel") > 0) {
-							auto = false;
-							transform.Rotate (Vector3.up * 5.0f, Space.Self);
-					}
-					if (Input.GetAxis ("Mouse ScrollWheel") < 0) {
-							auto = false;
-							transform.Rotate (Vector3.down * 5.0f, Space.Self);
-					}
-			}
+	if (enter) 
+	{
+			//mouse scrolling to open
+			if (Input.GetAxis ("Mouse ScrollWheel") > 0 && (currentRot.eulerAngles.y < openRot.eulerAngles.y)) {
+				auto = false;
+				transform.Rotate (Vector3.up * 5.0f, Space.Self);
+				currentRot = transform.localRotation;
 
-			if (open && auto) {
-					//Open door
-					transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, openRot, Time.deltaTime * smooth);
-					
-			} 
-		else 
-			{
+		}
+			if (Input.GetAxis ("Mouse ScrollWheel") < 0 && (currentRot.eulerAngles.y > defaultRot.eulerAngles.y)) {
+				auto = false;
+				transform.Rotate (Vector3.down * 5.0f, Space.Self);
+				currentRot = transform.localRotation;
+
+		}
+}
+
+				if (open && auto) {
+						//Open door
+				transform.localRotation = Quaternion.Slerp(transform.localRotation, openRot, Time.deltaTime * smooth);
+						
+				} 
+	
 				//Close door
-				if (auto) 
+				if (open == false && auto) 
 				{
-					transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
+				transform.localRotation = Quaternion.Slerp(transform.localRotation, defaultRot, Time.deltaTime * smooth);
 				}
-			}
+
 
 			if (Input.GetKeyDown ("e") && enter && open ==true) 
 			{
