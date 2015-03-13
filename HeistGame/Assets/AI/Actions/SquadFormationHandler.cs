@@ -21,59 +21,87 @@ public class SquadFormationHandler : RAINAction
 
 	void FormationWedge(int SquadPlace, RAIN.Core.AI ai)
 	{
-		FormationBox (SquadPlace, ai);
+		if (SquadPlace == 0) 
+		{
+			FormationManager = Vector3.zero;
+		}
+		
+		else if (SquadPlace == 1)
+		{
+			FormationManager.Set(1.5f, 0, -1.5f);
+		}
+		
+		else if (SquadPlace == 3)
+		{
+			FormationManager.Set(-1.5f, 0, -1.5f);
+		}
+		
+		else if (SquadPlace == 2)
+		{
+			FormationManager.Set(3.0f, 0, -3.0f);
+		}
+		
+		else if (SquadPlace == 4)
+		{
+			FormationManager.Set(-3.0f, 0, -3.0f);
+		}
+		
+		GameObject SquadSpot = GameObject.FindGameObjectWithTag (Positions [SquadPlace]);
+		
+		SquadSpot.transform.localPosition = FormationManager;
+		
+		SquadCopList [SquadPlace].GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("varMainMovePoint", SquadSpot);
+		
+		SquadCopList [SquadPlace].GetComponent<AIRig> ().AI.Motor.CloseEnoughDistance = 0.1f;
 	}
 
 	void FormationBox(int SquadPlace, RAIN.Core.AI ai)
 	{
 		if (SquadPlace == 0) 
 		{
-			FormationManager = ai.Body.transform.position;
+			FormationManager = Vector3.zero;
 		}
 		
 		else if (SquadPlace == 1)
 		{
-			FormationManager.Set(ai.Body.transform.position.x + 1.5f, ai.Body.transform.position.y, ai.Body.transform.position.z + 1.5f);
+			FormationManager.Set(1.5f, 0, 1.5f);
 		}
 		
 		else if (SquadPlace == 3)
 		{
-			FormationManager.Set(ai.Body.transform.position.x - 1.5f, ai.Body.transform.position.y, ai.Body.transform.position.z + 1.5f);
+			FormationManager.Set(-1.5f, 0, 1.5f);
 		}
 		
 		else if (SquadPlace == 2)
 		{
-			FormationManager.Set(ai.Body.transform.position.x + 1.5f, ai.Body.transform.position.y, ai.Body.transform.position.z - 1.5f);
+			FormationManager.Set(1.5f, 0, -1.5f);
 		}
 		
 		else if (SquadPlace == 4)
 		{
-			FormationManager.Set(ai.Body.transform.position.x - 1.5f, ai.Body.transform.position.y, ai.Body.transform.position.z - 1.5f);
+			FormationManager.Set(-1.5f, 0, -1.5f);
 		}
-		
+
 		GameObject SquadSpot = GameObject.FindGameObjectWithTag (Positions [SquadPlace]);
 
-		SquadSpot.GetComponent<Transform> ().position = FormationManager;
+		SquadSpot.transform.localPosition = FormationManager;
 
-		//SquadSpot.transform.localPosition = ai.Body.transform.position;
+		SquadCopList [SquadPlace].GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("varMainMovePoint", SquadSpot);
 
-		SquadCopList [SquadPlace].GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.SetItem ("varMainMovePoint", SquadSpot);
-
-		SquadCopList [SquadPlace].GetComponent<RAIN.Core.AIRig> ().AI.Motor.DefaultCloseEnoughDistance = 0.1f;
+		SquadCopList [SquadPlace].GetComponent<AIRig> ().AI.Motor.CloseEnoughDistance = 0.1f;
 	}
 
 	void FormationLine(int SquadPlace, RAIN.Core.AI ai)
 	{
 		GameObject SquadSpot = GameObject.FindGameObjectWithTag (Positions [SquadPlace]);
 
-		FormationManager.Set (ai.Body.transform.position.x, ai.Body.transform.position.y, ai.Body.transform.position.z);
+		FormationManager.Set (0, 0, 0);
 
-		//SquadSpot.transform.localPosition = ai.Body.transform.position;
+		SquadSpot.transform.localPosition = FormationManager;
 
-		SquadSpot.GetComponent<Transform> ().position = FormationManager;
-
-		SquadCopList[SquadPlace].GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.SetItem ("varMainMovePoint", SquadSpot);
-		SquadCopList[SquadPlace].GetComponent<RAIN.Core.AIRig> ().AI.Motor.DefaultCloseEnoughDistance = 1.5f * SquadPlace;
+		SquadCopList[SquadPlace].GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("varMainMovePoint", SquadSpot);
+		SquadCopList[SquadPlace].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varLookPoint", ai.Body.transform.position);
+		SquadCopList[SquadPlace].GetComponent<AIRig> ().AI.Motor.CloseEnoughDistance = 1.5f * SquadPlace;
 	}
 
     public override void Start(RAIN.Core.AI ai)
@@ -103,6 +131,11 @@ public class SquadFormationHandler : RAINAction
 
 		int FormationSet = ai.WorkingMemory.GetItem<int>("varFormationSet");
 
+		Vector3 Heading = ai.WorkingMemory.GetItem<Vector3>("varLastHeading");
+
+		if(Vector3.Distance(Heading, ai.Body.transform.position) < .5f)
+			ai.WorkingMemory.SetItem("varReadyToMove", 1);
+
 		bool ChangeTestLoc = false;
 
 		if (MoveLoc != TestLoc && ai.WorkingMemory.GetItem<GameObject> ("varPlayer") == (GameObject)null) 
@@ -110,7 +143,7 @@ public class SquadFormationHandler : RAINAction
 			if (Formation != "Box") 
 			{
 				ai.WorkingMemory.SetItem ("varFormation", "Box");
-				ai.WorkingMemory.SetItem ("varFormationSet", 0);
+				ai.WorkingMemory.SetItem ("varFormationSet", 1);
 			}
 
 			foreach (var cop in SquadCopList) {
@@ -125,7 +158,10 @@ public class SquadFormationHandler : RAINAction
 			}
 
 			if(ChangeTestLoc)
+			{
 				ai.WorkingMemory.SetItem ("varLastHeading", MoveLoc);
+				ai.WorkingMemory.SetItem("varReadyToMove", 0);
+			}
 
 		}
 
@@ -140,31 +176,31 @@ public class SquadFormationHandler : RAINAction
 			}
 		}
 
-		if (Formation == "Line" && FormationSet == 0) 
+		if (Formation == "Line" && FormationSet == 1) 
 		{
 			for(int i = 0; i < 5; i++)
 			{
 				FormationLine(i, ai);
 			}
-			ai.WorkingMemory.SetItem ("varFormationSet", 1);
+			ai.WorkingMemory.SetItem ("varFormationSet", 0);
 		}
 
-		if (Formation == "Box" && FormationSet == 0) 
+		if (Formation == "Box" && FormationSet == 1) 
 		{
 			for(int i = 0; i < 5; i++)
 			{
 				FormationBox(i, ai);
 			}
-			ai.WorkingMemory.SetItem ("varFormationSet", 1);
+			ai.WorkingMemory.SetItem ("varFormationSet", 0);
 		}
 
-		if (Formation == "Wedge" && FormationSet == 0) 
+		if (Formation == "Wedge" && FormationSet == 1) 
 		{
 			for(int i = 0; i < 5; i++)
 			{
-				FormationBox(i, ai);
+				FormationWedge(i, ai);
 			}
-			ai.WorkingMemory.SetItem ("varFormationSet", 1);
+			ai.WorkingMemory.SetItem ("varFormationSet", 0);
 		}
 
         return ActionResult.SUCCESS;
