@@ -35,7 +35,7 @@ public class SimpleMouseRotator : MonoBehaviour
     {
         originalRotation = transform.localRotation;
         Screen.lockCursor = true;
-        Screen.showCursor = false;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class SimpleMouseRotator : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Screen.lockCursor = true;
-            Screen.showCursor = false;
+            Cursor.visible = false;
         }
 
         // we make initial calculations from the original local rotation
