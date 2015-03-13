@@ -41,9 +41,24 @@ public class OpenableDoor : MonoBehaviour
 				auto = false;
 				transform.Rotate (Vector3.down * 5.0f, Space.Self);
 				currentRot = transform.localRotation;
+                if (currentRot.eulerAngles.y > 300)
+                {
+                    transform.Rotate(Vector3.up * 5.0f, Space.Self);
+                }
+
 
 		}
 }
+    if (Input.GetKeyDown("e") && enter && open == true)
+    {
+        auto = true;
+        open = false;
+    }
+    else if (Input.GetKeyDown("e") && enter && open == false)
+    {
+        auto = true;
+        open = true;
+    }
 
 				if (open && auto) {
 						//Open door
@@ -58,17 +73,7 @@ public class OpenableDoor : MonoBehaviour
 				}
 
 
-			if (Input.GetKeyDown ("e") && enter && open ==true) 
-			{
-				auto = true;
-				open = false;
-			}
 
-			if (Input.GetKeyDown ("e") && enter && open ==false) 
-			{
-				auto = true;
-				open = true;
-			}
 		}
 		
 	
