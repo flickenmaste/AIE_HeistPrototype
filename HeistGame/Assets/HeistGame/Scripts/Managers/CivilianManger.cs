@@ -6,15 +6,36 @@ using RAIN.Core;
 
 ////////TO DO LIST
 /// add a timer to the civilian seeing the player
-/// get civilians to perform a task once they reach their goal
+/// have civilians spend time at their goal to perform a task
 /// get civilians to hear the player
 
 ////////STRETCH GOALS
 /// possibly make a list of goals for the civilians
 /// get a list of possible goals once the level is fleshed out
 
+//uses states to trigger behaviors in the civilians?
+public enum CivState
+{
+    IDLE,
+	MOVETOTARGET,
+	DOINGTASK,
+	COWERING,
+	RUNNING,
+	CALLPOLICE
+};
+
+public enum IdleBehaviors
+{
+	USEPHONE,
+	SMOKE,
+	CHECKWATCH,
+    TYPE,
+};
+
 public class CivilianManger : MonoBehaviour
 {
+    
+
 	public GameObject Civilian;
 	public GameObject Clone;
 	public GameObject Cop;
@@ -27,23 +48,20 @@ public class CivilianManger : MonoBehaviour
 	public float SpawnRadius = 5.0f;
 	public Vector3 Spawnpoint;
 
-	public float WaitTime;
+    private float WaitTime;
 
 	// Use this for initialization
 	void Start ()
 	{
+		//temp cop to test civilian alertness
 		Cop = GameObject.FindGameObjectWithTag("Cop");
-		SpawnCivilian();
+		//SpawnCivilian();
 		WaitTime = 3000;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		//perhaps using a timer to spawn civilians?
-			//SpawnCivilian();
-
-
 		//checks how many civilians exist
 		//if 0 then the civilian functions will not be called
 		NumOfCivilians = GameObject.FindGameObjectsWithTag ("Civilian");
@@ -54,24 +72,32 @@ public class CivilianManger : MonoBehaviour
 			SpawnCivilian();
 		}
 
-		if (NumOfCivilians.Length != 0)
+		if (NumOfCivilians.Length > 0)
 		{
-			if (GetGoal() == "Bank")
+            //set the path for the civilian
+            if (Clone.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") == "MOVETOTARGET")
 			{
-				Clone.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varPath", Clone.GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.GetItem ("varGoal").ToString());
-			}
-			if (GetGoal() == "Building")
-			{
-				Clone.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varPath", Clone.GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.GetItem ("varGoal").ToString());
+				Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varPath", Clone.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varGoal"));
 			}
 
+            //limits varAfraid to 0-100, not really sure if this is necessary, but its here for now
+            if (Clone.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") > 100)
+            {
+                Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfaid", 100);
+            }
+            if (Clone.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") < 0)
+            {
+                Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfaid", 0);
+            }
 
-			if (Clone.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("varAfraid").Equals(100))
+            //if the civilian gets too scared they'll call the police
+			if (Clone.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") == 100)
 			{
-				Clone.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varGoal", "CallPolice");
+				Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("State", CivState.CALLPOLICE.ToString());
 			}
 			
-			if (GetGoal() == "CallPolice")
+            //if the civilian called the police activate the police
+			if (Clone.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("State").Equals(CivState.CALLPOLICE.ToString()))
 			{
 				Cop.GetComponent<RAIN.Core.AIRig>().AI.IsActive = true;
 			}
@@ -108,7 +134,9 @@ public class CivilianManger : MonoBehaviour
 		Spawnpoint.z = SpawnAreaLocation.z + (Random.Range(-1, 2) * SpawnRadius);
 
 		Clone = Instantiate(Civilian, Spawnpoint, Civilian.transform.rotation) as GameObject;
-		Clone.GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.SetItem("varGoal", RandomizeGoal());
+		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem("varGoal", RandomizeGoal());
+
+		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("State", "MOVETOTARGET");
 	}
 
 	//just makes getting the civilian's goal shorter
@@ -116,12 +144,44 @@ public class CivilianManger : MonoBehaviour
 	{
 		if (NumOfCivilians.Length != 0)
 		{
-			string Goal = Clone.GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.GetItem ("varGoal").ToString ();
+			string Goal = Clone.GetComponent<AIRig> ().AI.WorkingMemory.GetItem ("varGoal").ToString ();
 			return Goal;
 		}
 		else
 		{
 			return null;
+		}
+	}
+
+    void PerformIdleAction()
+    {
+        WaitTime = Clone.GetComponent<AIRig>().AI.WorkingMemory.GetItem<float>("varWait");
+        WaitTime += Time.time;
+
+        if (WaitTime > 3500)
+        {
+            Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varGoal", RandomizeGoal());
+            Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("State", "MOVETOTARGET");
+            WaitTime = 0;
+        }
+    }
+
+	void RandomizeIdle()
+	{
+		int RandomNumber = Random.Range (1, 6);
+		switch(RandomNumber)
+		{
+		case 1:
+
+		case 2:
+
+		case 3:
+
+		case 4:
+
+		case 5:
+			//Idle = IdleBehaviors.SMOKE;
+			break;
 		}
 	}
 }

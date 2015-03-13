@@ -82,7 +82,7 @@ public class Player : MonoBehaviour {
 			Debug.DrawRay (this.transform.position, this.transform.forward);
 
 			Vector3 Direciton = new Vector3 (transform.forward.x, transform.forward.y,transform.forward.z);
-			if (Physics.Raycast(transform.position, Direciton, out Hit, 100.0f))
+			if (Physics.Raycast(transform.position, Direciton, out Hit, 20.0f))
 			{
 				if (Hit.transform.tag == "Civilian")
 				{
