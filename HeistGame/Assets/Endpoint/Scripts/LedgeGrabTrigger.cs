@@ -15,11 +15,11 @@ public class LedgeGrabTrigger : MonoBehaviour {
 
 	void OnTriggerStay(Collider c)
 	{
-		c.gameObject.GetComponent<PlayerController>().ledgeGrab = true;
+		//c.gameObject.GetComponent<PlayerController>().ledgeGrab = true;
 	}
 	
 	void OnTriggerExit(Collider c)
 	{
-		c.gameObject.GetComponent<PlayerController>().ledgeGrab = false;
+		//c.gameObject.GetComponent<PlayerController>().ledgeGrab = false;
 	}
 }

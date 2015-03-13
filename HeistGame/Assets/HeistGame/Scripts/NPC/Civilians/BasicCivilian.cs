@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasicCivilian : NPC {
+public class BasicCivilian : Bolt.EntityBehaviour<ICivilianState>
+{
 
     public float myHealth;
 
@@ -13,8 +14,13 @@ public class BasicCivilian : NPC {
         myHealth = 100;
     }
 
+    public override void Attached()
+    {
+        state.CivilianTransform.SetTransforms(transform);
+    }
+
     // Update is called once per frame
-    void Update()
+    public override void SimulateOwner()
     {
 
     }
@@ -26,8 +32,9 @@ public class BasicCivilian : NPC {
 
         if (myHealth <= 0.0f)
         {
-            GameObject clone = Instantiate(myCorpse, this.gameObject.transform.position, Quaternion.Euler(new Vector3(5, 0, 0))) as GameObject;
-            Destroy(this.gameObject, 0);
+            //GameObject clone = Instantiate(myCorpse, this.gameObject.transform.position, Quaternion.Euler(new Vector3(5, 0, 0))) as GameObject;
+            //var clone = BoltNetwork.Instantiate(BoltPrefabs.SimpleCivCorpseNetworked, null, this.gameObject.transform.position, Quaternion.Euler(new Vector3(5, 0, 0)));
+            BoltEntity.Destroy(this.gameObject, 0);
         }
     }
 }
