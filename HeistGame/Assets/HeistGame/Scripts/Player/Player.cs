@@ -27,6 +27,7 @@ public class Player : MonoBehaviour {
 	void Update () 
     {
         CheckInput();
+		if (Input.GetKey(KeyCode.Escape)) { Application.Quit(); } 
 	}
 
     public void TakeDamage(float dmg)
