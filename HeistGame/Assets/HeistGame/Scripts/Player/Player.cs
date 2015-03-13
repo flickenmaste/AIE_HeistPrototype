@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using RAIN.Action;
+using RAIN.Core;
 
 public class Player : MonoBehaviour {
 
@@ -7,6 +9,8 @@ public class Player : MonoBehaviour {
     
     // Bool to show player is carrying gold
     public bool CarryingGold;
+
+	public float ShoutDistance;
 
     // Managers
     public GameObject LootMan;
@@ -27,6 +31,7 @@ public class Player : MonoBehaviour {
 	void Update () 
     {
         CheckInput();
+		Shout();
 	}
 
     public void TakeDamage(float dmg)
@@ -55,6 +60,7 @@ public class Player : MonoBehaviour {
 
         Debug.DrawRay(this.transform.position, dir * 2, Color.red);	// Ray so we can see
 
+
         if (Physics.Raycast(transform.position, dir, out Hit, 2))
         {
             if (Hit.transform.tag == "Loot")
@@ -67,6 +73,25 @@ public class Player : MonoBehaviour {
             }
         }
     }
+
+	void Shout()
+	{
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			RaycastHit Hit;
+			Debug.DrawRay (this.transform.position, this.transform.forward);
+
+			Vector3 Direciton = new Vector3 (transform.forward.x, transform.forward.y,transform.forward.z);
+			if (Physics.Raycast(transform.position, Direciton, out Hit, 100.0f))
+			{
+				if (Hit.transform.tag == "Civilian")
+				{
+					//scare the civilian
+					Hit.transform.gameObject.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varAfraid", 100);
+				}
+			}
+		}
+	}
 
     void DropGold()
     {
