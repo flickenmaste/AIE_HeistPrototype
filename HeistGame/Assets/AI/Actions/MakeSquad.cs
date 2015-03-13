@@ -80,7 +80,7 @@ public class MakeSquad : RAINAction
 			CopSpacing += 1.5f;
 		}
 
-		ai.WorkingMemory.SetItem ("varFormationSet", 1);
+		ai.WorkingMemory.SetItem ("varFormationSet", 0);
 		ai.WorkingMemory.SetItem ("varDoOnce", 1);
 
         return ActionResult.SUCCESS;
