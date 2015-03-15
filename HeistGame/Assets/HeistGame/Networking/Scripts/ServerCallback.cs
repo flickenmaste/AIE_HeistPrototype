@@ -19,11 +19,11 @@ public class PlayerObject
 
     public void Spawn()
     {
-        var pos = new Vector3(0, 2, 0);
+        var pos = new Vector3(0, 3, 0);
 
         if (!character)
         {
-            character = BoltNetwork.Instantiate(BoltPrefabs.PlayerNetworked, pos, Quaternion.identity);
+            character = BoltNetwork.Instantiate(BoltPrefabs.FPSController, pos, Quaternion.identity);
 
             if (isServer)
             {
