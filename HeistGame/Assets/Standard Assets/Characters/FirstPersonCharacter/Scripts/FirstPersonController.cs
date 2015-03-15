@@ -118,7 +118,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
-        public override void SimulateController()
+        public override void SimulateController()   // For server authorative net
         {
             m_Camera.gameObject.SetActive(true);
             RotateView();

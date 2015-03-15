@@ -27,11 +27,11 @@ public class PlayerObject
 
             if (isServer)
             {
-                character.TakeControl();
+                character.TakeControl();    // Host control
             }
             else
             {
-                character.AssignControl(connection);
+                character.AssignControl(connection);    // Give control to client
             }
         }
     }
@@ -40,12 +40,12 @@ public class PlayerObject
 [BoltGlobalBehaviour(BoltNetworkModes.Server)]
 public class ServerCallback : Bolt.GlobalEventListener
 {
-    static List<PlayerObject> players = new List<PlayerObject>();
+    static List<PlayerObject> players = new List<PlayerObject>();   // Store list of players in server
 
     void Awake()
     {
         PlayerObject p;
-        p = new PlayerObject();
+        p = new PlayerObject(); // Set up hosts player
         p.connection = null;
 
         players.Add(p);
@@ -54,7 +54,7 @@ public class ServerCallback : Bolt.GlobalEventListener
     public override void Connected(BoltConnection arg)
     {
         PlayerObject p;
-        p = new PlayerObject();
+        p = new PlayerObject(); // Set up clients player
         p.connection = arg;
         p.connection.UserData = p;
 
@@ -63,15 +63,15 @@ public class ServerCallback : Bolt.GlobalEventListener
 
     public override void SceneLoadLocalDone(string map)
     {
-        players[0].Spawn();
+        players[0].Spawn(); // Spawn host
     }
 
     public override void SceneLoadRemoteDone(BoltConnection connection)
     {
-        GetPlayer(connection).Spawn();
+        GetPlayer(connection).Spawn();  // Spawn client
     }
 
-    public static PlayerObject GetPlayer(BoltConnection connection)
+    public static PlayerObject GetPlayer(BoltConnection connection) // Get the player to spawn
     {
         if (connection == null)
         {
@@ -79,5 +79,18 @@ public class ServerCallback : Bolt.GlobalEventListener
         }
 
         return (PlayerObject)connection.UserData;
+    }
+
+    public override void Disconnected(BoltConnection connection, Bolt.IProtocolToken token) // Remove player from list of players
+    {
+        players.Remove((PlayerObject)connection.UserData);
+        foreach (var player in players)
+        {
+            if (player == (PlayerObject)connection.UserData)
+            {
+                BoltNetwork.Destroy(player.character);
+                players.Remove(player);
+            }
+        }
     }
 }

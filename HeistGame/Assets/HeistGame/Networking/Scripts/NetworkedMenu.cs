@@ -23,6 +23,8 @@ public class NetworkedMenu : MonoBehaviour {
 
     public bool LegacyGUI;
 
+    public InputField DirectIP;
+
     // Use this for initialization
 	void Start () 
     {
@@ -162,5 +164,20 @@ public class NetworkedMenu : MonoBehaviour {
                 JoinServer(server);
             }
         }
+    }
+
+    public void HostDirectIP()  // Do a server without Zeus
+    {
+        BoltLauncher.StartServer(UdpKit.UdpEndPoint.Parse(HostServerAddress)); // Start server
+        BoltNetwork.LoadScene("TestNetworkedLevel");
+    }
+
+    public void JoinDirectIP()
+    {
+        string address = DirectIP.text;
+
+        // START CLIENT
+        BoltLauncher.StartClient();
+        BoltNetwork.Connect(UdpKit.UdpEndPoint.Parse(address));
     }
 }
