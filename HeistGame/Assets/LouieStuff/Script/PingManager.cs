@@ -5,6 +5,7 @@ public class PingManager : MonoBehaviour {
 
 	// Use this for initialization
 	public GameObject Manager;
+    public GameObject Blueprint;
 	void Start () {
 	
 	}
@@ -12,7 +13,7 @@ public class PingManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Manager.GetComponent<ImportantPeaple> ().Found == true)
-			transform.position = new Vector3 (Manager.transform.position.x + 200.0f, Manager.transform.position.y, Manager.transform.position.z);
+        if (Manager.GetComponent<ImportantPeaple>().Found == true)
+            transform.position = Manager.transform.position + Blueprint.transform.position;
 	}
 }

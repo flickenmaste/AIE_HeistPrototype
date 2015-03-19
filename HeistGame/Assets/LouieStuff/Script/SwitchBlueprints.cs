@@ -15,10 +15,10 @@ public class SwitchBlueprints : MonoBehaviour {
 	void Update () {
 		if (Input.GetKey (KeyCode.LeftShift) && Input.GetKeyDown (KeyCode.UpArrow) && CurrentCameraLook < (Blueprint.Capacity-1)) {
 			CurrentCameraLook++;
-			transform.position = new Vector3 (transform.position.x, transform.position.y + 20.0f, transform.position.z);
+			transform.position = new Vector3 (transform.position.x, transform.position.y + 6.0f, transform.position.z);
 		} else if (Input.GetKey (KeyCode.LeftShift) && Input.GetKeyDown (KeyCode.DownArrow) && CurrentCameraLook != 0) {
 			CurrentCameraLook--;
-			transform.position = new Vector3 (transform.position.x, transform.position.y - 20.0f, transform.position.z);
+			transform.position = new Vector3 (transform.position.x, transform.position.y - 6.0f, transform.position.z);
 		}
 	}
 }

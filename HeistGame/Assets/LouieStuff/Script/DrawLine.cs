@@ -31,7 +31,7 @@ public class DrawLine : MonoBehaviour {
 			lineRender.SetVertexCount( numberOfPoints );
 			Vector3 mousePos = new Vector3(0,0,0);
 			mousePos = Input.mousePosition;
-			mousePos.z = 10.0f;
+			mousePos.z = 1.0f;
 			//mousePos.z = 1.0f;
 			Vector3 worldPos = MapCamera.ScreenToWorldPoint(mousePos);
 			//lineRender.SetPosition(numberOfPoints - 1, new Vector3(worldPos.x+200.0f,worldPos.y - 10.0f,worldPos.z));

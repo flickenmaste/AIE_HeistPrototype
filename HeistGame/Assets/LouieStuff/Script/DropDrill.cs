@@ -14,7 +14,7 @@ public class DropDrill : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.F) && Drill != null){
-			ObjectDrill.Drill =  GameObject.Instantiate (Drill, new Vector3(transform.position.x,0,transform.position.z),new Quaternion(0,0,0,0)) as GameObject;
+			ObjectDrill.Drill =  GameObject.Instantiate (Drill, new Vector3(transform.position.x,transform.position.y,transform.position.z),new Quaternion(0,0,0,0)) as GameObject;
 			Drill = null;
 		}
 	}

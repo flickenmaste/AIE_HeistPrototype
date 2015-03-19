@@ -7,7 +7,8 @@ public class GetDrillLocation : MonoBehaviour {
 	//public Vector3 Position;
 	public GameObject Drill;
 	public GameObject Player;
-    public Camera MapCamera;
+    public GameObject Blueprint;
+    public GameObject Bank;
 	void Start () {
 	
 	}
@@ -15,7 +16,7 @@ public class GetDrillLocation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Player.GetComponent<DropDrill> ().Drill == null) {
-            transform.position = new Vector3(MapCamera.transform.position.x + Drill.transform.position.x, Drill.transform.position.y + .5f, Drill.transform.position.z);
+            transform.position = new Vector3( Drill.transform.position.x, Drill.transform.position.y, Drill.transform.position.z);
 		}
 	
 	}

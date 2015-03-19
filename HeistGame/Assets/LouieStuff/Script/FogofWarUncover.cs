@@ -19,13 +19,8 @@ public class FogofWarUncover : MonoBehaviour {
 	}
     bool WithinATile(GameObject DistanceToPlayerGameObject)
     {
-        float xLocation = Player.transform.position.x + transform.position.x;
-        if ((DistanceToPlayerGameObject.transform.position.x - xLocation) > 0.0f &&
-            (DistanceToPlayerGameObject.transform.position.x - xLocation) < 8.0f &&
-            (DistanceToPlayerGameObject.transform.position.z - Player.transform.position.z) > 0.0f &&
-            (DistanceToPlayerGameObject.transform.position.z - Player.transform.position.z) < 8.0f &&
-            (Player.transform.position.y - DistanceToPlayerGameObject.transform.position.y) > 0.0f &&
-            (Player.transform.position.y - DistanceToPlayerGameObject.transform.position.y) < 2.0f){
+        if (Vector3.Distance(Player.transform.position, DistanceToPlayerGameObject.transform.position) < 5.0f)
+        {
 
             return true;
         }
@@ -34,10 +29,12 @@ public class FogofWarUncover : MonoBehaviour {
     void TilesManagment(){
         foreach(GameObject tile in Tiles)
         {
-            if ( tile != null && WithinATile(tile))
+            if (tile.GetComponent<Renderer>().material.color.a > 0 && WithinATile(tile))
             {
-                Destroy(tile);
-                break;
+                //Destroy(tile);
+                Color color = tile.GetComponent<Renderer>().material.color;
+                color.a -= 0.1f;
+                tile.GetComponent<Renderer>().material.color = color;
             }
         }
 
