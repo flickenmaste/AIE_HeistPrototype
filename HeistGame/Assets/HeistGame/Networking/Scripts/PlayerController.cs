@@ -499,7 +499,7 @@ public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
         jumpIntention = Input.GetButtonDown("Jump") || jumpIntention;
         crouchIntention = crouchCheck();
 
-        input.move = moveIntention;
+        input.Move = moveIntention;
 
         entity.QueueInput(input);
     }

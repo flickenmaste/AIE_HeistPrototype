@@ -1,6 +1,7 @@
 ﻿/* Originally from Sample Assets from Unity Technologies */
 
 using UnityEngine;
+using Rewired;
 
 public class SimpleMouseRotator : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class SimpleMouseRotator : MonoBehaviour
     Vector3 followVelocity;
     Quaternion originalRotation;
 
+	public int playerId = 0; // The Rewired player id
+	
+	private Rewired.Player RPlayer;
+	private CharacterController cc;
+
 
     // Use this for initialization
     void Start()
@@ -37,6 +43,15 @@ public class SimpleMouseRotator : MonoBehaviour
         Screen.lockCursor = true;
         Cursor.visible = false;
     }
+
+	void Awake()
+	{
+		//Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
+		RPlayer = ReInput.players.GetPlayer(playerId);
+		
+		//Get the character controller
+		cc = GetComponent<CharacterController>();
+	}
 
     // Update is called once per frame
     void Update()
@@ -56,8 +71,8 @@ public class SimpleMouseRotator : MonoBehaviour
         float inputV = 0;
         if (relative)
         {
-            inputH = Input.GetAxisRaw("Mouse X");
-            inputV = Input.GetAxisRaw("Mouse Y");
+            inputH = RPlayer.GetAxisRaw("Look Horizontal");
+			inputV = RPlayer.GetAxisRaw("Look Vertical");
 
             // wrap values to avoid springing quickly the wrong way from positive to negative
             if (targetAngles.y > 180) { targetAngles.y -= 360; followAngles.y -= 360; }
