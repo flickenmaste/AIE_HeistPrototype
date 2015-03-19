@@ -27,7 +27,7 @@ public class TakeScreenShot : MonoBehaviour {
 	List<byte[]> pngShot;
 
 	public List<GameObject> Blueprint;
-	GameObject CurrentFloor;
+    public List<GameObject> FogofWar;
 	int loadNumber;
 
 	// Use this for initialization
@@ -80,11 +80,20 @@ public class TakeScreenShot : MonoBehaviour {
 			MapCamera.GetComponent<SwitchBlueprints>().CurrentCameraLook = (Blueprint.Capacity - 1);
 			MapCamera.rect = new Rect(0,0,1,1);
 			PlayerCamera.transform.gameObject.SetActive(false);
-
+            foreach (GameObject fog in FogofWar)
+            {
+                fog.SetActive(false);
+            }
 		}
 		if (Grab == true && Captured == false && loadNumber < Blueprint.Capacity)
 			MapCamera.transform.position = new Vector3 (MapCamera.transform.position.x, Blueprint [loadNumber].transform.position.y + 10.0f, MapCamera.transform.position.z);
-
+        if (Captured == true)
+        {
+            foreach (GameObject fog in FogofWar)
+            {
+                fog.SetActive(true);
+            }
+        }
 
 	}
 }
