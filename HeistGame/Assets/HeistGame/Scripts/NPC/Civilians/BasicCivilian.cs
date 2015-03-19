@@ -20,7 +20,7 @@ public class BasicCivilian : Bolt.EntityBehaviour<ICivilianState>
     }
 
     // Update is called once per frame
-    public override void SimulateOwner()
+    public override void SimulateController()
     {
 
     }
@@ -34,7 +34,7 @@ public class BasicCivilian : Bolt.EntityBehaviour<ICivilianState>
         {
             //GameObject clone = Instantiate(myCorpse, this.gameObject.transform.position, Quaternion.Euler(new Vector3(5, 0, 0))) as GameObject;
             //var clone = BoltNetwork.Instantiate(BoltPrefabs.SimpleCivCorpseNetworked, null, this.gameObject.transform.position, Quaternion.Euler(new Vector3(5, 0, 0)));
-            BoltEntity.Destroy(this.gameObject, 0);
+            BoltNetwork.Detach(this.gameObject);
         }
     }
 }

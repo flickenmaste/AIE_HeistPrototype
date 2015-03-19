@@ -67,6 +67,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         bool _left;
         bool _right;
         bool _jump;
+        bool _shoot;
+        bool _reload;
 
         // Use this for initialization
         private void Start()
@@ -133,6 +135,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             input.Jump = _jump;
             input.Speed = speed;
+            input.Shoot = _shoot;
 
             // always move along the camera forward as it is the direction that it being aimed at
             Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
@@ -260,6 +263,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             _backward = Input.GetKey(KeyCode.S);
             _left = Input.GetKey(KeyCode.A);
             _right = Input.GetKey(KeyCode.D);
+            _shoot = Input.GetMouseButtonDown(0);
 
             bool waswalking = m_IsWalking;
 

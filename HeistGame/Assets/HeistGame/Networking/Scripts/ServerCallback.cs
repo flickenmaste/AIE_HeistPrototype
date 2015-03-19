@@ -88,9 +88,14 @@ public class ServerCallback : Bolt.GlobalEventListener
         {
             if (player == (PlayerObject)connection.UserData)
             {
-                BoltNetwork.Destroy(player.character);
+                BoltNetwork.Detach(player.character);
                 players.Remove(player);
             }
         }
+    }
+
+    public override void EntityDetached(BoltEntity entity)
+    {
+        BoltEntity.Destroy(entity);
     }
 }
