@@ -42,7 +42,6 @@ public class SquadPlayerDetection : RAINAction
 				ai.WorkingMemory.SetItem("varLastPlayerPos", IsPlayer.transform.position);
 				ai.WorkingMemory.SetItem("varBreak", 1);
 				ai.WorkingMemory.SetItem ("varFormation", "Wedge");
-				ai.Motor.Speed = 0.0f;
 				ai.WorkingMemory.SetItem ("varFormationSet", 1);
 				break;
 			}

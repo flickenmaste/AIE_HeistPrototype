@@ -22,7 +22,7 @@ public class SearchForPlayer : RAINAction
 		//get and set time here (fixes it not reseting when the players detected and keeps it from always reseting)
 		_time = ai.WorkingMemory.GetItem<float> ("varTimeToSearch");
 
-		_time += Time.time;
+		_time += Time.deltaTime;
 
 		ai.WorkingMemory.SetItem ("varTimeToSearch", _time);
 
@@ -58,7 +58,7 @@ public class SearchForPlayer : RAINAction
 
 		//tell the cop were to go
 		//if (Vector3.Distance (ai.Kinematic.Position, PlayerLastPos) > 0.1f && reachedLoc1 == false) {
-						ai.WorkingMemory.SetItem<Vector3> ("varSeek", pos);
+						ai.WorkingMemory.SetItem<Vector3> ("varSearch", pos);
 		//} //else {
 				//		ai.WorkingMemory.SetItem<Vector3> ("varSeek", SearchPos);
 				//}
@@ -71,7 +71,7 @@ public class SearchForPlayer : RAINAction
 		//}
 
 		//if this much time has passed, go back to patroling/last patrol location
-		if (_time > 3500)
+		if (_time > 35)
 		{
 			ai.WorkingMemory.SetItem("varBreak", 0);
 			ai.WorkingMemory.SetItem("varReachedLastPlayerPos", false);
