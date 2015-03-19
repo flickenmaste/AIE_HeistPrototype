@@ -61,6 +61,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
         public Animator myAnim;
+        public GameObject myBody;
 
         // Networking stuff
         float _forward;
@@ -128,6 +129,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public override void SimulateController()   // For server authorative net
         {
             m_Camera.gameObject.SetActive(true);
+            myBody.SetActive(false);
             RotateView();
             IPlayerCommandInput input = PlayerCommand.Create();
             float speed;
