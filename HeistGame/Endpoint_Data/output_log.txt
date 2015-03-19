@@ -1,4 +1,4 @@
-Initialize engine version: 4.6.0b17 (2d43734a3870)
+Initialize engine version: 5.0.0f4 (5b98b70ebeb9)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
@@ -6,6 +6,7 @@ Direct3D:
     Vendor:   ATI
     VRAM:     497 MB
 Begin MonoManager ReloadAssembly
+<<<<<<< HEAD
 Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.dll (this message is harmless)
 Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-CSharp.dll (this message is harmless)
@@ -152,4 +153,76 @@ NullReferenceException: Object reference not set to an instance of an object
   at WallKill.Start () [0x00000] in <filename unknown>:0 
  
 (Filename:  Line: -1)
+=======
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\bolt.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\bolt.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\bolt.user.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\bolt.user.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\udpkit.common.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\udpkit.common.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\udpkit.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\udpkit.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\udpkit_wp8.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\udpkit_wp8.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProBuilderCore.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProBuilderCore.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProBuilderMeshOps.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProBuilderMeshOps.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProCore.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProCore.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\SixBySeven.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\SixBySeven.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\RAIN.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\RAIN.dll into Unity Child Domain
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\RAINMetaform.dll (this message is harmless)
+Loading C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\RAINMetaform.dll into Unity Child Domain
+- Completed reload, in  0.171 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at -1920,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\System.dll (this message is harmless)
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[UnityEngine.UICharInfo].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at UnityEngine.UI.InputField.SetDrawRangeToContainCaretPosition (UnityEngine.TextGenerator gen, Int32 caretPos, System.Int32& drawStart, System.Int32& drawEnd) [0x00000] in <filename unknown>:0 
+  at UnityEngine.UI.InputField.UpdateLabel () [0x00000] in <filename unknown>:0 
+  at UnityEngine.UI.InputField.OnUpdateSelected (UnityEngine.EventSystems.BaseEventData eventData) [0x00000] in <filename unknown>:0 
+  at UnityEngine.EventSystems.ExecuteEvents.Execute (IUpdateSelectedHandler handler, UnityEngine.EventSystems.BaseEventData eventData) [0x00000] in <filename unknown>:0 
+  at UnityEngine.EventSystems.ExecuteEvents.Execute[IUpdateSelectedHandler] (UnityEngine.GameObject target, UnityEngine.EventSystems.BaseEventData eventData, UnityEngine.EventSystems.EventFunction`1 functor) [0x00000] in <filename unknown>:0 
+UnityEngine.Debug:Internal_LogException(Exception, Object)
+UnityEngine.Debug:LogException(Exception)
+UnityEngine.EventSystems.ExecuteEvents:Execute(GameObject, BaseEventData, EventFunction`1)
+UnityEngine.EventSystems.StandaloneInputModule:SendUpdateEventToSelectedObject()
+UnityEngine.EventSystems.StandaloneInputModule:Process()
+UnityEngine.EventSystems.EventSystem:Update()
+ 
+(Filename:  Line: -1)
 
+Fallback handler could not load library C:/Users/brandon.foote/Documents/GitHub/AIE_HeistPrototype/HeistGame/Endpoint_Data/Mono/libc
+Fallback handler could not load library C:/Users/brandon.foote/Documents/GitHub/AIE_HeistPrototype/HeistGame/Endpoint_Data/Mono/.\libc
+Fallback handler could not load library C:/Users/brandon.foote/Documents/GitHub/AIE_HeistPrototype/HeistGame/Endpoint_Data/Mono/libc
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.695753 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1bac -> priority: 1 
+  Thread -> id: 14f4 -> priority: 1 
+
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 549.
+Total: 2.633574 ms (FindLiveObjects: 0.025354 ms CreateObjectMapping: 0.021732 ms MarkObjects: 2.570489 ms  DeleteObjects: 0.015695 ms)
+>>>>>>> origin/dev
+
+Platform assembly: C:\Users\brandon.foote\Documents\GitHub\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\System.Xml.dll (this message is harmless)

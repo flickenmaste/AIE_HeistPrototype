@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PhaseManager : MonoBehaviour {
+public class PhaseManager : MonoBehaviour
+{
 
     public Queue PhaseQueue;
     
