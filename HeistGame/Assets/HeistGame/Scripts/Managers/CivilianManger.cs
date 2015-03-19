@@ -33,8 +33,6 @@ public enum Task
 
 public class CivilianManger : MonoBehaviour
 {
-    
-
 	public GameObject Civilian;
 	public GameObject Clone;
 	public GameObject Cop;

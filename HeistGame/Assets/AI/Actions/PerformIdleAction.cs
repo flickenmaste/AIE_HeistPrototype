@@ -32,7 +32,7 @@ public class PerformIdleAction : RAINAction
 
         ai.WorkingMemory.SetItem("varWait", WaitTime);
 
-        RandomizeIdle();
+        RandomizeIdle(ai);
 
         base.Start(ai);
     }
@@ -58,30 +58,40 @@ public class PerformIdleAction : RAINAction
     //functions that the AI uses to perform idle actions
     ///////////////////////////////////////////////////////////////////////////////
 
-    void RandomizeIdle()
+    void RandomizeIdle(RAIN.Core.AI ai)
     {
         int RandomNumber = Random.Range(1, 5);
         switch (RandomNumber)
         {
             case 1:
                 Idle = IdleBehaviors.CHECKWATCH;
-                MaxWaitTime = 500.0f;
+                // MaxWaitTime = 500.0f;
+                ai.WorkingMemory.SetItem("varIdle", Idle.ToString());
+                MaxWaitTime = 5000.0f;
                 break;
             case 2:
                 Idle = IdleBehaviors.SMOKE;
-                MaxWaitTime = 1500.0f;
+                //MaxWaitTime = 1500.0f;
+                ai.WorkingMemory.SetItem("varIdle", Idle.ToString());
+                MaxWaitTime = 5000.0f;
                 break;
             case 3:
                 Idle = IdleBehaviors.TYPE;
-                MaxWaitTime = 3500.0f;
+                //MaxWaitTime = 3500.0f;
+                ai.WorkingMemory.SetItem("varIdle", Idle.ToString());
+                MaxWaitTime = 5000.0f;
                 break;
             case 4:
                 Idle = IdleBehaviors.USEPHONE;
-                MaxWaitTime = 1000.0f;
+                //MaxWaitTime = 1000.0f;
+                ai.WorkingMemory.SetItem("varIdle", Idle.ToString());
+                MaxWaitTime = 5000.0f;
                 break;
             default:
                 Idle = IdleBehaviors.CHECKWATCH;
-                MaxWaitTime = 500.0f;
+                //MaxWaitTime = 500.0f;
+                ai.WorkingMemory.SetItem("varIdle", Idle.ToString());
+                MaxWaitTime = 5000.0f;
                 break;
         }
     }
