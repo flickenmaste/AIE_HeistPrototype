@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Rewired;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
@@ -65,7 +66,11 @@ public class RicochetController : MonoBehaviour
     public bool scaleJumpByGravity = false;
 
 
+	public int playerId = 0; // The Rewired player id
 
+	private Player player; // The Rewired Player
+	private Rewired.Player RPlayer;
+	private CharacterController cc;
 
     // # Cached Implementation Details
     float playerHeight;    // Player Hull Height
@@ -80,6 +85,15 @@ public class RicochetController : MonoBehaviour
     #endregion
 
     #region Methods
+
+	void Awake()
+	{
+		//Get the Rewired Player object for this player and keep it for the duration of the character's lifetime
+		RPlayer = ReInput.players.GetPlayer(playerId);
+
+		//Get the character controller
+		cc = GetComponent<CharacterController>();
+	}
 
     // Attempts to induce jumping in the player
     private void Jump()
@@ -98,9 +112,9 @@ public class RicochetController : MonoBehaviour
     Vector3 GetInput()
     {
         // Retrieve current input values
-        Vector3 MovementVelocity = new Vector3(Input.GetAxisRaw("Horizontal"),  // X    
+        Vector3 MovementVelocity = new Vector3(RPlayer.GetAxisRaw("Move Horizontal"),  // X    
                                                0,                            // Y
-                                               Input.GetAxisRaw("Vertical"));   // Z (think of this as a D-Pad)
+                                               RPlayer.GetAxisRaw("Move Vertical"));   // Z (think of this as a D-Pad)
 
         return MovementVelocity;
     }
