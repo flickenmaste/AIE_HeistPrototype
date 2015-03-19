@@ -7,7 +7,6 @@ using RAIN.Core;
 ////////TO DO LIST
 /// add a timer to the civilian seeing the player
 /// have civilians spend time at their goal to perform a task
-/// get civilians to hear the player
 
 ////////STRETCH GOALS
 /// possibly make a list of goals for the civilians
@@ -97,6 +96,12 @@ public class CivilianManger : MonoBehaviour
                 if (AllCivilians[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("State").Equals(CivState.CALLPOLICE.ToString()))
                 {
                     Cop.GetComponent<RAIN.Core.AIRig>().AI.IsActive = true;
+                }
+
+                //temp line function
+                if (Input.GetKeyDown(KeyCode.Backspace))
+                {
+                    AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varPath", "SpotInQueue");
                 }
             }
         }

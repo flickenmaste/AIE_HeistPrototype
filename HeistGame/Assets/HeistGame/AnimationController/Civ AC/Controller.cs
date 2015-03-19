@@ -16,44 +16,39 @@ public class Controller : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        Civilians = GameObject.FindGameObjectsWithTag("Civilian");
-
-        for (int i = 0; i < Civilians.Length; i++)
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") == "MOVETOTARGET")
         {
-            if (Civilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem("State").ToString() == "MOVETOTARGET")
-            {
-                anim.SetBool("Walking", true);
-            }
-            //else if(Civilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem("varIdle").ToString() == "SMOKE")
-            //{
-            //    anim.SetBool("Smoking", true);
-            //}
-            else
-            {
-                anim.SetBool("Smoking", false);
-                anim.SetBool("Walking", false);
-            }
+            this.anim.SetBool("Walking", true);
+        }
+
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") == 100)
+        {
+            this.anim.SetBool("Walking", false);
+            this.anim.SetBool("Coward", true);
+            
+        }
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") >= 200)
+        {
+            this.anim.SetBool("YelledAt", true);
+        }
+
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") != "MOVETOTARGET" && this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varIdle") == "SMOKE")
+        {
+            this.anim.SetBool("Walking", false);
+            this.anim.SetBool("Running", false);
+            this.anim.SetInteger("IdleNumber", 1);
+        }
+        else
+        {
+            this.anim.SetInteger("IdleNumber", 0);
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            this.anim.SetBool("Running", true);
         }
 
 	//		anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 	//		anim.SetFloat("Vertical", Input.GetAxis("Vertical"));
-		/*if(Input.GetKey(KeyCode.W))
-		{
-		anim.SetBool ("Walking", true);
-		}
-		else
-		{
-			anim.SetBool ("Walking", false);
-		}
-
-		if(Input.GetKey(KeyCode.S))
-		{
-			anim.SetBool ("Backward", true);
-		}
-		else
-		{
-			anim.SetBool ("Backward", false);
-		}*/
 
 	}
 }
