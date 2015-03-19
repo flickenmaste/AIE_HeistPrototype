@@ -60,12 +60,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+        public Animator myAnim;
 
         // Networking stuff
-        bool _forward;
-        bool _backward;
-        bool _left;
-        bool _right;
+        float _forward;
+        float _backward;
+        float _left;
+        float _right;
         bool _jump;
         bool _shoot;
         bool _reload;
@@ -89,6 +90,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public override void Attached() // Attach For Networking
         {
             state.PlayerTransform.SetTransforms(transform);
+
+            state.SetAnimator(myAnim);
+
+            state.Animator.applyRootMotion = entity.isOwner;
         }
 
         // Update is called once per frame
@@ -133,6 +138,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 _jump = Input.GetKeyDown(KeyCode.Space);
             }
 
+            input.Forward = _forward;
+            input.Back = _backward;
+            input.Left = _left;
+            input.Right = _right; 
             input.Jump = _jump;
             input.Speed = speed;
             input.Shoot = _shoot;
@@ -180,6 +189,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             PlayerCommand cmd = (PlayerCommand)command;
 
             m_CollisionFlags = m_CharacterController.Move(cmd.Input.Move * Time.fixedDeltaTime);
+
+            state.Vertical = cmd.Input.Forward + cmd.Input.Back;
+            state.Horizontal = cmd.Input.Left + cmd.Input.Right;
+
+            //PlayAnimation(cmd.Input.Move);
 
             cmd.Result.Position = m_CharacterController.transform.position;
             cmd.Result.Velocity = m_CharacterController.velocity;
@@ -259,10 +273,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
-            _forward = Input.GetKey(KeyCode.W);
-            _backward = Input.GetKey(KeyCode.S);
-            _left = Input.GetKey(KeyCode.A);
-            _right = Input.GetKey(KeyCode.D);
+            if (Input.GetKey(KeyCode.W))
+                _forward = 1;
+            else
+                _forward = 0;
+            if (Input.GetKey(KeyCode.S))
+                _backward = -1;
+            else
+                _backward = 0;
+            if (Input.GetKey(KeyCode.A))
+                _left = -1;
+            else
+                _left = 0;
+            if (Input.GetKey(KeyCode.D))
+                _right = 1;
+            else
+                _right = 0; 
             _shoot = Input.GetMouseButtonDown(0);
 
             bool waswalking = m_IsWalking;
