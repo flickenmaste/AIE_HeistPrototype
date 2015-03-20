@@ -100,6 +100,10 @@ public class SquadFormationHandler : RAINAction
         SquadCopList[SquadPlace].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varLookObject", (GameObject)null);
 
 		SquadCopList [SquadPlace].GetComponent<AIRig> ().AI.Motor.CloseEnoughDistance = 0.2f;
+
+        ai.Motor.DefaultSpeed = 0;
+
+        ai.WorkingMemory.SetItem("varReadyToMove", 0);
 	}
 
 	void FormationLine(int SquadPlace, RAIN.Core.AI ai)
@@ -114,6 +118,8 @@ public class SquadFormationHandler : RAINAction
         SquadCopList[SquadPlace].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varLookpoint", Vector3.zero);
         SquadCopList[SquadPlace].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varLookObject", ai.Body);
 		SquadCopList[SquadPlace].GetComponent<AIRig> ().AI.Motor.CloseEnoughDistance = 1.5f + 1.5f * SquadPlace;
+
+        ai.Motor.DefaultSpeed = 1.0f;
 	}
 
     public override void Start(RAIN.Core.AI ai)
@@ -184,7 +190,7 @@ public class SquadFormationHandler : RAINAction
 
 		}
 
-        if (MoveLoc == TestLoc &&  ai.WorkingMemory.GetItem<GameObject>("varPlayer") == (GameObject)null)
+        if ((MoveLoc == TestLoc &&  ai.WorkingMemory.GetItem<GameObject>("varPlayer") == (GameObject)null) || ai.WorkingMemory.GetItem<int>("varReadyToMove") == 1)
 		{
             if (Formation != "Line")
             {
