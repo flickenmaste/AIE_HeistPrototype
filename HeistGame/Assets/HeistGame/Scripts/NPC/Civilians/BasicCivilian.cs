@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using RAIN.Action;
+using RAIN.Core; 
 
 public class BasicCivilian : Bolt.EntityBehaviour<ICivilianState>
 {
-
     public float myHealth;
 
     public GameObject myCorpse;
+    public Animator myAnim;
 
     // Use this for initialization
     void Start()
@@ -17,12 +19,52 @@ public class BasicCivilian : Bolt.EntityBehaviour<ICivilianState>
     public override void Attached()
     {
         state.CivilianTransform.SetTransforms(transform);
+        state.SetAnimator(myAnim);
+
+        state.Animator.applyRootMotion = entity.isOwner;
     }
 
     // Update is called once per frame
-    public override void SimulateController()
+    public override void SimulateOwner()
     {
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") == "MOVETOTARGET")
+        {
+           state.Walking = true;
+        }
 
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") == 100)
+        {
+            //this.anim.SetBool("Walking", false);
+            //this.anim.SetBool("Coward", true);
+            state.Walking = false;
+            state.Coward = true; 
+
+        }
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") >= 200)
+        {
+            //this.anim.SetBool("YelledAt", true);
+            state.YelledAt = true; 
+        }
+
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") != "MOVETOTARGET" && this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varIdle") == "SMOKE")
+        {
+            //this.anim.SetBool("Walking", false);
+            //this.anim.SetBool("Running", false);
+            //this.anim.SetInteger("IdleNumber", 1);
+            state.Walking = false;
+            state.Running = false;
+            state.IdleNumber = 1; 
+        }
+        else
+        {
+            //this.anim.SetInteger("IdleNumber", 0);
+            state.IdleNumber = 0; 
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            //this.anim.SetBool("Running", true);
+            state.Running = true; 
+        }
     }
 
     public void TakeDamage(float dmg)

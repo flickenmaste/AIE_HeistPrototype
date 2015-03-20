@@ -30,7 +30,7 @@ public enum Task
     WALKACROSSMAP
 };
 
-public class CivilianManger : MonoBehaviour
+public class CivilianManger : Bolt.EntityBehaviour<ICivMan>
 {
 	public GameObject Civilian;
 	public GameObject Clone;
@@ -52,9 +52,15 @@ public class CivilianManger : MonoBehaviour
 
         AllCivilians = GameObject.FindGameObjectsWithTag("Civilian");
 	}
+
+    public override void Attached()
+    {
+        //base.Attached();
+        state.ManagerObj.SetTransforms(transform);
+    }
 	
 	// Update is called once per frame
-	void Update ()
+	public override void SimulateOwner()
 	{
 		//checks how many civilians exist
 		//if 0 then the civilian functions will not be called
