@@ -36,10 +36,15 @@ public class CivilianManger : MonoBehaviour
 	public GameObject Civilian;
 	public GameObject Clone;
 	public GameObject Cop;
-    public GameObject QueueManager;
+    public GameObject Spot;
 
-	//array used to determine whether or not civilian functions should be called
 	public GameObject[] AllCivilians;
+    public GameObject[] Queues;
+
+    
+    public GameObject[] QueueSpots; //handles the spots in the line
+
+    public bool NewSpot;
 
 	//variables for creating a spawn area
 	public Vector3 SpawnAreaLocation;
@@ -53,6 +58,24 @@ public class CivilianManger : MonoBehaviour
 		Cop = GameObject.FindGameObjectWithTag("Cop");
 
         AllCivilians = GameObject.FindGameObjectsWithTag("Civilian");
+
+        for (int x = 0; x < 4; x++)
+        {
+            //Clone = GameObject.Instantiate(Queues[0]) as GameObject;
+        }
+
+        Queues = GameObject.FindGameObjectsWithTag("Queue");
+
+        NewSpot = false;
+        for (int i = 0; i < Queues.Length; i++ )
+        {
+            Clone = GameObject.Instantiate(Spot, Queues[i].transform.position, Queues[i].transform.rotation) as GameObject;
+            Clone.tag = "Spot" + Queues[i].name;
+            QueueSpots.AddFirst<GameObject>(Clone);
+
+            CreateSpot(Queues[i]);
+        }
+
 	}
 	
 	// Update is called once per frame
@@ -72,6 +95,49 @@ public class CivilianManger : MonoBehaviour
         {
             Execute();
         }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            NewSpot = true;
+        }
+
+        for (int i = 0; i < AllCivilians.Length; i++)
+        {
+            if (GetGoal(AllCivilians[i]) == "SpotQueue ")
+            {
+                QueueSpots = GameObject.FindGameObjectsWithTag("SpotQueue");
+
+                SetTarget(AllCivilians[i], QueueSpots[QueueSpots.Length - 1].transform.position);
+            }
+            if (GetGoal(AllCivilians[i]) == "SpotQueue 1")
+            {
+                QueueSpots = GameObject.FindGameObjectsWithTag("SpotQueue 1");
+
+                SetTarget(AllCivilians[i], QueueSpots[QueueSpots.Length - 1].transform.position);
+            }
+            if (GetGoal(AllCivilians[i]) == "SpotQueue 2")
+            {
+                QueueSpots = GameObject.FindGameObjectsWithTag("SpotQueue 2");
+
+                SetTarget(AllCivilians[i], QueueSpots[QueueSpots.Length - 1].transform.position);
+            }
+            if (GetGoal(AllCivilians[i]) == "SpotQueue 3")
+            {
+                QueueSpots = GameObject.FindGameObjectsWithTag("SpotQueue 3");
+
+                SetTarget(AllCivilians[i], QueueSpots[QueueSpots.Length - 1].transform.position);
+            }
+            
+        }
+
+        if (NewSpot)
+        {
+            for (int j = 0; j < Queues.Length; j++)
+            {
+                CreateSpot(Queues[j]);
+                NewSpot = false;
+            }
+        }
 	}
 
 	//creates a random string to be assigned to the
@@ -79,17 +145,37 @@ public class CivilianManger : MonoBehaviour
 	public string RandomizeGoal()
 	{
 		string Objective = ("0");
-		int RandomNumber = Random.Range (1, 21);
+		int RandomNumber = Random.Range (1, 61);
 
 		if (RandomNumber > 1 && RandomNumber <= 10)
 		{
 			Objective = "Bank";
 		}
-		if (RandomNumber > 10 && RandomNumber <=20)
+
+		if (RandomNumber > 10 && RandomNumber <= 20)
 		{
 			Objective = "Building";
 		}
 
+        if (RandomNumber > 20 && RandomNumber <= 30)
+        {
+            Objective = "Spot" + Queues[0].name;
+        }
+
+        if (RandomNumber > 30 && RandomNumber <= 40)
+        {
+            Objective = "Spot" + Queues[1].name;
+        }
+
+        if (RandomNumber > 40 && RandomNumber <= 50)
+        {
+            Objective = "Spot" + Queues[2].name;
+        }
+
+        if (RandomNumber > 50 && RandomNumber <= 60)
+        {
+            Objective = "Spot" + Queues[3].name;
+        }
 		return Objective;
 	}
 	
@@ -106,7 +192,7 @@ public class CivilianManger : MonoBehaviour
 		Clone = Instantiate(Civilian, Spawnpoint, Civilian.transform.rotation) as GameObject;
 		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem("varGoal", RandomizeGoal());
 
-		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("State", "MOVETOTARGET");
+		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("varState", "MOVETOTARGET");
 
         AllCivilians = GameObject.FindGameObjectsWithTag("Civilian");
 	}
@@ -142,56 +228,134 @@ public class CivilianManger : MonoBehaviour
         {
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //set the path for the civilian
-            if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") == "MOVETOTARGET")
+            if (GetState(AllCivilians[i]) == "MOVETOTARGET")
             {
-                AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varPath", AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varGoal"));
+                SetPath(AllCivilians[i], GetGoal(AllCivilians[i]));
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //limits varAfraid to 0-100, not really sure if this is necessary, but its here for now
-            if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") > 100)
+            if (GetAfraid(AllCivilians[i]) > 100)
             {
-                AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfaid", 100);
+                SetAfraid(AllCivilians[i], 100);
             }
-            if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") < 0)
+            if (GetAfraid(AllCivilians[i]) < 0)
             {
-                AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfaid", 0);
+                SetAfraid(AllCivilians[i], 0);
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //if the civilian gets too scared they'll call the police
-            if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") == 100)
+            if (GetAfraid(AllCivilians[i]) == 100)
             {
-                AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("State", CivState.CALLPOLICE.ToString());
+                SetState(AllCivilians[i], CivState.CALLPOLICE.ToString());
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //if the civilian called the police activate the police
-            if (AllCivilians[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("State").Equals(CivState.CALLPOLICE.ToString()))
+            if (GetState(AllCivilians[i]) == (CivState.CALLPOLICE.ToString()))
             {
                 Cop.GetComponent<RAIN.Core.AIRig>().AI.IsActive = true;
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //temp line function
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            //if the civilian reaches their spot in the queue
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //get working later
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //possibly set up a function to get the name of the target to see if its the same as the queue and spot?
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /*for (int j = 0; j < Queues.Length; j++)
             {
-                //AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("Target", );
-            }
+                
+                if (GetGoal(AllCivilians[i]) == Queues[j].name + "Spot" && GetState(AllCivilians[i]) == "IDLE")
+                {
+                    CreateSpot(Queues[j]);
+                }
+            }*/
         }
     }
 
-    //checks the spots in the queue to see which ones don't have an AI at them
-	public void CheckSpots()
+    void CreateSpot(GameObject queue)
     {
-        GameObject[] Queues;
-        GameObject[] QueueSpots;
-        Queues = GameObject.FindGameObjectsWithTag("Queue");
-        QueueSpots = GameObject.FindGameObjectsWithTag("Spot");
+        QueueSpots = GameObject.FindGameObjectsWithTag("Spot" + queue.name);
 
-        for (int i = 0; i < Queues.Length; i++)
-        {
-            
-        }
+        Vector3 SpawnLocation = QueueSpots[QueueSpots.Length - 1].transform.position;
+        SpawnLocation.z -= 5;
+
+        Clone = GameObject.Instantiate(Spot, SpawnLocation, Quaternion.identity) as GameObject;
+        Clone.tag = "Spot" + queue.name;
+        Clone.name = queue.name + "Spot";
+    }
+
+    //once the spot in front of the civilian is empty the civilian will move forward in the queue
+	public void MoveForward()
+    {
+        
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public string GetState(GameObject ai)
+    {
+        string State = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varState");
+        return State;
+    }
+
+    public void SetState(GameObject ai, string state)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varState", state);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public int GetAfraid(GameObject ai)
+    {
+        int Afraid = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid");
+        return Afraid;
+    }
+
+    public void SetAfraid(GameObject ai, int afraid)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfraid", afraid);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public string GetPath(GameObject ai)
+    {
+        string Path = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varPath");
+        return Path;
+    }
+
+    public void SetPath(GameObject ai, string path)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varPath", path);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public string GetGoal(GameObject ai)
+    {
+        string Goal = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varGoal");
+        return Goal;
+    }
+
+    public void SetGoal(GameObject ai, string goal)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varGoal", goal);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public Vector3 GetTarget(GameObject ai)
+    {
+        Vector3 Target = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<Vector3>("varTarget");
+        return Target;
+    }
+
+    public void SetTarget(GameObject ai, Vector3 target)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varTarget", target);
     }
 }
+
+//varGoal == "SpotQueue " || varGoal == "SpotQueue 1" || varGoal == "SpotQueue 2" || varGoal == "SpotQueue 3"

@@ -16,7 +16,8 @@ public class Controller : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") == "MOVETOTARGET")
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////fix these later
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varState") == "MOVETOTARGET")
         {
             this.anim.SetBool("Walking", true);
         }
@@ -32,7 +33,7 @@ public class Controller : MonoBehaviour
             this.anim.SetBool("YelledAt", true);
         }
 
-        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") != "MOVETOTARGET" && this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varIdle") == "SMOKE")
+        if (this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varState") != "MOVETOTARGET" && this.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varIdle") == "SMOKE")
         {
             this.anim.SetBool("Walking", false);
             this.anim.SetBool("Running", false);
@@ -51,4 +52,54 @@ public class Controller : MonoBehaviour
 	//		anim.SetFloat("Vertical", Input.GetAxis("Vertical"));
 
 	}
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public string GetState(GameObject ai)
+    {
+        string State = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varState");
+        return State;
+    }
+
+    public void SetState(GameObject ai, string state)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varState", state);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public int GetAfraid(GameObject ai)
+    {
+        int Afraid = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid");
+        return Afraid;
+    }
+
+    public void SetAfraid(GameObject ai, int afraid)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfraid", afraid);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public string GetPath(GameObject ai)
+    {
+        string Path = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varPath");
+        return Path;
+    }
+
+    public void SetPath(GameObject ai, string path)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varState", path);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public string GetGoal(GameObject ai)
+    {
+        string Goal = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varGoal");
+        return Goal;
+    }
+
+    public void SetGoal(GameObject ai, string goal)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varGoal", goal);
+    }
 }

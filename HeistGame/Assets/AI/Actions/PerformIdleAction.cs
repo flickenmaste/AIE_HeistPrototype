@@ -43,7 +43,7 @@ public class PerformIdleAction : RAINAction
         {
             ai.WorkingMemory.SetItem("varGoal", RandomizeGoal());
             WaitTime = 0.0f;
-            ai.WorkingMemory.SetItem("State", "MOVETOTARGET");
+            ai.WorkingMemory.SetItem("varState", "MOVETOTARGET");
         }
 
         return ActionResult.SUCCESS;
