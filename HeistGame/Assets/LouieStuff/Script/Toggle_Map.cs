@@ -1,20 +1,62 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class Toggle_Map : MonoBehaviour {
 
-	public Camera MapCamera;
+	public GameObject MapCamera;
 	public bool Active;
 	public MouseLook look;
+
+    //Fog of war
+    public GameObject FogofWar;
+    List<GameObject> Tiles = new List<GameObject>();
+
+
 	// Use this for initialization
 	void Start () {
 		Active = false;
 		ShowMap ();
 	
 	}
+    void Awake()
+    {
+        foreach (Transform kid in FogofWar.transform)
+        {
+            Tiles.Add(kid.gameObject);
+        }
+    }
+    bool WithinATile(GameObject DistanceToPlayerGameObject)
+    {
+        if (Vector3.Distance(transform.position, DistanceToPlayerGameObject.transform.position) < 4.0f)
+        {
+
+            return true;
+        }
+        return false;
+    }
+    void TilesManagment()
+    {
+        foreach (GameObject tile in Tiles)
+        {
+            if (tile.GetComponent<Renderer>().material.color.a > 0 && WithinATile(tile))
+            {
+                if (tile.GetComponent<Renderer>().material.color.a <= 0)
+                    Destroy(tile);
+
+                else
+                {
+                    Color color = tile.GetComponent<Renderer>().material.color;
+                    color.a -= 0.1f;
+                    tile.GetComponent<Renderer>().material.color = color;
+                }
+            }
+        }
+
+
+    }
 	void ShowMap()
 	{
-        if (MapCamera.GetComponent<TakeScreenShot>().Captured == false)
+        if (MapCamera.GetComponent<Mapscript>().Captured == false)
         {
             if (Active == false)
             {
@@ -50,11 +92,13 @@ public class Toggle_Map : MonoBehaviour {
             look.maximumY = 45.0f;
             if (Active == false)
             {
-                MapCamera.transform.gameObject.SetActive(false);
+                MapCamera.GetComponent<Camera>().enabled = false;
             }
             else if (Active == true)
             {
-                MapCamera.transform.gameObject.SetActive(true);
+                //MapCamera.transform.gameObject.SetActive(true);
+                MapCamera.GetComponent<Camera>().enabled = true;
+                
             }
         }
             
@@ -66,6 +110,7 @@ public class Toggle_Map : MonoBehaviour {
 			Active = !Active;
 		}
 		ShowMap();
+        TilesManagment();
 
 	}
 }
