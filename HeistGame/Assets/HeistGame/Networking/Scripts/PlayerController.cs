@@ -10,6 +10,7 @@ using System.Collections;
 
 public class PlayerController : Bolt.EntityBehaviour<IPlayerState>
 {
+
     #region Properties and Variables
 
     // Indicates movement state
