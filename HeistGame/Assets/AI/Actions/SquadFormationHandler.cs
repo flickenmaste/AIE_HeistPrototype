@@ -55,6 +55,8 @@ public class SquadFormationHandler : RAINAction
 		SquadCopList [SquadPlace].GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("varMainMovePoint", SquadSpot);
 
 		SquadCopList [SquadPlace].GetComponent<AIRig> ().AI.Motor.CloseEnoughDistance = 0.1f;
+
+        ai.Motor.DefaultSpeed = 0;
 	}
 
 	void FormationBox(int SquadPlace, RAIN.Core.AI ai)
@@ -161,7 +163,7 @@ public class SquadFormationHandler : RAINAction
 
 		ChangeTestLoc = false;
 
-		if (MoveLoc != TestLoc && ai.WorkingMemory.GetItem<GameObject> ("varPlayer") == (GameObject)null) 
+		if ((MoveLoc != TestLoc && ai.WorkingMemory.GetItem<GameObject> ("varPlayer") == (GameObject)null)) 
 		{
 			if (Formation != "Box")
 			{
@@ -169,13 +171,12 @@ public class SquadFormationHandler : RAINAction
 				ai.WorkingMemory.SetItem ("varFormationSet", 1);
 			}
 
-            ai.WorkingMemory.SetItem("varReadyToMove", 0);
-
 			foreach (var cop in SquadCopList) {
 
 				if (cop.GetComponent<RAIN.Core.AIRig> ().AI.WorkingMemory.GetItem<int> ("varReadyToMove") == 0)
 				{
 					ChangeTestLoc = false;
+                    ai.WorkingMemory.SetItem("varReadyToMove", 0);
 					break;
 				}
 
@@ -190,7 +191,7 @@ public class SquadFormationHandler : RAINAction
 
 		}
 
-        if ((MoveLoc == TestLoc &&  ai.WorkingMemory.GetItem<GameObject>("varPlayer") == (GameObject)null) || ai.WorkingMemory.GetItem<int>("varReadyToMove") == 1)
+        if ((MoveLoc == TestLoc &&  ai.WorkingMemory.GetItem<GameObject>("varPlayer") == (GameObject)null))
 		{
             if (Formation != "Line")
             {

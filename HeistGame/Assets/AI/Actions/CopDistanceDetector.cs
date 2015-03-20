@@ -36,11 +36,11 @@ public class CopDistanceDetector : RAINAction
             ai.WorkingMemory.SetItem("varReadyToMove", 0);
             ai.Motor.DefaultSpeed = ((Distance) / (10.0f + ai.Motor.CloseEnoughDistance)) * 10;
 
-            if (ai.Motor.DefaultSpeed < 1.2f && Distance >= ai.Motor.CloseEnoughDistance)
-                ai.Motor.DefaultSpeed = 1.2f;
+            if (ai.Motor.DefaultSpeed < 0.5f || Distance <= ai.Motor.CloseEnoughDistance - 0.1f)
+                ai.Motor.DefaultSpeed = 0;
         }
 
-        if (Distance < ai.Motor.CloseEnoughDistance)
+        if (ai.Motor.DefaultSpeed == 0)
         {
             ai.WorkingMemory.SetItem("varReadyToMove", 1);
             CopAnim.SetFloat("Vertical", 0);
