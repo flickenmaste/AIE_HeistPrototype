@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class C_Shoot : MonoBehaviour
+public class C_Shoot : Bolt.EntityBehaviour<IShootState>
 {
     public float range = 1000.0f;
     public float ShotSpread = 0.03f;
@@ -28,6 +28,8 @@ public class C_Shoot : MonoBehaviour
     public AudioClip GunShot;
     public AudioClip Reload;
 
+    bool _shoot;
+
     // Use this for initialization
     void Start()
     {
@@ -35,14 +37,35 @@ public class C_Shoot : MonoBehaviour
         PhaseMan = GameObject.FindGameObjectWithTag("PhaseManager");
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Attached() // Attach For Networking
     {
+        state.ShootObj.SetTransforms(transform);
+    }
 
+    // Update is called once per frame
+    public override void SimulateController()   // For server authorative net
+    {
+        IShootCommandInput input = ShootCommand.Create();
+
+        PollKeys();
+
+        input.Shoot = _shoot;
+    }
+
+    public override void ExecuteCommand(Bolt.Command command, bool resetState)  // Send input over server
+    {
+        PlayerCommand cmd = (PlayerCommand)command;
+
+        if (cmd.Input.Shoot)
+            Shoot();
+    }
+
+    void PollKeys()
+    {
         if (PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
         {
             if (Input.GetMouseButtonDown(0) && MaxShots >= 1)
-                Shoot();
+                _shoot = true;
 
             if (Input.GetKeyUp(KeyCode.R) && MaxShots < 15)
             {

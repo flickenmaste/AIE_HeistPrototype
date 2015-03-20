@@ -129,6 +129,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public override void SimulateController()   // For server authorative net
         {
             m_Camera.gameObject.SetActive(true);
+            myCam = GetComponentInChildren<Camera>().gameObject;
+            myCam.transform.localPosition = new Vector3(0, 0.8f, 0);
             //myBody.SetActive(false);
             RotateView();
             IPlayerCommandInput input = PlayerCommand.Create();

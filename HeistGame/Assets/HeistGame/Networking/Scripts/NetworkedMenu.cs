@@ -169,7 +169,7 @@ public class NetworkedMenu : MonoBehaviour {
     public void HostDirectIP()  // Do a server without Zeus
     {
         BoltLauncher.StartServer(UdpKit.UdpEndPoint.Parse(HostServerAddress)); // Start server
-        BoltNetwork.LoadScene("JayceTestLevel");
+        BoltNetwork.LoadScene("TestNetworkedLevel");
     }
 
     public void JoinDirectIP()
