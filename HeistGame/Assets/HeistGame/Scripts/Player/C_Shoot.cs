@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class C_Shoot : MonoBehaviour
 {
     public float range = 1000.0f;

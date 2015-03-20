@@ -126,10 +126,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
-        public override void SimulateController()   // For server authorative net
+        public override void SimulateOwner()   // For server authorative net
         {
             m_Camera.gameObject.SetActive(true);
-            myBody.SetActive(false);
+            //myBody.SetActive(false);
             RotateView();
             IPlayerCommandInput input = PlayerCommand.Create();
             float speed;
@@ -182,24 +182,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             UpdateCameraPosition(speed);
             ProgressStepCycle(speed);
+            m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
 
-            entity.QueueInput(input);   // Send players input
-        }
-
-        public override void ExecuteCommand(Bolt.Command command, bool resetState)  // Send input over server
-        {
-            PlayerCommand cmd = (PlayerCommand)command;
-
-            m_CollisionFlags = m_CharacterController.Move(cmd.Input.Move * Time.fixedDeltaTime);
-
-            state.Vertical = cmd.Input.Forward + cmd.Input.Back;
-            state.Horizontal = cmd.Input.Left + cmd.Input.Right;
-
-            //PlayAnimation(cmd.Input.Move);
-
-            cmd.Result.Position = m_CharacterController.transform.position;
-            cmd.Result.Velocity = m_CharacterController.velocity;
-            cmd.Result.IsGrounded = m_CharacterController.isGrounded;
         }
 
 
