@@ -136,7 +136,7 @@ public class CivilianManger : MonoBehaviour
 		Spawnpoint.y = 1;
 		Spawnpoint.z = SpawnAreaLocation.z + (Random.Range(-1, 2) * SpawnRadius);
 
-		Clone = Instantiate(Civilian, Spawnpoint, Civilian.transform.rotation) as GameObject;
+		Clone = BoltNetwork.Instantiate(Civilian, Spawnpoint, Civilian.transform.rotation);
 		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem("varGoal", RandomizeGoal());
 
 		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("State", "MOVETOTARGET");
