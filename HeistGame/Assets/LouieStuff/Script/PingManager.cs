@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PingManager : MonoBehaviour {
 
@@ -9,8 +10,9 @@ public class PingManager : MonoBehaviour {
 
     // Use this for initialization
     //for uncover map
-    public GameObject[] KeyIndividuals;
+    public List<GameObject> KeyIndividuals;
     public int KeyIndivFound;
+    ImportantPeaple[] Targets;
 
     public GameObject DrillPrefab;
 
@@ -20,18 +22,28 @@ public class PingManager : MonoBehaviour {
 
     int DropOne = 1;
 	void Start () {
+        int i = 0;
+        Targets = new ImportantPeaple[KeyIndividuals.Count];
+        while (i < KeyIndividuals.Count)
+        {
+            Targets[i] = new ImportantPeaple(KeyIndividuals[i]);
+            i++;
+        }
 	
 	}
 
     void CheckForFoundIndividuals()
     {
-        if (KeyIndivFound <= KeyIndividuals.Length)
+        if (KeyIndivFound <= KeyIndividuals.Count)
         {
             RaycastHit hit;
             if (Physics.Raycast(Player.transform.position, Player.transform.forward, out hit, 100))
             {
-                if (hit.transform.name == KeyIndividuals[0].name)
+                foreach (ImportantPeaple target in Targets)
+                if (hit.transform.name == target.IPerson.name) {
+                    target.Found = true;
                     KeyIndivFound++;
+                }
             }
         }
 
@@ -55,14 +67,27 @@ public class PingManager : MonoBehaviour {
 	void Update () {
         CheckForFoundIndividuals();
         DrillLocator();
-        foreach (GameObject Individual in KeyIndividuals)
+        foreach (ImportantPeaple Individual in Targets)
         {
-            if (KeyIndivFound == 1)
-                ManagerMiniMap.transform.position = Manager.transform.position;
+            if (Individual.Found)
+                ManagerMiniMap.transform.position = Individual.IPerson.transform.position;
         }
 
 
 	}
 
         
+}
+
+class ImportantPeaple
+{
+
+    public bool Found;
+    public GameObject IPerson;
+    public ImportantPeaple(GameObject POI)
+    {
+        IPerson = POI;
+        Found = false;
+    }
+
 }

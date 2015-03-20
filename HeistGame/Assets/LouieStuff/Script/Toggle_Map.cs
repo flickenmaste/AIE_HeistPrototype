@@ -8,52 +8,29 @@ public class Toggle_Map : MonoBehaviour {
 	public MouseLook look;
 
     //Fog of war
-    public GameObject FogofWar;
-    List<GameObject> Tiles = new List<GameObject>();
+    public List<GameObject> FogGameObjects;
+    FogofWar[] FogPlanes;
 
+    int count;
+    
+    
+    void Awake()
+    {
+        count = 0;
+        FogPlanes = new FogofWar[FogGameObjects.Count];
+        while (count < FogGameObjects.Count)
+        {
+            FogPlanes[count] = new FogofWar(FogGameObjects[count]);
+            count++;
+        }
 
+    }
 	// Use this for initialization
 	void Start () {
 		Active = false;
 		ShowMap ();
 	
 	}
-    void Awake()
-    {
-        foreach (Transform kid in FogofWar.transform)
-        {
-            Tiles.Add(kid.gameObject);
-        }
-    }
-    bool WithinATile(GameObject DistanceToPlayerGameObject)
-    {
-        if (Vector3.Distance(transform.position, DistanceToPlayerGameObject.transform.position) < 4.0f)
-        {
-
-            return true;
-        }
-        return false;
-    }
-    void TilesManagment()
-    {
-        foreach (GameObject tile in Tiles)
-        {
-            if (tile.GetComponent<Renderer>().material.color.a > 0 && WithinATile(tile))
-            {
-                if (tile.GetComponent<Renderer>().material.color.a <= 0)
-                    Destroy(tile);
-
-                else
-                {
-                    Color color = tile.GetComponent<Renderer>().material.color;
-                    color.a -= 0.1f;
-                    tile.GetComponent<Renderer>().material.color = color;
-                }
-            }
-        }
-
-
-    }
 	void ShowMap()
 	{
         if (MapCamera.GetComponent<Mapscript>().Captured == false)
@@ -110,7 +87,54 @@ public class Toggle_Map : MonoBehaviour {
 			Active = !Active;
 		}
 		ShowMap();
-        TilesManagment();
+        foreach (FogofWar fogs in FogPlanes)
+        {
+            fogs.ClearFog(transform);
+
+        }
 
 	}
+}
+
+class FogofWar
+{
+    public GameObject FogofWarPlane;
+
+    Vector3[] vertices;
+    Color[] changeAlpha;
+    int count = 0;
+    public FogofWar(GameObject FogTile)
+    {
+        int i = 0;
+        FogofWarPlane = FogTile;
+
+       
+       Mesh GetFogMesh = FogofWarPlane.GetComponent<MeshFilter>().mesh;
+       vertices = GetFogMesh.vertices;
+       changeAlpha = new Color[vertices.Length];
+       
+
+       while (i < vertices.Length)
+       {
+           changeAlpha[i] = new Color(1, 1, 1, 1);
+           i++;
+       }
+    }
+
+    public void ClearFog(Transform PlayersTransform)
+    {
+        while (count < vertices.Length)
+       {
+           Vector3 VerticesWorldSpace = FogofWarPlane.transform.TransformPoint(vertices[count].x, vertices[count].y, vertices[count].z);
+           float Distance = Vector3.Distance(PlayersTransform.position, VerticesWorldSpace);
+           if (Distance < 3.0f && changeAlpha[count].a > 0)
+           {
+               changeAlpha[count] = new Color(changeAlpha[count].r, changeAlpha[count].g, changeAlpha[count].b, (changeAlpha[count].a - ( .25f * Time.deltaTime)));
+           }
+           count++;
+       }
+       count = 0;
+           FogofWarPlane.GetComponent<MeshFilter>().mesh.colors = changeAlpha;
+    }
+
 }

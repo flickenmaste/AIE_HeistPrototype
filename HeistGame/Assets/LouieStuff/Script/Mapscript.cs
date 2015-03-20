@@ -26,14 +26,7 @@ public class Mapscript : MonoBehaviour {
 
     int loadNumber;
 
-    // ForgofwarUncover
-    List<GameObject> Tiles = new List<GameObject>();
 
-    void Awake()
-    {
-        addTiles();
-
-    }
 	void Start () {
         CurrentCameraLook = 0;
 
@@ -65,11 +58,8 @@ public class Mapscript : MonoBehaviour {
 			CurrentCameraLook = (Blueprint.Capacity - 1);
 			GetComponent<Camera>().rect = new Rect(0,0,1,1);
             Player.GetComponentInChildren<Camera>().enabled = false;
-            foreach (GameObject fog in Tiles)
-            {
-                fog.SetActive(false);
-            }
             turnoffCanvas.SetActive(false);
+            FogofWar.SetActive(false);
             foreach (GameObject blueprint in Blueprint)
             {
                 Mesh mesh = blueprint.GetComponent<MeshFilter>().mesh;
@@ -82,11 +72,8 @@ public class Mapscript : MonoBehaviour {
 			transform.position = new Vector3 (transform.position.x, Blueprint [loadNumber].transform.position.y + 6.0f, transform.position.z);
         if (Captured == true)
         {
+            FogofWar.SetActive(true);
             Player.GetComponentInChildren<Camera>().enabled = true;
-            foreach (GameObject fog in Tiles)
-            {
-                fog.SetActive(true);
-            }
             turnoffCanvas.SetActive(true);
         }
 
@@ -133,15 +120,6 @@ public class Mapscript : MonoBehaviour {
     {
 
         TakeScreen();
-    }
-
-    void addTiles()
-    {
-        foreach( Transform fog in FogofWar.transform)
-        {
-            Tiles.Add(fog.gameObject);
-        }
-
     }
 
 
