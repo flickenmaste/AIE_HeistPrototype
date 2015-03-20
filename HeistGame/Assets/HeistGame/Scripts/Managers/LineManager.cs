@@ -3,28 +3,32 @@ using System.Collections;
 
 public class LineManager : MonoBehaviour
 {
-    public GameObject Clone;
+    public GameObject QueueClone;
+    public GameObject SpotClone;
 
-    public GameObject[] Lines;
+    public GameObject[] Queues;
     public GameObject[] Spots; //handles the spots in the line
+
+    public bool NewSpot;
 
 	// Use this for initialization
 	void Start ()
     {
-        Lines = GameObject.FindGameObjectsWithTag("Queue");
+        NewSpot = true;
+        Queues = GameObject.FindGameObjectsWithTag("Queue");
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        
+        for (int i = 0; i < Queues.Length; i++)
+        {
+            if (NewSpot)
+            {
+                CreateSpot();
+            }
+        }
 	}
-
-    //creates lines for the AIs to queue up in
-    void CreateQueue()
-    {
-
-    }
 
     //creates spots in the lines
     void CreateSpot()
@@ -33,6 +37,7 @@ public class LineManager : MonoBehaviour
                                             Spots[Spots.Length - 1].transform.position.y,
                                             Spots[Spots.Length - 1].transform.position.z + 5);
 
-        Clone = GameObject.Instantiate(Spots[Spots.Length - 1], SpawnLocation, Spots[Spots.Length - 1].transform.rotation) as GameObject;
+        SpotClone = GameObject.Instantiate(Spots[Spots.Length - 1], SpawnLocation, Quaternion.identity) as GameObject;
+        SpotClone.tag = "Spot";
     }
 }

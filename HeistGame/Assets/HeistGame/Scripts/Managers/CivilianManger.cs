@@ -20,7 +20,8 @@ public enum CivState
 	DOINGTASK,
 	COWERING,
 	RUNNING,
-	CALLPOLICE
+	CALLPOLICE,
+    INQUEUE
 };
 
 public enum Task
@@ -35,6 +36,7 @@ public class CivilianManger : MonoBehaviour
 	public GameObject Civilian;
 	public GameObject Clone;
 	public GameObject Cop;
+    public GameObject QueueManager;
 
 	//array used to determine whether or not civilian functions should be called
 	public GameObject[] AllCivilians;
@@ -68,42 +70,7 @@ public class CivilianManger : MonoBehaviour
 
         if (AllCivilians.Length > 0)
         {
-            for (int i = 0; i < AllCivilians.Length; i++)
-            {
-                //set the path for the civilian
-                if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") == "MOVETOTARGET")
-                {
-                    AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varPath", AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varGoal"));
-                }
-
-                //limits varAfraid to 0-100, not really sure if this is necessary, but its here for now
-                if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") > 100)
-                {
-                    AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfaid", 100);
-                }
-                if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") < 0)
-                {
-                    AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfaid", 0);
-                }
-
-                //if the civilian gets too scared they'll call the police
-                if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") == 100)
-                {
-                    AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("State", CivState.CALLPOLICE.ToString());
-                }
-
-                //if the civilian called the police activate the police
-                if (AllCivilians[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("State").Equals(CivState.CALLPOLICE.ToString()))
-                {
-                    Cop.GetComponent<RAIN.Core.AIRig>().AI.IsActive = true;
-                }
-
-                //temp line function
-                if (Input.GetKeyDown(KeyCode.Backspace))
-                {
-                    AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varPath", "SpotInQueue");
-                }
-            }
+            Execute();
         }
 	}
 
@@ -169,10 +136,62 @@ public class CivilianManger : MonoBehaviour
         return task;
     }
 
-	//just makes getting the civilian's goal shorter
-	/*public string GetGoal()
-	{
-		string Goal = Clone.GetComponent<AIRig> ().AI.WorkingMemory.GetItem ("varGoal").ToString ();
-		return Goal;
-	}*/
+    public void Execute()
+    {
+        for (int i = 0; i < AllCivilians.Length; i++)
+        {
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //set the path for the civilian
+            if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("State") == "MOVETOTARGET")
+            {
+                AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varPath", AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>("varGoal"));
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //limits varAfraid to 0-100, not really sure if this is necessary, but its here for now
+            if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") > 100)
+            {
+                AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfaid", 100);
+            }
+            if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") < 0)
+            {
+                AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfaid", 0);
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //if the civilian gets too scared they'll call the police
+            if (AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid") == 100)
+            {
+                AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("State", CivState.CALLPOLICE.ToString());
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //if the civilian called the police activate the police
+            if (AllCivilians[i].GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.GetItem("State").Equals(CivState.CALLPOLICE.ToString()))
+            {
+                Cop.GetComponent<RAIN.Core.AIRig>().AI.IsActive = true;
+            }
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //temp line function
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                //AllCivilians[i].GetComponent<AIRig>().AI.WorkingMemory.SetItem("Target", );
+            }
+        }
+    }
+
+    //checks the spots in the queue to see which ones don't have an AI at them
+	public void CheckSpots()
+    {
+        GameObject[] Queues;
+        GameObject[] QueueSpots;
+        Queues = GameObject.FindGameObjectsWithTag("Queue");
+        QueueSpots = GameObject.FindGameObjectsWithTag("Spot");
+
+        for (int i = 0; i < Queues.Length; i++)
+        {
+            
+        }
+    }
 }
