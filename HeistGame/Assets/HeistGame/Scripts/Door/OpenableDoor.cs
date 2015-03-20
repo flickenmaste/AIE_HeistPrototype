@@ -14,7 +14,7 @@ public class OpenableDoor : MonoBehaviour
 	private Quaternion currentRot;
 	public Vector3 defaultRotEular;
 	public Vector3 openRotEular;
-	
+    public Vector3 currentRotEular;
 	void  Start ()
 	{
 		defaultRot = transform.localRotation;
@@ -25,18 +25,46 @@ public class OpenableDoor : MonoBehaviour
 
 	void  Update ()
 		{
+      //  currentRot = transform.localRotation;
+       // transform.localRotation = currentRot;
 		defaultRotEular = defaultRot.eulerAngles;
 		openRotEular = openRot.eulerAngles;
+        currentRotEular = currentRot.eulerAngles;
+
+        if (currentRot.eulerAngles.y > openRot.eulerAngles.y && currentRot.eulerAngles.y < 300)
+        {
+            Vector3 tempEuler = currentRot.eulerAngles;
+            tempEuler.y = openRot.eulerAngles.y;
+
+            currentRot.eulerAngles = tempEuler;
+        }
+
+        if (currentRot.eulerAngles.y > 300)
+        {
+            Vector3 tempCEuler = currentRot.eulerAngles;
+            tempCEuler.y = defaultRot.eulerAngles.y;
+
+            currentRot.eulerAngles = tempCEuler;
+        }
+        /*
+        if (currentRot.eulerAngles.y <= openRot.eulerAngles.y +10)
+        {
+            Vector3 tempClEuler = openRot.eulerAngles;
+            tempClEuler.y = openRot.eulerAngles.y;
+
+            currentRot.eulerAngles = tempClEuler;
+        }*/
 
 	if (enter) 
 	{
 			//mouse scrolling to open
-			if (Input.GetAxis ("Mouse ScrollWheel") > 0 && (currentRot.eulerAngles.y < openRot.eulerAngles.y)) {
+			if (Input.GetAxis ("Mouse ScrollWheel") > 0 && (currentRot.eulerAngles.y < openRot.eulerAngles.y)) 
+            {
 				auto = false;
 				transform.Rotate (Vector3.up * 5.0f, Space.Self);
 				currentRot = transform.localRotation;
+		    }
 
-		}
 			if (Input.GetAxis ("Mouse ScrollWheel") < 0 && (currentRot.eulerAngles.y > defaultRot.eulerAngles.y)) {
 				auto = false;
 				transform.Rotate (Vector3.down * 5.0f, Space.Self);
@@ -45,7 +73,7 @@ public class OpenableDoor : MonoBehaviour
                 {
                     transform.Rotate(Vector3.up * 5.0f, Space.Self);
                 }
-
+                
 
 		}
 }
@@ -130,7 +158,7 @@ public class OpenableDoor : MonoBehaviour
 
 
 
-
+    
 
 
 
