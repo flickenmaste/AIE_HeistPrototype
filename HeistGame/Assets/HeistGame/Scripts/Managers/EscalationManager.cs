@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EscalationManager : MonoBehaviour
+public class EscalationManager : Bolt.EntityBehaviour<IEscaMan>
 {
 
     #region old code
@@ -60,9 +60,14 @@ public class EscalationManager : MonoBehaviour
         PhaseQueue.Enqueue("PhaseTwo");
         PhaseQueue.Enqueue("PhaseThree");
 	}
+
+    public override void Attached() // Attach For Networking
+    {
+        state.ManagerObj.SetTransforms(transform);
+    }
 	
 	// Update is called once per frame
-	void Update () 
+    public override void SimulateOwner()   // For server authorative net
     {
         CheckPhase();
 	}

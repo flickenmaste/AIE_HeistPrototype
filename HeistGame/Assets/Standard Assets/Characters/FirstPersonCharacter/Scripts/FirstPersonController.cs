@@ -129,7 +129,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public override void SimulateController()   // For server authorative net
         {
             m_Camera.gameObject.SetActive(true);
-            myBody.SetActive(false);
+            //myBody.SetActive(false);
             RotateView();
             IPlayerCommandInput input = PlayerCommand.Create();
             float speed;

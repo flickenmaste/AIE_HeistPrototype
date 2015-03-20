@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PhaseManager : MonoBehaviour
+public class PhaseManager : Bolt.EntityBehaviour<IPhaseMan>
 {
 
+    [SerializeField]
     public Queue PhaseQueue;
     
     // Use this for initialization
@@ -14,9 +15,14 @@ public class PhaseManager : MonoBehaviour
         PhaseQueue.Enqueue("Planning");
         PhaseQueue.Enqueue("Execution");
 	}
+
+    public override void Attached() // Attach For Networking
+    {
+        state.ManagerObj.SetTransforms(transform);
+    }
 	
 	// Update is called once per frame
-	void Update () 
+    public override void SimulateOwner()   // For server authorative net
     {
         CheckPhase();
 	}
