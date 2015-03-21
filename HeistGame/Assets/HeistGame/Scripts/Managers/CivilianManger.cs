@@ -11,8 +11,6 @@ using RAIN.Core;
 ////////STRETCH GOALS
 /// possibly make a list of goals for the civilians
 /// get a list of possible goals once the level is fleshed out
-
-//uses states to trigger behaviors in the civilians?
 public enum CivState
 {
     IDLE,
@@ -103,27 +101,9 @@ public class CivilianManger : MonoBehaviour
 
         for (int i = 0; i < AllCivilians.Length; i++)
         {
-            if (GetGoal(AllCivilians[i]) == "SpotQueue ")
+            if (GetGoal(AllCivilians[i]) == "SpotQueue " || GetGoal(AllCivilians[i]) == "SpotQueue 1" || GetGoal(AllCivilians[i]) == "SpotQueue 2" || GetGoal(AllCivilians[i]) == "SpotQueue 3")
             {
-                QueueSpots = GameObject.FindGameObjectsWithTag("SpotQueue");
-
-                SetTarget(AllCivilians[i], QueueSpots[QueueSpots.Length - 1].transform.position);
-            }
-            if (GetGoal(AllCivilians[i]) == "SpotQueue 1")
-            {
-                QueueSpots = GameObject.FindGameObjectsWithTag("SpotQueue 1");
-
-                SetTarget(AllCivilians[i], QueueSpots[QueueSpots.Length - 1].transform.position);
-            }
-            if (GetGoal(AllCivilians[i]) == "SpotQueue 2")
-            {
-                QueueSpots = GameObject.FindGameObjectsWithTag("SpotQueue 2");
-
-                SetTarget(AllCivilians[i], QueueSpots[QueueSpots.Length - 1].transform.position);
-            }
-            if (GetGoal(AllCivilians[i]) == "SpotQueue 3")
-            {
-                QueueSpots = GameObject.FindGameObjectsWithTag("SpotQueue 3");
+                QueueSpots = GameObject.FindGameObjectsWithTag(GetGoal(AllCivilians[i]));
 
                 SetTarget(AllCivilians[i], QueueSpots[QueueSpots.Length - 1].transform.position);
             }
@@ -139,6 +119,21 @@ public class CivilianManger : MonoBehaviour
             }
         }
 	}
+
+    public void ReachedSpot()
+    {
+        for (int i = 0; i < AllCivilians.Length; i++)
+        {
+            if (GetGoal(AllCivilians[i]) == "SpotQueue" && GetState(AllCivilians[i]) == "IDLE"
+                || GetGoal(AllCivilians[i]) == "SpotQueue 1" && GetState(AllCivilians[i]) == "IDLE"
+                || GetGoal(AllCivilians[i]) == "SpotQueue 2" && GetState(AllCivilians[i]) == "IDLE"
+                || GetGoal(AllCivilians[i]) == "SpotQueue 3" && GetState(AllCivilians[i]) == "IDLE")
+            {
+                QueueSpots = GameObject.FindGameObjectsWithTag(GetGoal(AllCivilians[i]));
+                CreateSpot(QueueSpots[QueueSpots.Length - 1]);
+            }
+        }
+    }
 
 	//creates a random string to be assigned to the
 	//civilian clone when spawned
