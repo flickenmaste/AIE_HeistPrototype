@@ -62,6 +62,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
         public Animator myAnim;
         public GameObject myBody;
+        public C_Shoot myShoot;
 
         // Networking stuff
         float _forward;
@@ -129,8 +130,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public override void SimulateController()   // For server authorative net
         {
             m_Camera.gameObject.SetActive(true);
-            myCam = GetComponentInChildren<Camera>().gameObject;
-            myCam.transform.localPosition = new Vector3(0, 0.8f, 0);
             //myBody.SetActive(false);
             RotateView();
             IPlayerCommandInput input = PlayerCommand.Create();
@@ -193,6 +192,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             PlayerCommand cmd = (PlayerCommand)command;
 
             m_CollisionFlags = m_CharacterController.Move(cmd.Input.Move * Time.fixedDeltaTime);
+
+            if (myShoot.PhaseMan.gameObject.GetComponent<PhaseManager>().PhaseQueue.Peek().ToString() == "Execution")
+            {
+                if (cmd.Input.Shoot && myShoot.MaxShots >= 1)
+                    myShoot.Shoot();
+            }
 
             state.Vertical = cmd.Input.Forward + cmd.Input.Back;
             state.Horizontal = cmd.Input.Left + cmd.Input.Right;

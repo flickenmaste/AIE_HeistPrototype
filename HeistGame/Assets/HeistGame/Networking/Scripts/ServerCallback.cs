@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class PlayerObject
 {
     public BoltEntity character;
-    public BoltEntity charCamera;
     public BoltConnection connection;
 
     public bool isServer
@@ -25,19 +24,14 @@ public class PlayerObject
         if (!character)
         {
             character = BoltNetwork.Instantiate(BoltPrefabs.FPSController, pos, Quaternion.identity);
-            charCamera = BoltNetwork.Instantiate(BoltPrefabs.FirstPersonCharacter, character.gameObject.transform.position, character.gameObject.transform.rotation);
-            charCamera.SetParent(character);
-            charCamera.gameObject.transform.localPosition = new Vector3(0, 0.8f, 0);
 
             if (isServer)
             {
                 character.TakeControl();    // Host control
-                charCamera.TakeControl();
             }
             else
             {
                 character.AssignControl(connection);    // Give control to client
-                charCamera.AssignControl(connection);
             }
         }
     }
