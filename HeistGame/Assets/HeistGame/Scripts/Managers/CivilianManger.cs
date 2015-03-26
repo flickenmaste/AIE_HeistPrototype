@@ -5,6 +5,7 @@ using RAIN.Action;
 using RAIN.Core;
 
 ////////TO DO LIST
+/// make the lines spawn with only one spot
 /// add a timer to the civilian seeing the player
 /// have civilians spend time at their goal to perform a task
 
@@ -26,7 +27,7 @@ public enum Task
 {
     GETMONEY,
     GOTOBUILDING,
-    WALKACROSSMAP
+    PASSINGTHROUGH
 };
 
 public class CivilianManger : MonoBehaviour
@@ -38,8 +39,6 @@ public class CivilianManger : MonoBehaviour
 
 	public GameObject[] AllCivilians;
     public GameObject[] Queues;
-
-    
     public GameObject[] QueueSpots; //handles the spots in the line
 
     public bool NewSpot;
@@ -131,26 +130,48 @@ public class CivilianManger : MonoBehaviour
             {
                 QueueSpots = GameObject.FindGameObjectsWithTag(GetGoal(AllCivilians[i]));
                 CreateSpot(QueueSpots[QueueSpots.Length - 1]);
+                
             }
         }
     }
 
-	//creates a random string to be assigned to the
-	//civilian clone when spawned
-	public string RandomizeGoal()
-	{
-		string Objective = ("0");
-		int RandomNumber = Random.Range (1, 61);
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		if (RandomNumber > 1 && RandomNumber <= 10)
-		{
-			Objective = "Bank";
-		}
+    //set where the civilian spawns in
+    //as well as their goal when they spawn in
+    void SpawnCivilian()
+    {
+        SpawnAreaLocation = GameObject.FindGameObjectWithTag("CivilianSpawner").transform.position;
 
-		if (RandomNumber > 10 && RandomNumber <= 20)
-		{
-			Objective = "Building";
-		}
+        Spawnpoint.x = SpawnAreaLocation.x + (Random.Range(-1, 2) * SpawnRadius);
+        Spawnpoint.y = 1;
+        Spawnpoint.z = SpawnAreaLocation.z + (Random.Range(-1, 2) * SpawnRadius);
+
+        Clone = Instantiate(Civilian, Spawnpoint, Civilian.transform.rotation) as GameObject;
+        Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varGoal", RandomizeGoal());
+
+        Clone.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varState", "MOVETOTARGET");
+
+        AllCivilians = GameObject.FindGameObjectsWithTag("Civilian");
+    }
+
+    //creates a random string to be assigned to the
+    //civilian clone when spawned
+    public string RandomizeGoal()
+    {
+        string Objective = ("0");
+        int RandomNumber = Random.Range(1, 61);
+
+        if (RandomNumber > 1 && RandomNumber <= 10)
+        {
+            Objective = "Bank";
+        }
+
+        if (RandomNumber > 10 && RandomNumber <= 20)
+        {
+            Objective = "Building";
+        }
 
         if (RandomNumber > 20 && RandomNumber <= 30)
         {
@@ -171,26 +192,8 @@ public class CivilianManger : MonoBehaviour
         {
             Objective = "Spot" + Queues[3].name;
         }
-		return Objective;
-	}
-	
-	//set where the civilian spawns in
-	//as well as their goal when they spawn in
-	void SpawnCivilian()
-	{
-		SpawnAreaLocation = GameObject.FindGameObjectWithTag("CivilianSpawner").transform.position;
-
-		Spawnpoint.x = SpawnAreaLocation.x + (Random.Range (-1, 2) * SpawnRadius);
-		Spawnpoint.y = 1;
-		Spawnpoint.z = SpawnAreaLocation.z + (Random.Range(-1, 2) * SpawnRadius);
-
-		Clone = Instantiate(Civilian, Spawnpoint, Civilian.transform.rotation) as GameObject;
-		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem("varGoal", RandomizeGoal());
-
-		Clone.GetComponent<AIRig> ().AI.WorkingMemory.SetItem ("varState", "MOVETOTARGET");
-
-        AllCivilians = GameObject.FindGameObjectsWithTag("Civilian");
-	}
+        return Objective;
+    }
 
     public string ChooseRandomTask()
     {
@@ -207,7 +210,7 @@ public class CivilianManger : MonoBehaviour
                 task = Task.GOTOBUILDING.ToString();
                 break;
             case 3:
-                task = Task.WALKACROSSMAP.ToString();
+                task = Task.PASSINGTHROUGH.ToString();
                 break;
             default:
                 task = Task.GETMONEY.ToString();
@@ -253,6 +256,27 @@ public class CivilianManger : MonoBehaviour
                 Cop.GetComponent<RAIN.Core.AIRig>().AI.IsActive = true;
             }
 
+            if (GetBool(AllCivilians[i], "InGroup") != true)
+            {
+                List<int> GroupSizes;
+                RaycastHit Hit;
+                for (int j = 0; j < 110; j++)
+                {
+                    Vector3 Direction;
+                    Direction.x = Quaternion.AngleAxis((float)j + 35, AllCivilians[i].transform.right).x;
+                    Direction.y = Quaternion.AngleAxis((float)j + 35, AllCivilians[i].transform.right).y;
+                    Direction.z = Quaternion.AngleAxis((float)j + 35, AllCivilians[i].transform.right).z;
+
+                    if (Physics.Raycast(transform.position, Direction, out Hit, 15.0f))
+                    {
+                        if (Hit.transform.tag == "Civilian")
+                        {
+                            //GroupSizes.Add();
+                        }
+                    }
+                }
+            }
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //if the civilian reaches their spot in the queue
 
@@ -261,14 +285,6 @@ public class CivilianManger : MonoBehaviour
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //possibly set up a function to get the name of the target to see if its the same as the queue and spot?
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /*for (int j = 0; j < Queues.Length; j++)
-            {
-                
-                if (GetGoal(AllCivilians[i]) == Queues[j].name + "Spot" && GetState(AllCivilians[i]) == "IDLE")
-                {
-                    CreateSpot(Queues[j]);
-                }
-            }*/
         }
     }
 
@@ -285,9 +301,71 @@ public class CivilianManger : MonoBehaviour
     }
 
     //once the spot in front of the civilian is empty the civilian will move forward in the queue
-	public void MoveForward()
+	public void GoToNextSpot()
     {
         
+    }
+
+    /*public void CreateRotation(int )
+    {
+
+    }*/
+
+    public void FindGroup()
+    {
+        //game object to be rotated in order to use it's transform.rotation for ray casting
+        GameObject Spotter;
+
+        for (int i = 0; i < AllCivilians.Length; i++)
+        {
+            Spotter = GameObject.Instantiate(AllCivilians[i], AllCivilians[i].transform.position, AllCivilians[i].transform.rotation) as GameObject;
+
+            if (!GetBool(AllCivilians[i], "InGroup"))
+            {
+                for (int j = 0; j < 110; j++)
+                {
+                    RaycastHit Hit;
+
+                    //fix later
+                    Spotter.transform.eulerAngles = AllCivilians[i].transform.right;
+                    Spotter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, (float)j + 35));
+
+                    if (Physics.Raycast(Spotter.transform.position, Spotter.transform.rotation.eulerAngles, out Hit, 10.0f))
+                    {
+
+                    }
+                }
+            }
+
+            //do some flocking shit
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public string GetString(GameObject ai, string stringName)
+    {
+        string TempString = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<string>(stringName);
+        return TempString;
+    }
+
+    public float GetFloat(GameObject ai, string floatName)
+    {
+        float TempFloat = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<float>(floatName);
+        return TempFloat;
+    }
+
+    public int GetInt(GameObject ai, string intName)
+    {
+        int TempInt = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>(intName);
+        return TempInt;
+    }
+
+    public bool GetBool(GameObject ai, string boolName)
+    {
+        bool TempBool = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<bool>(boolName);
+        return TempBool;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -350,6 +428,30 @@ public class CivilianManger : MonoBehaviour
     public void SetTarget(GameObject ai, Vector3 target)
     {
         ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varTarget", target);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public bool GetInGroup(GameObject ai)
+    {
+        bool InGroup = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<bool>("InGroup");
+        return InGroup;
+    }
+
+    public void SetInGroup(GameObject ai, bool inGroup)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("InGroup", inGroup);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public int GetGroupSize(GameObject ai)
+    {
+        int GroupSize = ai.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("GroupSize");
+        return GroupSize;
+    }
+
+    public void SetGroupSize(GameObject ai, int groupSize)
+    {
+        ai.GetComponent<AIRig>().AI.WorkingMemory.SetItem("InGroup", groupSize);
     }
 }
 
