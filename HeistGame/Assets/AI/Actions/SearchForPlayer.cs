@@ -13,33 +13,41 @@ public class SearchForPlayer : RAINAction
 
 	public 	static bool reachedLoc1;
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public override void Start(RAIN.Core.AI ai)
     {
         base.Start(ai);
 
-		ai.WorkingMemory.SetItem ("varPlayer", (GameObject)null);
+		ai.WorkingMemory.SetItem ("Obj_Player", (GameObject)null);
 
 		//get and set time here (fixes it not reseting when the players detected and keeps it from always reseting)
-		_time = ai.WorkingMemory.GetItem<float> ("varTimeToSearch");
+		_time = ai.WorkingMemory.GetItem<float> ("Float_TimeToSearch");
 
 		_time += Time.deltaTime;
 
-		ai.WorkingMemory.SetItem ("varTimeToSearch", _time);
+		ai.WorkingMemory.SetItem ("Float_TimeToSearch", _time);
 
 		//this bool needs to be set externally to avoid script stop and start problems
-		reachedLoc1 = ai.WorkingMemory.GetItem<bool>("varReachedLastPlayerPos");
+		reachedLoc1 = ai.WorkingMemory.GetItem<bool>("Bool_ReachedLastPlayerPos");
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
 
 		//get the players last seen location
-		Vector3 pos = ai.WorkingMemory.GetItem<Vector3>("varLastPlayerPos");
+		Vector3 pos = ai.WorkingMemory.GetItem<Vector3>("Vec3_LastPlayerPos");
 		
 		var PlayerLastPos = Vector3.zero;
 
 		var SearchPos = Vector3.zero;
-		
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Ignore the shit below (it may or may not be used again)
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		//uses the index number to get the waypoints position for the players last location
 		//PlayerLastPos = NavigationManager.Instance.GetWaypointSet ("NewSearchPath").Waypoints[foundPlayer].position;
 
@@ -58,7 +66,16 @@ public class SearchForPlayer : RAINAction
 
 		//tell the cop were to go
 		//if (Vector3.Distance (ai.Kinematic.Position, PlayerLastPos) > 0.1f && reachedLoc1 == false) {
-						ai.WorkingMemory.SetItem<Vector3> ("varSearch", pos);
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //the only part thats still in use
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+						ai.WorkingMemory.SetItem("Vec3_Search", pos);
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 		//} //else {
 				//		ai.WorkingMemory.SetItem<Vector3> ("varSeek", SearchPos);
 				//}
@@ -70,21 +87,27 @@ public class SearchForPlayer : RAINAction
 		//	ai.WorkingMemory.SetItem("varReachedLastPlayerPos", true);
 		//}
 
-		//if this much time has passed, go back to patroling/last patrol location
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //if this much time has passed, go back to patroling/last patrol location
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if (_time > 35)
 		{
-			ai.WorkingMemory.SetItem("varBreak", 0);
-			ai.WorkingMemory.SetItem("varReachedLastPlayerPos", false);
-			ai.WorkingMemory.SetItem ("varPlayer", (GameObject)null);
+			ai.WorkingMemory.SetItem("Int_Break", 0);
+			ai.WorkingMemory.SetItem("Bool_ReachedLastPlayerPos", false);
+			ai.WorkingMemory.SetItem ("Obj_Player", (GameObject)null);
 			_time = 0;
 		}
 
         return ActionResult.SUCCESS;
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public override void Stop(RAIN.Core.AI ai)
     {
-		ai.WorkingMemory.SetItem ("varPlayer", (GameObject)null);
+        //just to make absolutly certain that the squad leader sees nothing
+		ai.WorkingMemory.SetItem ("Obj_Player", (GameObject)null);
 
         base.Stop(ai);
     }
