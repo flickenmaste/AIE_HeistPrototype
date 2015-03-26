@@ -1,20 +1,20 @@
 fileFormatVersion: 2
-guid: 792f3c033d6a65d49aa1428970adb4c6
-timeCreated: 1426111283
+guid: 039a6e2a8f564624e88a2bce0c326e70
+timeCreated: 1426873177
 licenseType: Pro
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Door
-    100002: //RootNode
-    400000: Door
-    400002: //RootNode
-    2300000: Door
-    2300002: //RootNode
-    3300000: Door
-    3300002: //RootNode
+    100000: //RootNode
+    100002: Door_01
+    400000: //RootNode
+    400002: Door_01
+    2300000: //RootNode
+    2300002: Door_01
+    3300000: //RootNode
+    3300002: Door_01
     4300000: Door_Frame_01
-    4300002: Door
+    4300002: Door_01
     7400000: Take 001
     9500000: //RootNode
   materials:
