@@ -1,0 +1,155 @@
+Initialize engine version: 4.6.0b17 (2d43734a3870)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 6350 (ID=0x68f9)
+    Vendor:   ATI
+    VRAM:     497 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProBuilderCore.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProBuilderCore.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProBuilderMeshOps.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProBuilderMeshOps.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProCore.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\ProCore.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\SixBySeven.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\SixBySeven.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\RAIN.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\RAIN.dll into Unity Child Domain
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\RAINMetaform.dll (this message is harmless)
+Loading C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\RAINMetaform.dll into Unity Child Domain
+- Completed reload, in  0.047 seconds
+desktop: 1920x1080 60Hz; virtual: 3840x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\kyle.kennedy\Desktop\AIE_HeistPrototype\HeistGame\Endpoint_Data\Managed\System.Xml.dll (this message is harmless)
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 2.783908 ms
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 808.
+Total: 1.777862 ms (FindLiveObjects: 0.028675 ms CreateObjectMapping: 0.012677 ms MarkObjects: 1.141574 ms  DeleteObjects: 0.237853 ms)
+
+UnloadTime: 1.238768 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 806.
+Total: 1.792652 ms (FindLiveObjects: 0.030486 ms CreateObjectMapping: 0.013281 ms MarkObjects: 1.156063 ms  DeleteObjects: 0.249021 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 1.862378 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 808.
+Total: 2.026883 ms (FindLiveObjects: 0.035013 ms CreateObjectMapping: 0.016299 ms MarkObjects: 1.288874 ms  DeleteObjects: 0.295505 ms)
+
+UnloadTime: 1.230618 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 806.
+Total: 1.739225 ms (FindLiveObjects: 0.028373 ms CreateObjectMapping: 0.013582 ms MarkObjects: 1.146404 ms  DeleteObjects: 0.201933 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 2.085441 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 808.
+Total: 1.937235 ms (FindLiveObjects: 0.031693 ms CreateObjectMapping: 0.015997 ms MarkObjects: 1.233033 ms  DeleteObjects: 0.274074 ms)
+
+UnloadTime: 1.127086 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 806.
+Total: 1.890449 ms (FindLiveObjects: 0.031995 ms CreateObjectMapping: 0.015695 ms MarkObjects: 1.243899 ms  DeleteObjects: 0.251436 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 2.083630 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 808.
+Total: 1.852719 ms (FindLiveObjects: 0.031391 ms CreateObjectMapping: 0.015394 ms MarkObjects: 1.201943 ms  DeleteObjects: 0.266830 ms)
+
+UnloadTime: 1.046191 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 806.
+Total: 1.762166 ms (FindLiveObjects: 0.029580 ms CreateObjectMapping: 0.015092 ms MarkObjects: 1.158477 ms  DeleteObjects: 0.217327 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+UnloadTime: 1.048002 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 809.
+Total: 1.770014 ms (FindLiveObjects: 0.029882 ms CreateObjectMapping: 0.016903 ms MarkObjects: 1.113804 ms  DeleteObjects: 0.265924 ms)
+
+UnloadTime: 1.020233 ms
+Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 66 unused Assets to reduce memory usage. Loaded Objects now: 806.
+Total: 1.773032 ms (FindLiveObjects: 0.037428 ms CreateObjectMapping: 0.024147 ms MarkObjects: 1.137952 ms  DeleteObjects: 0.230910 ms)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at WallKill.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
