@@ -227,7 +227,7 @@ public class RicochetController : MonoBehaviour
         // Poll user's state
         moveIntention = GetInput();
         runIntention = Input.GetKey(KeyCode.LeftShift);
-        jumpIntention = Input.GetButtonDown("Jump") || jumpIntention; // @terrehbyte: this looks cool but seems like one of those dick-move things
+        jumpIntention = RPlayer.GetButtonDown("Jump") || jumpIntention; // @terrehbyte: this looks cool but seems like one of those dick-move things
 
         bool crouchPressed = false;
         if (Input.GetKey(crouchKey))    // TODO: @emlowry, please write the event-based input manager
