@@ -26,7 +26,7 @@ public class Mapscript : MonoBehaviour {
 
     int loadNumber;
 
-
+     
 	void Start () {
         CurrentCameraLook = 0;
 
@@ -38,7 +38,7 @@ public class Mapscript : MonoBehaviour {
 
     void SwitchBlueprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.UpArrow) && CurrentCameraLook < (Blueprint.Capacity - 1))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.UpArrow) && CurrentCameraLook < Blueprint.Count)
         {
             CurrentCameraLook++;
             transform.position = new Vector3(transform.position.x, transform.position.y + 6.0f, transform.position.z);
@@ -55,27 +55,15 @@ public class Mapscript : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.S) && Grab == false){
 			Grab = true;
-			CurrentCameraLook = (Blueprint.Capacity - 1);
+			CurrentCameraLook = Blueprint.Count;
 			GetComponent<Camera>().rect = new Rect(0,0,1,1);
             Player.GetComponentInChildren<Camera>().enabled = false;
             turnoffCanvas.SetActive(false);
             FogofWar.SetActive(false);
-            foreach (GameObject blueprint in Blueprint)
-            {
-                Mesh mesh = blueprint.GetComponent<MeshFilter>().mesh;
-
-            }
-
-
 		}
+
 		if (Grab == true && Captured == false && loadNumber < Blueprint.Capacity)
 			transform.position = new Vector3 (transform.position.x, Blueprint [loadNumber].transform.position.y + 6.0f, transform.position.z);
-        if (Captured == true)
-        {
-            FogofWar.SetActive(true);
-            Player.GetComponentInChildren<Camera>().enabled = true;
-            turnoffCanvas.SetActive(true);
-        }
 
 	}
     void TakeScreen()
@@ -93,7 +81,8 @@ public class Mapscript : MonoBehaviour {
 
                 image.Apply();
 
-                pngShot.Add(image.EncodeToPNG());
+                //pngShot.Add(image.EncodeToPNG());
+
                 //load map texture
                 Blueprint[loadNumber].GetComponent<Renderer>().material.mainTexture = image;
 
@@ -104,9 +93,13 @@ public class Mapscript : MonoBehaviour {
                 Captured = true;
                 gameObject.GetComponent<Camera>().rect = new Rect(.5f, .5f, 1, 1);
                 Player.GetComponentInChildren<Camera>().transform.gameObject.SetActive(true);
+
+                turnoffCanvas.SetActive(true);
+
                 //delete lines
                 GameObject[] Lines;
                 Lines = GameObject.FindGameObjectsWithTag("Lines");
+
                 foreach (GameObject line in Lines)
                 {
                     Destroy(line);
@@ -118,7 +111,6 @@ public class Mapscript : MonoBehaviour {
 
     void OnPostRender()
     {
-
         TakeScreen();
     }
 

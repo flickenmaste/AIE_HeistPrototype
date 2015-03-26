@@ -5,22 +5,23 @@ using System.Collections.Generic;
 public class PingManager : MonoBehaviour {
 
 	// Use this for initialization
-	public GameObject Manager;
     public GameObject Blueprint;
 
     // Use this for initialization
     //for uncover map
     public List<GameObject> KeyIndividuals;
     public int KeyIndivFound;
-    ImportantPeaple[] Targets;
+    ImportantPeaple[] Targets;  // spelling
 
     public GameObject DrillPrefab;
+
+    GameObject Drill;
 
     public GameObject Player;
     public GameObject DrillMiniMap;
     public GameObject ManagerMiniMap;
 
-    int DropOne = 1;
+    bool Drop = false;
 	void Start () {
         int i = 0;
         Targets = new ImportantPeaple[KeyIndividuals.Count];
@@ -34,15 +35,19 @@ public class PingManager : MonoBehaviour {
 
     void CheckForFoundIndividuals()
     {
+        // if there are people to find
         if (KeyIndivFound <= KeyIndividuals.Count)
         {
             RaycastHit hit;
             if (Physics.Raycast(Player.transform.position, Player.transform.forward, out hit, 100))
             {
                 foreach (ImportantPeaple target in Targets)
-                if (hit.transform.name == target.IPerson.name) {
-                    target.Found = true;
-                    KeyIndivFound++;
+                {
+                    if (hit.transform.name == target.IPerson.name)
+                    {
+                        target.Found = true;
+                        KeyIndivFound++;
+                    }
                 }
             }
         }
@@ -50,13 +55,14 @@ public class PingManager : MonoBehaviour {
     }
     void DrillLocator()
     {
-        if (DropOne == 0)
+        // bool == drop
+        if (Drop == true)
             DrillMiniMap.transform.position = DrillPrefab.transform.position;
         else
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                DropOne = 0;
+                Drop = true;
                 DrillPrefab = Instantiate(DrillPrefab,Player.transform.position,new Quaternion(0,0,0,0)) as GameObject;
             }
         }
