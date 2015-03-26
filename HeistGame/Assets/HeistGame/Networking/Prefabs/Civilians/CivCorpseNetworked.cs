@@ -1,21 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CivCorpseNetworked : Bolt.EntityBehaviour<ICivilianState>
+public class CivCorpseNetworked : MonoBehaviour
 {
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+    {
+
 	}
 
-    public override void Attached()
-    {
-        state.CivCorpseTransform.SetTransforms(transform);
-    }
-	
-	// Update is called once per frame
-    public override void SimulateOwner()
+    void Update()
     {
 
     }

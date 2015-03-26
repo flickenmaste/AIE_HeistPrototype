@@ -88,7 +88,9 @@ public class Player : MonoBehaviour {
 				if (Hit.transform.tag == "Civilian")
 				{
 					//scare the civilian
-					Hit.transform.gameObject.GetComponent<RAIN.Core.AIRig>().AI.WorkingMemory.SetItem("varAfraid", 100);
+					int temp = Hit.transform.gameObject.GetComponent<AIRig>().AI.WorkingMemory.GetItem<int>("varAfraid");
+                    temp += 100;
+                    Hit.transform.gameObject.GetComponent<AIRig>().AI.WorkingMemory.SetItem("varAfraid", temp);
 				}
 			}
 		}
