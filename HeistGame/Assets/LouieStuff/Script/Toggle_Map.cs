@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityStandardAssets.Characters.FirstPerson;
 public class Toggle_Map : MonoBehaviour {
 
 	public GameObject MapCamera;
@@ -39,34 +40,18 @@ public class Toggle_Map : MonoBehaviour {
             {
 
                 MapCamera.transform.gameObject.SetActive(false);
-                look.sensitivityX = 15.0f;
-                look.sensitivityY = 15.0f;
-                look.minimumX = -360.0f;
-                look.maximumX = 360.0f;
-                look.minimumY = -45.0f;
-                look.maximumY = 45.0f;
+               
 
             }
             else if (Active == true)
             {
                 MapCamera.transform.gameObject.SetActive(true);
-                look.sensitivityX = 0.0f;
-                look.sensitivityY = 0.0f;
-                look.minimumX = 0.0f;
-                look.maximumX = 0.0f;
-                look.minimumY = 0.0f;
-                look.maximumY = 0.0f;
+                
             }
         }
         else
         {
-            look.enabled = true;
-            look.sensitivityX = 15.0f;
-            look.sensitivityY = 15.0f;
-            look.minimumX = -360.0f;
-            look.maximumX = 360.0f;
-            look.minimumY = -45.0f;
-            look.maximumY = 45.0f;
+           
             if (Active == false)
             {
                 MapCamera.GetComponent<Camera>().enabled = false;
